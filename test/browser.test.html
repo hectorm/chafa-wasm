@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'none';
+      connect-src 'self';
+      img-src 'self' data:;
+      script-src 'self' 'unsafe-inline' 'unsafe-eval';
+      style-src 'self';"
+    />
+    <title>Mocha</title>
+    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg==" />
+    <link rel="stylesheet" href="../node_modules/mocha/mocha.css" />
+    <script src="../node_modules/mocha/mocha.js"></script>
+    <script src="../node_modules/chai/chai.js"></script>
+    <script type="module">
+      mocha.setup({ ui: "bdd", reporter: "html" });
+
+      globalThis.assert = chai.assert;
+      globalThis.assertEquals = chai.assert.deepEqual;
+      globalThis.assertThrows = chai.assert.throws;
+      globalThis.assertRejects = (a) => a().then(
+        () => chai.assert.fail("expected function to throw an error"),
+        (e) => chai.assert.throws(() => { throw e; })
+      );
+
+      import Chafa from "../dist/chafa.mjs";
+
+      globalThis.Chafa = Chafa;
+
+      await import("./test.mjs");
+
+      mocha.run();
+    </script>
+  </head>
+  <body>
+    <div id="mocha"></div>
+  </body>
+</html>

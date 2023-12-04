@@ -1,0 +1,57 @@
+{
+  "id": "ansi-o-matic",
+  "name": "ANSI-o-Matic",
+  "short_name": "ANSI-o-Matic",
+  "description": "Image to ANSI converter",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#212529",
+  "theme_color": "#212529",
+  "icons": [
+    {
+      "src": "./imgs/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./imgs/icon-196.png",
+      "sizes": "196x196",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./imgs/icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./imgs/icon-128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./imgs/icon-96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "./imgs/screenshot-wide.png",
+      "sizes": "1024x576",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "./imgs/screenshot-narrow.png",
+      "sizes": "576x1024",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ]
+}

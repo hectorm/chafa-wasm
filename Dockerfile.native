@@ -1,0 +1,182 @@
+##################################################
+## "build" stage
+##################################################
+
+FROM docker.io/hectorm/wasm:v53@sha256:3007f8898b1295c2e6576a64c3935d9cfc7a6cd3547878cd614d390ad45e0437 AS build
+
+# Environment
+ENV BUILDDIR=/tmp/build
+ENV SYSROOT=/tmp/sysroot
+ENV PKG_CONFIG_SYSROOT_DIR=${SYSROOT}
+ENV PKG_CONFIG_LIBDIR=${SYSROOT}/lib/pkgconfig:${SYSROOT}/share/pkgconfig
+ENV PKG_CONFIG_PATH=${PKG_CONFIG_LIBDIR}
+ENV CPPFLAGS='-Wdate-time'
+ENV CFLAGS='-O3 -frandom-seed=42 -Wall -Wextra -Wformat -Werror=format-security'
+ENV CXXFLAGS=${CFLAGS}
+ENV LDFLAGS=''
+
+# Build zlib
+ARG ZLIB_TREEISH=v1.3
+ARG ZLIB_REMOTE=https://github.com/madler/zlib.git
+WORKDIR ${BUILDDIR}/dep/zlib/
+RUN git clone "${ZLIB_REMOTE:?}" ./ \
+	&& git checkout "${ZLIB_TREEISH:?}" \
+	&& git submodule update --init --recursive
+RUN ./configure \
+		--prefix="${SYSROOT:?}" \
+		--libdir="${SYSROOT:?}"/lib \
+		--static
+RUN make -j"$(nproc)" install
+RUN pkg-config --static --exists --print-errors zlib
+
+# Build libffi
+ARG LIBFFI_TREEISH=5b1944b4ce4b03e28a5843d36812756168d66b08
+ARG LIBFFI_REMOTE=https://github.com/libffi/libffi.git
+WORKDIR ${BUILDDIR}/dep/libffi/
+RUN git clone "${LIBFFI_REMOTE:?}" ./ \
+	&& git checkout "${LIBFFI_TREEISH:?}" \
+	&& git submodule update --init --recursive
+RUN NOCONFIGURE=1 ./autogen.sh
+RUN ./configure \
+		--prefix="${SYSROOT:?}" \
+		--libdir="${SYSROOT:?}"/lib \
+		--enable-static \
+		--disable-shared \
+		--disable-docs
+RUN make -j"$(nproc)" install
+RUN pkg-config --static --exists --print-errors libffi
+
+# Build glib
+ARG GLIB_TREEISH=2.78.1
+ARG GLIB_REMOTE=https://github.com/GNOME/glib.git
+WORKDIR ${BUILDDIR}/dep/glib/
+RUN git clone "${GLIB_REMOTE:?}" ./ \
+	&& git checkout "${GLIB_TREEISH:?}" \
+	&& git submodule update --init --recursive
+RUN meson setup ./build/ \
+		--prefix="${SYSROOT:?}" \
+		--libdir="${SYSROOT:?}"/lib \
+		--buildtype=release \
+		--default-library=static \
+		--force-fallback-for=gvdb,zlib \
+		-D man=false \
+		-D gtk_doc=false \
+		-D tests=false \
+		-D nls=disabled \
+		-D selinux=disabled \
+		-D xattr=false \
+		-D libmount=disabled \
+		-D glib_assert=false \
+		-D glib_checks=false
+RUN ninja -C ./build/ install
+RUN pkg-config --static --exists --print-errors glib-2.0
+
+# Build libpng
+ARG LIBPNG_TREEISH=v1.6.40
+ARG LIBPNG_REMOTE=https://github.com/glennrp/libpng.git
+WORKDIR ${BUILDDIR}/dep/libpng/
+RUN git clone "${LIBPNG_REMOTE:?}" ./ \
+	&& git checkout "${LIBPNG_TREEISH:?}" \
+	&& git submodule update --init --recursive
+RUN cmake -G 'Ninja' -S ./ -B ./build/ \
+		-D CMAKE_INSTALL_PREFIX="${SYSROOT:?}" \
+		-D CMAKE_INSTALL_LIBDIR="${SYSROOT:?}"/lib \
+		-D CMAKE_FIND_ROOT_PATH="${SYSROOT:?}" \
+		-D CMAKE_FIND_ROOT_PATH_MODE_PACKAGE=BOTH \
+		-D CMAKE_BUILD_TYPE=Release \
+		-D PNG_STATIC=ON \
+		-D PNG_SHARED=OFF
+RUN ninja -C ./build/ install
+RUN pkg-config --static --exists --print-errors libpng
+
+# Build libjpeg-turbo
+ARG LIBJPEG_TURBO_TREEISH=3.0.1
+ARG LIBJPEG_TURBO_REMOTE=https://github.com/libjpeg-turbo/libjpeg-turbo.git
+WORKDIR ${BUILDDIR}/dep/libjpeg-turbo/
+RUN git clone "${LIBJPEG_TURBO_REMOTE:?}" ./ \
+	&& git checkout "${LIBJPEG_TURBO_TREEISH:?}" \
+	&& git submodule update --init --recursive
+RUN cmake -G 'Ninja' -S ./ -B ./build/ \
+		-D CMAKE_INSTALL_PREFIX="${SYSROOT:?}" \
+		-D CMAKE_INSTALL_LIBDIR="${SYSROOT:?}"/lib \
+		-D CMAKE_FIND_ROOT_PATH="${SYSROOT:?}" \
+		-D CMAKE_FIND_ROOT_PATH_MODE_PACKAGE=BOTH \
+		-D CMAKE_BUILD_TYPE=Release \
+		-D ENABLE_STATIC=ON \
+		-D ENABLE_SHARED=OFF
+RUN ninja -C ./build/ install
+RUN pkg-config --static --exists --print-errors libjpeg
+
+# Build libwebp
+ARG LIBWEBP_TREEISH=v1.3.2
+ARG LIBWEBP_REMOTE=https://chromium.googlesource.com/webm/libwebp.git
+WORKDIR ${BUILDDIR}/dep/libwebp/
+RUN git clone "${LIBWEBP_REMOTE:?}" ./ \
+	&& git checkout "${LIBWEBP_TREEISH:?}" \
+	&& git submodule update --init --recursive
+RUN cmake -G 'Ninja' -S ./ -B ./build/ \
+		-D CMAKE_INSTALL_PREFIX="${SYSROOT:?}" \
+		-D CMAKE_INSTALL_LIBDIR="${SYSROOT:?}"/lib \
+		-D CMAKE_FIND_ROOT_PATH="${SYSROOT:?}" \
+		-D CMAKE_FIND_ROOT_PATH_MODE_PACKAGE=BOTH \
+		-D CMAKE_BUILD_TYPE=Release \
+		-D BUILD_SHARED_LIBS=OFF \
+		-D WEBP_USE_THREAD=OFF \
+		-D WEBP_BUILD_CWEBP=OFF \
+		-D WEBP_BUILD_DWEBP=OFF \
+		-D WEBP_BUILD_VWEBP=OFF \
+		-D WEBP_BUILD_WEBPINFO=OFF \
+		-D WEBP_BUILD_WEBPMUX=OFF \
+		-D WEBP_BUILD_IMG2WEBP=OFF \
+		-D WEBP_BUILD_GIF2WEBP=OFF \
+		-D WEBP_BUILD_ANIM_UTILS=OFF \
+		-D WEBP_BUILD_EXTRAS=OFF
+RUN ninja -C ./build/ install
+RUN pkg-config --static --exists --print-errors libwebp
+
+# Build FreeType
+ARG FREETYPE_TREEISH=VER-2-13-2
+ARG FREETYPE_REMOTE=https://gitlab.freedesktop.org/freetype/freetype.git
+WORKDIR ${BUILDDIR}/dep/freetype/
+RUN git clone "${FREETYPE_REMOTE:?}" ./ \
+	&& git checkout "${FREETYPE_TREEISH:?}" \
+	&& git submodule update --init --recursive
+RUN cmake -G 'Ninja' -S ./ -B ./build/ \
+		-D CMAKE_INSTALL_PREFIX="${SYSROOT:?}" \
+		-D CMAKE_INSTALL_LIBDIR="${SYSROOT:?}"/lib \
+		-D CMAKE_FIND_ROOT_PATH="${SYSROOT:?}" \
+		-D CMAKE_FIND_ROOT_PATH_MODE_PACKAGE=BOTH \
+		-D CMAKE_BUILD_TYPE=Release \
+		-D FT_REQUIRE_ZLIB=ON \
+		-D FT_DISABLE_BZIP2=ON \
+		-D FT_DISABLE_BROTLI=ON \
+		-D FT_DISABLE_PNG=ON \
+		-D FT_DISABLE_HARFBUZZ=ON
+RUN ninja -C ./build/ install
+RUN pkg-config --static --exists --print-errors freetype2
+
+# Build Chafa
+ARG CHAFA_TREEISH=5e77e15ebe916f529f075aa9d30c25dd9ea5b245
+ARG CHAFA_REMOTE=https://github.com/hpjansson/chafa.git
+WORKDIR ${BUILDDIR}/dep/chafa/
+RUN git clone "${CHAFA_REMOTE:?}" ./ \
+	&& git checkout "${CHAFA_TREEISH:?}" \
+	&& git submodule update --init --recursive
+RUN NOCONFIGURE=1 ./autogen.sh
+RUN ./configure \
+		--prefix="${SYSROOT:?}" \
+		--libdir="${SYSROOT:?}"/lib \
+		--enable-static \
+		--disable-shared \
+		--disable-man \
+		--disable-gtk-doc
+RUN make -j"$(nproc)" install
+RUN pkg-config --static --exists --print-errors chafa
+
+##################################################
+## "dist" stage
+##################################################
+
+FROM scratch AS dist
+
+COPY --from=build /tmp/sysroot/bin/chafa /

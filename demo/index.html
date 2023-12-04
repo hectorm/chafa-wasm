@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'none';
+      connect-src 'self';
+      font-src 'self';
+      img-src 'self' data:;
+      manifest-src 'self';
+      script-src 'self' 'sha384-Gtrf2hED5OArS2TS5pB8Jbi3EFJWDjUfvQlR6SkegqxTZOwGEMhTqpm8fEftEg68' https://cdnjs.cloudflare.com/ajax/libs/bootstrap/;
+      style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com/ajax/libs/bootstrap/;"
+    />
+
+    <title>ANSI-o-Matic</title>
+    <meta name="description" content="Image to ANSI converter" />
+    <link rel="canonical" href="https://hectorm.github.io/chafa-wasm/" />
+    <link rel="icon" sizes="32x32" type="image/png" href="./imgs/icon-32.png" />
+    <link rel="icon" sizes="16x16" type="image/png" href="./imgs/icon-16.png" />
+
+    <meta property="og:title" content="ANSI-o-Matic" />
+    <meta property="og:description" content="Image to ANSI converter" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://hectorm.github.io/chafa-wasm/" />
+    <meta property="og:image" content="https://hectorm.github.io/chafa-wasm/imgs/icon-512.png" />
+
+    <meta name="theme-color" content="#212529" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+      async
+    ></script>
+
+    <link rel="stylesheet" href="./css/main.css" />
+    <script src="./js/main.mjs" type="module"></script>
+
+    <script>
+      if (navigator.serviceWorker) {
+        navigator.serviceWorker.register("./sw.js");
+      }
+
+      if (globalThis.matchMedia) {
+        const mm = matchMedia("(prefers-color-scheme: dark)");
+        const ut = () => document.documentElement.dataset.bsTheme = mm.matches ? "dark" : "light";
+        mm.addEventListener("change", ut); ut();
+      }
+    </script>
+  </head>
+  <body class="d-flex flex-column vh-100 vw-100">
+    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+      <!-- Font Awesome by @fontawesome - https://fontawesome.com -->
+      <symbol id="fa-solid-bars" viewBox="0 0 448 512"><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" /></symbol>
+      <symbol id="fa-solid-book" viewBox="0 0 448 512"><path d="M96 0C43 0 0 43 0 96V416c0 53 43 96 96 96H384h32c17.7 0 32-14.3 32-32s-14.3-32-32-32V384c17.7 0 32-14.3 32-32V32c0-17.7-14.3-32-32-32H384 96zm0 384H352v64H96c-17.7 0-32-14.3-32-32s14.3-32 32-32zm32-240c0-8.8 7.2-16 16-16H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16zm16 48H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16s7.2-16 16-16z" /></symbol>
+      <symbol id="fa-regular-clipboard" viewBox="0 0 384 512"><path d="M280 64h40c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128C0 92.7 28.7 64 64 64h40 9.6C121 27.5 153.3 0 192 0s71 27.5 78.4 64H280zM64 112c-8.8 0-16 7.2-16 16V448c0 8.8 7.2 16 16 16H320c8.8 0 16-7.2 16-16V128c0-8.8-7.2-16-16-16H304v24c0 13.3-10.7 24-24 24H192 104c-13.3 0-24-10.7-24-24V112H64zm128-8a24 24 0 1 0 0-48 24 24 0 1 0 0 48z" /></symbol>
+      <symbol id="fa-brands-github" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z" /></symbol>
+    </svg>
+    <nav class="navbar bg-body-tertiary border-bottom">
+      <div class="d-flex justify-content-start gap-2 container-fluid">
+        <button class="navbar-toggler d-lg-none px-2 border-0" type="button" title="Menu" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
+          <svg class="icon"><use href="#fa-solid-bars"></use></svg>
+        </button>
+        <div class="navbar-brand px-2">ANSI-o-Matic</div>
+        <ul class="d-flex flex-row flex-grow-1 justify-content-end gap-2 navbar-nav px-2">
+          <li class="nav-item">
+            <a class="nav-link px-1" title="Docs" href="https://github.com/hectorm/chafa-wasm/blob/master/docs/README.md">
+              <svg class="icon"><use href="#fa-solid-book"></use></svg>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-1" title="GitHub" href="https://github.com/hectorm/chafa-wasm">
+              <svg class="icon"><use href="#fa-brands-github"></use></svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="d-flex flex-grow-1 container-fluid overflow-hidden">
+      <div class="d-flex flex-grow-1 row px-0 ps-lg-3 py-3 overflow-auto">
+        <aside id="sidebar" class="col-lg-4 col-xl-3 col-xxl-2 h-100 overflow-y-auto offcanvas-lg offcanvas-start bg-body-tertiary border rounded" tabindex="-1">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title">Settings</h5>
+            <button class="btn-close" type="button" data-bs-dismiss="offcanvas" data-bs-target="#sidebar"></button>
+          </div>
+          <div class="d-lg-flex offcanvas-body py-2">
+            <form id="settings" class="nav flex-column w-100" autocomplete="off">
+              <div class="nav-item mb-3">
+                <label for="width" class="form-label">Width</label>
+                <div class="input-group input-group-sm">
+                  <input id="width" name="width" class="form-control form-range h-auto" type="range" min="5" max="200" step="1" />
+                  <output class="input-group-text">&nbsp;</output>
+                </div>
+              </div>
+              <div class="nav-item mb-3">
+                <label for="font-ratio" class="form-label">Font ratio</label>
+                <div class="input-group input-group-sm">
+                  <input id="font-ratio" name="fontRatio" class="form-control form-range h-auto" type="range" min="0" max="1" step="0.01" />
+                  <output class="input-group-text">&nbsp;</output>
+                </div>
+              </div>
+              <div class="nav-item mb-3">
+                <label for="colors" class="form-label">Colors</label>
+                <div class="input-group input-group-sm">
+                  <select id="colors" name="colors" class="form-select"></select>
+                </div>
+              </div>
+              <div class="nav-item mb-3">
+                <label for="color-extractor" class="form-label">Color extractor</label>
+                <div class="input-group input-group-sm">
+                  <select id="color-extractor" name="colorExtractor" class="form-select"></select>
+                </div>
+              </div>
+              <div class="nav-item mb-3">
+                <label for="color-space" class="form-label">Color space</label>
+                <div class="input-group input-group-sm">
+                  <select id="color-space" name="colorSpace" class="form-select"></select>
+                </div>
+              </div>
+              <div class="nav-item mb-3">
+                <label for="symbols" class="form-label">Symbols</label>
+                <div class="input-group input-group-sm">
+                  <input id="symbols" name="symbols" list="symbols-list" class="form-control" type="text" />
+                  <datalist id="symbols-list"></datalist>
+                </div>
+              </div>
+              <div class="nav-item mb-3">
+                <label for="fill" class="form-label">Fill</label>
+                <div class="input-group input-group-sm">
+                  <input id="fill" name="fill" list="fill-list" class="form-control" type="text" />
+                  <datalist id="fill-list"></datalist>
+                </div>
+              </div>
+              <div class="nav-item mb-3">
+                <label for="fg" class="form-label">Foreground</label>
+                <div class="input-group input-group-sm">
+                  <input id="fg" name="fg" class="form-control form-control-color form-control-sm w-100" type="color" />
+                </div>
+              </div>
+              <div class="nav-item mb-3">
+                <label for="bg" class="form-label">Background</label>
+                <div class="input-group input-group-sm">
+                  <input id="bg" name="bg" class="form-control form-control-color form-control-sm w-100" type="color" />
+                </div>
+              </div>
+              <div class="nav-item mb-3">
+                <div class="form-check form-switch">
+                  <input id="fg-only" name="fgOnly" class="form-check-input" type="checkbox" />
+                  <label for="fg-only" class="form-check-label">Foreground only</label>
+                </div>
+              </div>
+              <div class="nav-item mb-3">
+                <label for="dither" class="form-label">Dither mode</label>
+                <div class="input-group input-group-sm">
+                  <select id="dither" name="dither" class="form-select"></select>
+                </div>
+              </div>
+              <div class="nav-item mb-3">
+                <label for="dither-intensity" class="form-label">Dither intensity</label>
+                <div class="input-group input-group-sm">
+                  <input id="dither-intensity" name="ditherIntensity" class="form-control form-range h-auto" type="range" min="0" max="1" step="0.01" />
+                  <output class="input-group-text">&nbsp;</output>
+                </div>
+              </div>
+              <div class="nav-item mb-3">
+                <label for="dither-grain-width" class="form-label">Dither grain width</label>
+                <div class="input-group input-group-sm">
+                  <select id="dither-grain-width" name="ditherGrainWidth" class="form-select"></select>
+                </div>
+              </div>
+              <div class="nav-item mb-3">
+                <label for="dither-grain-height" class="form-label">Dither grain height</label>
+                <div class="input-group input-group-sm">
+                  <select id="dither-grain-height" name="ditherGrainHeight" class="form-select"></select>
+                </div>
+              </div>
+              <div class="nav-item mb-3">
+                <div class="form-check form-switch">
+                  <input id="preprocess" name="preprocess" class="form-check-input" type="checkbox" />
+                  <label for="preprocess" class="form-check-label">Preprocess</label>
+                </div>
+              </div>
+              <div class="nav-item mb-3">
+                <label for="threshold" class="form-label">Threshold</label>
+                <div class="input-group input-group-sm">
+                  <input id="threshold" name="threshold" class="form-control form-range h-auto" type="range" min="0" max="1" step="0.01" />
+                  <output class="input-group-text">&nbsp;</output>
+                </div>
+              </div>
+              <div class="nav-item mb-3">
+                <label for="optimize" class="form-label">Optimize</label>
+                <div class="input-group input-group-sm">
+                  <input id="optimize" name="optimize" class="form-control form-range h-auto" type="range" min="0" max="9" step="1" />
+                  <output class="input-group-text">&nbsp;</output>
+                </div>
+              </div>
+              <div class="nav-item mb-3">
+                <label for="work" class="form-label">Work</label>
+                <div class="input-group input-group-sm">
+                  <input id="work" name="work" class="form-control form-range h-auto" type="range" min="1" max="9" step="1" />
+                  <output class="input-group-text">&nbsp;</output>
+                </div>
+              </div>
+              <hr>
+              <div class="nav-item mb-3">
+                <button type="reset" class="btn btn-secondary btn-sm">Restore default settings</button>
+              </div>
+            </form>
+          </div>
+        </aside>
+        <main class="col-lg-8 col-xl-9 col-xxl-10 px-2 px-lg-3 h-100 overflow-y-auto">
+          <div class="p-4 mb-3 bg-body-tertiary border rounded">
+            <h1>Image to ANSI</h1>
+            <div class="lead">
+              <label for="image-input" class="form-label">Choose an image or</label>
+              <span class="dropdown">
+                <a class="link-body-emphasis link-underline-opacity-50" href="#" data-bs-toggle="dropdown">try an example</a>
+                <ul id="image-examples" class="dropdown-menu">
+                  <li><a class="dropdown-item" href="./imgs/examples/tsunami.webp">Tsunami</a></li>
+                  <li><a class="dropdown-item" href="./imgs/examples/starry_night.webp">Starry Night</a></li>
+                  <li><a class="dropdown-item" href="./imgs/examples/doom_logo.webp">Doom logo</a></li>
+                  <li><a class="dropdown-item" href="./imgs/examples/doom_cover.webp">Doom cover</a></li>
+                  <li><a class="dropdown-item" href="./imgs/examples/save_icon.webp">Save icon</a></li>
+                </ul>
+              </span>
+              <input id="image-input" class="form-control form-control-sm" type="file" accept="image/png, image/jpeg, image/webp" autocomplete="off" />
+            </div>
+          </div>
+          <div class="position-relative">
+            <iframe id="ansi" class="rounded" title="Output" sandbox="allow-same-origin"></iframe>
+            <div class="position-absolute top-0 end-0 p-2 opacity-75">
+              <div class="dropdown">
+                <button class="btn btn-secondary" type="button" title="Copy" data-bs-toggle="dropdown">
+                  <svg class="icon"><use href="#fa-regular-clipboard"></use></svg>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><button id="clipboard-ansi" class="dropdown-item" type="button">ANSI</button></li>
+                  <li><button id="clipboard-html" class="dropdown-item" type="button">HTML</button></li>
+                  <li><button id="clipboard-web-console" class="dropdown-item" type="button">Web console</button></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+      <div id="notification-toast" class="toast align-items-center">
+        <div class="d-flex">
+          <div class="toast-body"></div>
+          <button class="btn-close me-2 m-auto" type="button" data-bs-dismiss="toast"></button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

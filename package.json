@@ -1,0 +1,66 @@
+{
+  "name": "chafa-wasm",
+  "version": "0.0.0",
+  "description": "Chafa WebAssembly module to convert images to text",
+  "keywords": [
+    "chafa",
+    "images",
+    "ansi",
+    "ansi-art",
+    "ascii",
+    "ascii-art",
+    "unicode",
+    "unicode-art",
+    "terminal",
+    "terminal-graphics"
+  ],
+  "author": "Héctor Molinero Fernández <hector@molinero.dev>",
+  "license": "LGPL-3.0",
+  "homepage": "https://github.com/hectorm/chafa-wasm",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hectorm/chafa-wasm.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hectorm/chafa-wasm/issues"
+  },
+  "funding": "https://github.com/hectorm/chafa-wasm?sponsor=1",
+  "type": "module",
+  "main": "./dist/chafa.mjs",
+  "browser": "./dist/chafa.mjs",
+  "exports": {
+    ".": {
+      "types": "./types/chafa.d.ts",
+      "default": "./dist/chafa.mjs"
+    }
+  },
+  "files": [
+    "dist/",
+    "types/"
+  ],
+  "scripts": {
+    "all": "run-s types build docs test",
+    "types": "tsc",
+    "build": "docker buildx build ./ --file ./Dockerfile --output type=local,dest=./dist/",
+    "build-native": "docker buildx build ./ --file ./Dockerfile.native --output type=local,dest=./dist/",
+    "docs": "typedoc ./types/chafa.d.ts --plugin typedoc-plugin-markdown --readme none --disableSources --cleanOutputDir --out ./docs/",
+    "test": "run-s test:*",
+    "test:node": "node --test ./test/node.test.mjs",
+    "test:deno": "deno test --allow-read=./dist/ ./test/deno.test.mjs",
+    "test:bun": "bun test --cwd ./test/ bun",
+    "test:browser": "run-s test:browser:*",
+    "test:browser:chromium": "TEST_BROWSER=chromium node ./test/browser.test.mjs",
+    "test:browser:firefox": "TEST_BROWSER=firefox node ./test/browser.test.mjs",
+    "test:browser:webkit": "TEST_BROWSER=webkit node ./test/browser.test.mjs",
+    "version": "run-s all && git add -A ./docs/"
+  },
+  "devDependencies": {
+    "chai": "~4.3.10",
+    "mocha": "~10.2.0",
+    "npm-run-all2": "~6.1.1",
+    "playwright": "~1.40.1",
+    "typedoc-plugin-markdown": "~3.17.1",
+    "typedoc": "~0.25.4",
+    "typescript": "~5.3.2"
+  }
+}

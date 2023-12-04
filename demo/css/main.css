@@ -1,0 +1,22 @@
+.icon {
+  height: 1em;
+  width: 1em;
+  vertical-align: -.125em;
+  fill: currentColor;
+}
+
+#settings input + output {
+  font-family: monospace;
+}
+
+#ansi {
+  display: block;
+  width: 100%;
+  height: 0;
+}
+
+@media (max-width: 991.98px) {
+  #sidebar {
+    opacity: 90%;
+  }
+}
