@@ -30,20 +30,19 @@
   "browser": "./dist/chafa.mjs",
   "exports": {
     ".": {
-      "types": "./types/chafa.d.ts",
+      "types": "./dist/chafa.d.mts",
       "default": "./dist/chafa.mjs"
     }
   },
   "files": [
-    "dist/",
-    "types/"
+    "dist/"
   ],
   "scripts": {
     "all": "run-s types build docs test",
-    "types": "tsc",
+    "types": "tsc && mkdir -p ./dist/ && cp -a ./types/chafa.d.mts ./dist/chafa.d.mts",
     "build": "docker buildx build ./ --file ./Dockerfile --output type=local,dest=./dist/",
     "build-native": "docker buildx build ./ --file ./Dockerfile.native --output type=local,dest=./dist/",
-    "docs": "typedoc ./types/chafa.d.ts --plugin typedoc-plugin-markdown --readme none --disableSources --cleanOutputDir --out ./docs/",
+    "docs": "typedoc ./types/chafa.d.mts --plugin typedoc-plugin-markdown --readme none --disableSources --cleanOutputDir --out ./docs/",
     "test": "run-s test:*",
     "test:node": "node --test ./test/node.test.mjs",
     "test:deno": "deno test --allow-read=./dist/ ./test/deno.test.mjs",

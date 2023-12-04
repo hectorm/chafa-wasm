@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-/// <reference types="../types/chafa.d.ts" />
 
 import { promises as fs } from "node:fs";
 import { promisify } from "node:util";

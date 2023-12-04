@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-/// <reference types="../types/chafa.d.ts" />
 
 import { argv, exit } from "node:process";
 import { fileURLToPath } from "node:url";
