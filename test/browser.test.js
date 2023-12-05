@@ -37,9 +37,9 @@ try {
     path: require.resolve("chai/chai.js"),
   });
 
-  const chafaJs = fs.readFileSync(require.resolve("../dist/chafa.mjs"));
+  const chafaJs = fs.readFileSync(require.resolve("../dist/chafa.js"));
   const chafaWasm = fs.readFileSync(require.resolve("../dist/chafa.wasm"));
-  const testJs = fs.readFileSync(require.resolve("./test.mjs"));
+  const testJs = fs.readFileSync(require.resolve("./test.js"));
 
   await page.addScriptTag({
     type: "module",

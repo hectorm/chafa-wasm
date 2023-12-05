@@ -1,4 +1,4 @@
-import moduleFactory from "../../dist/chafa.mjs";
+import moduleFactory from "../../dist/chafa.js";
 
 const modulePromise = moduleFactory();
 

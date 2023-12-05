@@ -1,3 +1,3 @@
-/// <reference types="../types/chafa.d.mts" />
+/// <reference types="../types/chafa.d.ts" />
 
 declare const Module: ChafaModule;

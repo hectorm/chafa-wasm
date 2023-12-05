@@ -10,8 +10,8 @@ globalThis.assertMatch = assertMatch;
 globalThis.assertThrows = assertThrows;
 globalThis.assertRejects = assertRejects;
 
-import Chafa from "../dist/chafa.mjs";
+import Chafa from "../dist/chafa.js";
 
 globalThis.Chafa = Chafa;
 
-await import("./test.mjs");
+await import("./test.js");

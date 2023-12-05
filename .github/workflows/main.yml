@@ -47,7 +47,7 @@ jobs:
         if: "startsWith(github.ref, 'refs/tags/v')"
         run: |
           cp -a ./dist/ ./demo/dist/
-          sed -ri 's|"[^"]+/(chafa\.mjs)"|"../dist/\1"|' ./demo/js/worker.mjs
+          sed -ri 's|"[^"]+/(chafa\.js)"|"../dist/\1"|' ./demo/js/worker.js
           find ./demo/ -type f -not -perm 0644 -exec chmod 0644 '{}' '+'
           find ./demo/ -type d -not -perm 0755 -exec chmod 0755 '{}' '+'
       - name: 'Upload module artifact'

@@ -192,7 +192,7 @@ RUN em++ ${CPPFLAGS-} ${CXXFLAGS-} ${LDFLAGS-} \
 		-s FILESYSTEM=0 \
 		-s POLYFILL=0 \
 		--closure 1 \
-		-o "${BUILDDIR:?}"/dist/chafa.mjs
+		-o "${BUILDDIR:?}"/dist/chafa.js
 
 ##################################################
 ## "dist" stage
@@ -200,5 +200,5 @@ RUN em++ ${CPPFLAGS-} ${CXXFLAGS-} ${LDFLAGS-} \
 
 FROM scratch AS dist
 
-COPY --from=build /tmp/build/dist/chafa.mjs /
+COPY --from=build /tmp/build/dist/chafa.js /
 COPY --from=build /tmp/build/dist/chafa.wasm /

@@ -9,8 +9,8 @@ globalThis.assertMatch = (a, b) => expect(b.test(a)).toBe(true);
 globalThis.assertThrows = (a) => expect(a).toThrow();
 globalThis.assertRejects = (a) => expect(a).toThrow();
 
-import Chafa from "../dist/chafa.mjs";
+import Chafa from "../dist/chafa.js";
 
 globalThis.Chafa = Chafa;
 
-await import("./test.mjs");
+await import("./test.js");

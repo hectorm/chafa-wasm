@@ -26,12 +26,12 @@
   },
   "funding": "https://github.com/hectorm/chafa-wasm?sponsor=1",
   "type": "module",
-  "main": "./dist/chafa.mjs",
-  "browser": "./dist/chafa.mjs",
+  "main": "./dist/chafa.js",
+  "browser": "./dist/chafa.js",
   "exports": {
     ".": {
-      "types": "./dist/chafa.d.mts",
-      "default": "./dist/chafa.mjs"
+      "types": "./dist/chafa.d.ts",
+      "default": "./dist/chafa.js"
     }
   },
   "files": [
@@ -39,18 +39,18 @@
   ],
   "scripts": {
     "all": "run-s types build docs test",
-    "types": "tsc && mkdir -p ./dist/ && cp -a ./types/chafa.d.mts ./dist/chafa.d.mts",
+    "types": "tsc && mkdir -p ./dist/ && cp -a ./types/chafa.d.ts ./dist/chafa.d.ts",
     "build": "docker buildx build ./ --file ./Dockerfile --output type=local,dest=./dist/",
     "build-native": "docker buildx build ./ --file ./Dockerfile.native --output type=local,dest=./dist/",
-    "docs": "typedoc ./types/chafa.d.mts --plugin typedoc-plugin-markdown --readme none --disableSources --cleanOutputDir --out ./docs/",
+    "docs": "typedoc ./types/chafa.d.ts --plugin typedoc-plugin-markdown --readme none --disableSources --cleanOutputDir --out ./docs/",
     "test": "run-s test:*",
-    "test:node": "node --test ./test/node.test.mjs",
-    "test:deno": "deno test --allow-read=./dist/ ./test/deno.test.mjs",
+    "test:node": "node --test ./test/node.test.js",
+    "test:deno": "deno test --allow-read=./dist/ ./test/deno.test.js",
     "test:bun": "bun test --cwd ./test/ bun",
     "test:browser": "run-s test:browser:*",
-    "test:browser:chromium": "TEST_BROWSER=chromium node ./test/browser.test.mjs",
-    "test:browser:firefox": "TEST_BROWSER=firefox node ./test/browser.test.mjs",
-    "test:browser:webkit": "TEST_BROWSER=webkit node ./test/browser.test.mjs",
+    "test:browser:chromium": "TEST_BROWSER=chromium node ./test/browser.test.js",
+    "test:browser:firefox": "TEST_BROWSER=firefox node ./test/browser.test.js",
+    "test:browser:webkit": "TEST_BROWSER=webkit node ./test/browser.test.js",
     "version": "run-s all && git add -A ./docs/"
   },
   "devDependencies": {
