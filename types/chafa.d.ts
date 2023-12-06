@@ -20,7 +20,7 @@ declare interface ChafaModule {
    */
   decodeImage: {
     (
-      image: ArrayBuffer | ImageData | ImageDataLike,
+      image: ArrayBuffer | ImageDataLike,
       callback: {
         /** Success callback. */
         (error: null, image: ImageDataLike): void;
@@ -35,7 +35,7 @@ declare interface ChafaModule {
    */
   imageToCanvas: {
     (
-      image: ArrayBuffer | ImageData | ImageDataLike,
+      image: ArrayBuffer | ImageDataLike,
       config: PartialChafaConfig,
       callback: {
         /** Success callback. */
@@ -54,7 +54,7 @@ declare interface ChafaModule {
    */
   imageToMatrix: {
     (
-      image: ArrayBuffer | ImageData | ImageDataLike,
+      image: ArrayBuffer | ImageDataLike,
       config: PartialChafaConfig,
       callback: {
         /** Success callback. */
@@ -73,7 +73,7 @@ declare interface ChafaModule {
    */
   imageToAnsi: {
     (
-      image: ArrayBuffer | ImageData | ImageDataLike,
+      image: ArrayBuffer | ImageDataLike,
       config: PartialChafaConfig,
       callback: {
         /** Success callback. */
@@ -92,7 +92,7 @@ declare interface ChafaModule {
    */
   imageToHtml: {
     (
-      image: ArrayBuffer | ImageData | ImageDataLike,
+      image: ArrayBuffer | ImageDataLike,
       config: PartialChafaConfig,
       callback: {
         /** Success callback. */
@@ -111,7 +111,7 @@ declare interface ChafaModule {
    */
   imageToConsoleLogArgs: {
     (
-      image: ArrayBuffer | ImageData | ImageDataLike,
+      image: ArrayBuffer | ImageDataLike,
       config: PartialChafaConfig,
       callback: {
         /** Success callback. */
