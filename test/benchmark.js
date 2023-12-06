@@ -36,7 +36,6 @@ if (isMainThread) {
   /** @type {ChafaFactory} */
   const Chafa = (await import("../dist/chafa.js")).default;
 
-  /** @type {ChafaModule} */
   const chafa = await Chafa();
   const decodeImage = promisify(chafa.decodeImage);
   const imageToCanvas = promisify(chafa.imageToCanvas);

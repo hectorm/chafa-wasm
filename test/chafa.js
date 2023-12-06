@@ -7,7 +7,6 @@ import { argv, exit, stdout } from "node:process";
 /** @type {ChafaFactory} */
 const Chafa = (await import("../dist/chafa.js")).default;
 
-/** @type {ChafaModule} */
 const chafa = await Chafa();
 const imageToAnsi = promisify(chafa.imageToAnsi);
 
