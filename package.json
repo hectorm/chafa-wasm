@@ -54,7 +54,7 @@
     "version": "run-s all && git add -A ./docs/"
   },
   "devDependencies": {
-    "chai": "~4.3.10",
+    "chai": "~5.0.0",
     "mocha": "~10.2.0",
     "npm-run-all2": "~6.1.1",
     "playwright": "~1.40.1",
