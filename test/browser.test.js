@@ -33,8 +33,23 @@ try {
   await page.addScriptTag({
     path: require.resolve("mocha/mocha.js"),
   });
+
+  const chaiJs = fs.readFileSync(require.resolve("chai/chai.js"));
+
   await page.addScriptTag({
-    path: require.resolve("chai/chai.js"),
+    type: "module",
+    content: `
+      ${chaiJs.toString("utf-8")};
+
+      globalThis.assert = assert;
+      globalThis.assertEquals = assert.deepEqual;
+      globalThis.assertMatch = assert.match;
+      globalThis.assertThrows = assert.throws;
+      globalThis.assertRejects = (a) => a().then(
+        () => assert.fail("expected function to throw an error"),
+        (e) => assert.throws(() => { throw e; })
+      );
+    `,
   });
 
   const chafaJs = fs.readFileSync(require.resolve("../dist/chafa.js"));
@@ -45,15 +60,6 @@ try {
     type: "module",
     content: `
       mocha.setup({ ui: "bdd", reporter: "tap" });
-
-      globalThis.assert = chai.assert;
-      globalThis.assertEquals = chai.assert.deepEqual;
-      globalThis.assertMatch = chai.assert.match;
-      globalThis.assertThrows = chai.assert.throws;
-      globalThis.assertRejects = (a) => a().then(
-        () => chai.assert.fail("expected function to throw an error"),
-        (e) => chai.assert.throws(() => { throw e; })
-      );
 
       ${chafaJs.toString("utf-8").replaceAll(
         "chafa.wasm",
