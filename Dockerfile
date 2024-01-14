@@ -50,7 +50,7 @@ RUN emmake make -j"$(nproc)" install
 RUN pkg-config --static --exists --print-errors libffi
 
 # Build glib
-ARG GLIB_TREEISH=2.78.1
+ARG GLIB_TREEISH=2.79.0
 ARG GLIB_REMOTE=https://github.com/GNOME/glib.git
 WORKDIR ${BUILDDIR}/dep/glib/
 RUN git clone "${GLIB_REMOTE:?}" ./ \
@@ -65,8 +65,8 @@ RUN emconfigure meson setup ./build/ \
 		--buildtype=release \
 		--default-library=static \
 		--force-fallback-for=gvdb,zlib \
-		-D man=false \
-		-D gtk_doc=false \
+		-D man-pages=disabled \
+		-D documentation=false \
 		-D tests=false \
 		-D nls=disabled \
 		-D selinux=disabled \
