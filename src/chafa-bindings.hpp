@@ -59,6 +59,16 @@ EMSCRIPTEN_BINDINGS(Chafa) {
       .value("CHAFA_PIXEL_RGB8", CHAFA_PIXEL_RGB8)
       .value("CHAFA_PIXEL_BGR8", CHAFA_PIXEL_BGR8)
       .value("CHAFA_PIXEL_MAX", CHAFA_PIXEL_MAX);
+  emscripten::enum_<ChafaAlign>("ChafaAlign")
+      .value("CHAFA_ALIGN_START", CHAFA_ALIGN_START)
+      .value("CHAFA_ALIGN_END", CHAFA_ALIGN_END)
+      .value("CHAFA_ALIGN_CENTER", CHAFA_ALIGN_CENTER)
+      .value("CHAFA_ALIGN_MAX", CHAFA_ALIGN_MAX);
+  emscripten::enum_<ChafaTuck>("ChafaTuck")
+      .value("CHAFA_TUCK_STRETCH", CHAFA_TUCK_STRETCH)
+      .value("CHAFA_TUCK_FIT", CHAFA_TUCK_FIT)
+      .value("CHAFA_TUCK_SHRINK_TO_FIT", CHAFA_TUCK_SHRINK_TO_FIT)
+      .value("CHAFA_TUCK_MAX", CHAFA_TUCK_MAX);
   emscripten::enum_<ChafaFeatures>("ChafaFeatures")
       .value("CHAFA_FEATURE_MMX", CHAFA_FEATURE_MMX)
       .value("CHAFA_FEATURE_SSE41", CHAFA_FEATURE_SSE41)

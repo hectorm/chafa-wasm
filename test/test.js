@@ -70,25 +70,31 @@ const data = {
     0x52, 0x49, 0x46, 0x46, 0xde, 0xad, 0xbe, 0xef,
   ]),
   ansi: [
-    `\x1B[0m\x1B[7m\x1B[38;2;0;0;0m \x1B[0m\x1B[38;2;0;0;0;48;2;0;0;0m \x1B[38;2;53;52;49;48;2;1;1;1m\u{2581}\x1B[38;2;210;206;191;48;2;17;17;17m\u{2582}\x1B[38;2;230;229;214;48;2;18;18;17m\u{2584}\x1B[38;2;215;215;203;48;2;24;24;24m\u{2585}\x1B[38;2;203;204;193;48;2;14;14;13m\u{2585}\x1B[38;2;201;203;194;48;2;24;24;22m\u{2583}\x1B[38;2;0;0;0;48;2;7;7;7m\u{2575}\x1B[48;2;0;0;0m       \x1B[0m`,
-    `\x1B[38;2;147;157;155;48;2;7;8;8m\u{2582}\x1B[38;2;192;187;171;48;2;23;22;21m\u{2584}\x1B[38;2;225;222;203;48;2;114;111;103m\u{2587}\x1B[38;2;134;146;153;48;2;231;229;211m\u{257A}\x1B[38;2;181;184;179;48;2;121;136;148m\u{2582}\x1B[38;2;76;101;125;48;2;155;164;166m\u{2587}\x1B[38;2;40;68;91;48;2;132;147;157m\u{2581}\x1B[38;2;136;138;132;48;2;213;217;206m\u{2581}\x1B[38;2;218;221;211;48;2;127;126;118m\u{2586}\x1B[38;2;131;134;130;48;2;21;21;20m\u{258D}\x1B[48;2;0;0;0m     \x1B[38;2;0;0;0;48;2;7;6;6m\u{2575}\x1B[0m`,
-    `\x1B[38;2;177;178;165;48;2;195;196;180m\u{2597}\x1B[38;2;116;131;141;48;2;177;184;177m\u{2583}\x1B[38;2;138;151;156;48;2;193;200;188m\u{2585}\x1B[38;2;116;133;145;48;2;194;200;189m\u{2582}\x1B[38;2;130;142;150;48;2;193;198;190m\u{2585}\x1B[38;2;221;221;208;48;2;137;148;155m\u{2581}\x1B[38;2;86;110;133;48;2;18;28;36m\u{258B}\x1B[38;2;0;0;0;48;2;36;37;36m\u{2587}\x1B[38;2;5;5;5;48;2;124;125;120m\u{2586}\x1B[38;2;4;4;4;48;2;60;62;62m\u{2587}\x1B[48;2;0;0;0m   \x1B[38;2;84;83;82;48;2;5;5;4m\u{2582}\x1B[38;2;189;185;168;48;2;19;19;18m\u{2584}\x1B[38;2;204;208;196;48;2;112;110;101m\u{2587}\x1B[0m`,
-    `\x1B[38;2;141;148;147;48;2;197;197;181m\u{2517}\x1B[38;2;133;140;143;48;2;192;192;180m\u{2501}\x1B[38;2;205;203;185;48;2;116;129;137m\u{2586}\x1B[38;2;212;214;198;48;2;103;122;137m\u{2585}\x1B[38;2;226;227;212;48;2;162;168;169m\u{2586}\x1B[38;2;223;227;213;48;2;245;244;226m\u{2585}\x1B[38;2;216;218;206;48;2;164;171;171m\u{2587}\x1B[38;2;195;198;187;48;2;12;17;22m\u{2586}\x1B[38;2;164;169;164;48;2;15;14;13m\u{2584}\x1B[38;2;172;170;159;48;2;30;30;28m\u{2585}\x1B[38;2;177;177;166;48;2;31;30;29m\u{2586}\x1B[38;2;201;195;178;48;2;24;22;19m\u{2584}\x1B[38;2;205;204;188;48;2;43;44;43m\u{2585}\x1B[38;2;193;200;193;48;2;142;146;146m\u{2587}\x1B[38;2;155;168;169;48;2;190;200;194m\u{257C}\x1B[38;2;179;194;189;48;2;119;140;152m\u{2585}\x1B[0m`,
-    `\x1B[38;2;118;128;133;48;2;210;207;187m\u{2585}\x1B[38;2;84;106;123;48;2;190;197;186m\u{2585}\x1B[38;2;74;96;114;48;2;170;178;173m\u{2583}\x1B[38;2;90;110;125;48;2;192;198;187m\u{2596}\x1B[38;2;174;180;172;48;2;214;219;204m\u{2582}\x1B[38;2;158;166;163;48;2;195;200;190m\u{2597}\x1B[38;2;192;197;187;48;2;145;153;155m\u{2572}\x1B[38;2;98;109;124;48;2;165;166;161m\u{257E}\x1B[38;2;167;163;155;48;2;136;149;155m\u{2586}\x1B[38;2;190;178;161;48;2;146;155;156m\u{2584}\x1B[38;2;159;150;142;48;2;203;203;186m\u{2501}\x1B[38;2;147;144;143;48;2;199;203;189m\u{2501}\x1B[38;2;164;174;169;48;2;153;163;164m\u{2584}\x1B[38;2;182;192;186;48;2;150;165;165m\u{259D}\x1B[38;2;118;137;147;48;2;182;194;185m\u{257C}\x1B[38;2;192;200;185;48;2;118;136;145m\u{2583}\x1B[0m`,
+    `\u{001b}[0m\u{001b}[7m\u{001b}[38;2;0;0;0m\u{0020}\u{001b}[0m\u{001b}[38;2;0;0;0;48;2;0;0;0m\u{0020}\u{001b}[38;2;78;76;70;48;2;3;3;2m\u{2581}\u{001b}[38;2;220;216;200;48;2;24;24;23m\u{2582}\u{001b}[38;2;211;210;197;48;2;0;0;0m\u{2585}\u{001b}[38;2;220;220;207;48;2;35;36;35m\u{2585}\u{001b}[38;2;212;213;201;48;2;23;23;21m\u{2585}\u{001b}[38;2;187;189;180;48;2;14;13;13m\u{2584}\u{001b}[38;2;68;67;62;48;2;4;4;4m\u{2581}\u{001b}[48;2;0;0;0m\u{0020}\u{0020}\u{0020}\u{0020}\u{0020}\u{0020}\u{0020}\u{001b}[0m`,
+    `\u{001b}[38;2;127;136;134;48;2;0;0;0m\u{2583}\u{001b}[38;2;202;197;180;48;2;34;34;31m\u{2584}\u{001b}[38;2;229;225;206;48;2;144;140;129m\u{2587}\u{001b}[38;2;150;156;158;48;2;232;229;212m\u{257a}\u{001b}[38;2;79;100;123;48;2;162;169;169m\u{2501}\u{001b}[38;2;80;103;126m\u{2587}\u{001b}[38;2;95;115;134;48;2;180;187;184m\u{2585}\u{001b}[38;2;155;157;150;48;2;214;218;207m\u{2581}\u{001b}[38;2;213;216;205;48;2;128;126;118m\u{2587}\u{001b}[38;2;133;136;131;48;2;21;21;20m\u{258c}\u{001b}[48;2;0;0;0m\u{0020}\u{0020}\u{0020}\u{0020}\u{0020}\u{001b}[38;2;61;60;54;48;2;3;3;2m\u{2581}\u{001b}[0m`,
+    `\u{001b}[38;2;178;180;166;48;2;197;197;180m\u{2597}\u{001b}[38;2;122;135;142;48;2;179;185;178m\u{2583}\u{001b}[38;2;114;132;144;48;2;177;184;177m\u{2582}\u{001b}[38;2;119;135;146;48;2;196;201;190m\u{2582}\u{001b}[38;2;134;144;152;48;2;196;200;191m\u{2585}\u{001b}[38;2;224;223;210;48;2;141;151;157m\u{2581}\u{001b}[38;2;90;114;137;48;2;25;39;51m\u{258b}\u{001b}[38;2;0;1;2;48;2;79;80;77m\u{2587}\u{001b}[38;2;8;9;9;48;2;150;152;145m\u{2586}\u{001b}[38;2;7;7;7;48;2;70;73;72m\u{2587}\u{001b}[48;2;0;0;0m\u{0020}\u{0020}\u{0020}\u{001b}[38;2;104;103;101;48;2;7;7;6m\u{2582}\u{001b}[38;2;197;193;176;48;2;32;31;28m\u{2584}\u{001b}[38;2;211;214;201;48;2;138;135;124m\u{2587}\u{001b}[0m`,
+    `\u{001b}[38;2;144;150;148;48;2;200;199;182m\u{2517}\u{001b}[38;2;136;142;144;48;2;194;194;181m\u{2501}\u{001b}[38;2;207;204;186;48;2;120;131;138m\u{2586}\u{001b}[38;2;214;215;199;48;2;106;124;138m\u{2585}\u{001b}[38;2;227;228;213;48;2;165;171;170m\u{2586}\u{001b}[38;2;223;227;214;48;2;245;244;226m\u{2585}\u{001b}[38;2;218;220;207;48;2;171;176;175m\u{2587}\u{001b}[38;2;201;204;192;48;2;16;23;31m\u{2586}\u{001b}[38;2;158;160;153;48;2;3;3;3m\u{2585}\u{001b}[38;2;167;165;154;48;2;7;7;7m\u{2586}\u{001b}[38;2;188;187;175;48;2;50;50;47m\u{2586}\u{001b}[38;2;191;185;168;48;2;0;0;0m\u{2585}\u{001b}[38;2;196;193;177;48;2;15;20;26m\u{2586}\u{001b}[38;2;195;202;194;48;2;150;152;152m\u{2587}\u{001b}[38;2;161;172;172;48;2;194;203;195m\u{257c}\u{001b}[38;2;184;197;190;48;2;128;145;154m\u{2585}\u{001b}[0m`,
+    `\u{001b}[38;2;122;131;134;48;2;211;207;187m\u{2585}\u{001b}[38;2;87;107;123;48;2;191;198;187m\u{2585}\u{001b}[38;2;77;97;114;48;2;173;181;174m\u{2583}\u{001b}[38;2;94;112;126;48;2;194;200;188m\u{2596}\u{001b}[38;2;175;181;173;48;2;215;220;205m\u{2582}\u{001b}[38;2;160;168;164;48;2;197;201;190m\u{2597}\u{001b}[38;2;136;141;146;48;2;177;182;175m\u{259d}\u{001b}[38;2;109;113;125;48;2;171;170;163m\u{257e}\u{001b}[38;2;175;172;163;48;2;152;152;150m\u{259a}\u{001b}[38;2;191;179;161;48;2;150;158;158m\u{2584}\u{001b}[38;2;165;153;144;48;2;205;204;187m\u{2501}\u{001b}[38;2;151;145;144;48;2;201;204;190m\u{2501}\u{001b}[38;2;177;182;173;48;2;156;165;165m\u{2584}\u{001b}[38;2;215;223;203;48;2;160;171;169m\u{2581}\u{001b}[38;2;130;142;149;48;2;188;198;187m\u{257c}\u{001b}[38;2;197;204;187;48;2;123;138;146m\u{2583}\u{001b}[0m`,
   ].join("\n"),
   html: [
-    `<span style="color:transparent;background:#000000">&#32;</span><span style="color:#000000;background:#000000">&#32;</span><span style="color:#353431;background:#010101">&#9601;</span><span style="color:#d2cebf;background:#111111">&#9602;</span><span style="color:#e6e5d6;background:#121211">&#9604;</span><span style="color:#d7d7cb;background:#181818">&#9605;</span><span style="color:#cbccc1;background:#0e0e0d">&#9605;</span><span style="color:#c9cbc2;background:#181816">&#9603;</span><span style="color:#000000;background:#070707">&#9589;</span><span style="color:#000000;background:#000000">&#32;</span><span style="color:#000000;background:#000000">&#32;</span><span style="color:#000000;background:#000000">&#32;</span><span style="color:#000000;background:#000000">&#32;</span><span style="color:#000000;background:#000000">&#32;</span><span style="color:#000000;background:#000000">&#32;</span><span style="color:#000000;background:#000000">&#32;</span>`,
-    `<span style="color:#939d9b;background:#070808">&#9602;</span><span style="color:#c0bbab;background:#171615">&#9604;</span><span style="color:#e1decb;background:#726f67">&#9607;</span><span style="color:#869299;background:#e7e5d3">&#9594;</span><span style="color:#b5b8b3;background:#798894">&#9602;</span><span style="color:#4c657d;background:#9ba4a6">&#9607;</span><span style="color:#28445b;background:#84939d">&#9601;</span><span style="color:#888a84;background:#d5d9ce">&#9601;</span><span style="color:#daddd3;background:#7f7e76">&#9606;</span><span style="color:#838682;background:#151514">&#9613;</span><span style="color:#838682;background:#000000">&#32;</span><span style="color:#838682;background:#000000">&#32;</span><span style="color:#838682;background:#000000">&#32;</span><span style="color:#838682;background:#000000">&#32;</span><span style="color:#838682;background:#000000">&#32;</span><span style="color:#000000;background:#070606">&#9589;</span>`,
-    `<span style="color:#b1b2a5;background:#c3c4b4">&#9623;</span><span style="color:#74838d;background:#b1b8b1">&#9603;</span><span style="color:#8a979c;background:#c1c8bc">&#9605;</span><span style="color:#748591;background:#c2c8bd">&#9602;</span><span style="color:#828e96;background:#c1c6be">&#9605;</span><span style="color:#ddddd0;background:#89949b">&#9601;</span><span style="color:#566e85;background:#121c24">&#9611;</span><span style="color:#000000;background:#242524">&#9607;</span><span style="color:#050505;background:#7c7d78">&#9606;</span><span style="color:#040404;background:#3c3e3e">&#9607;</span><span style="color:#040404;background:#000000">&#32;</span><span style="color:#040404;background:#000000">&#32;</span><span style="color:#040404;background:#000000">&#32;</span><span style="color:#545352;background:#050504">&#9602;</span><span style="color:#bdb9a8;background:#131312">&#9604;</span><span style="color:#ccd0c4;background:#706e65">&#9607;</span>`,
-    `<span style="color:#8d9493;background:#c5c5b5">&#9495;</span><span style="color:#858c8f;background:#c0c0b4">&#9473;</span><span style="color:#cdcbb9;background:#748189">&#9606;</span><span style="color:#d4d6c6;background:#677a89">&#9605;</span><span style="color:#e2e3d4;background:#a2a8a9">&#9606;</span><span style="color:#dfe3d5;background:#f5f4e2">&#9605;</span><span style="color:#d8dace;background:#a4abab">&#9607;</span><span style="color:#c3c6bb;background:#0c1116">&#9606;</span><span style="color:#a4a9a4;background:#0f0e0d">&#9604;</span><span style="color:#acaa9f;background:#1e1e1c">&#9605;</span><span style="color:#b1b1a6;background:#1f1e1d">&#9606;</span><span style="color:#c9c3b2;background:#181613">&#9604;</span><span style="color:#cdccbc;background:#2b2c2b">&#9605;</span><span style="color:#c1c8c1;background:#8e9292">&#9607;</span><span style="color:#9ba8a9;background:#bec8c2">&#9596;</span><span style="color:#b3c2bd;background:#778c98">&#9605;</span>`,
-    `<span style="color:#768085;background:#d2cfbb">&#9605;</span><span style="color:#546a7b;background:#bec5ba">&#9605;</span><span style="color:#4a6072;background:#aab2ad">&#9603;</span><span style="color:#5a6e7d;background:#c0c6bb">&#9622;</span><span style="color:#aeb4ac;background:#d6dbcc">&#9602;</span><span style="color:#9ea6a3;background:#c3c8be">&#9623;</span><span style="color:#c0c5bb;background:#91999b">&#9586;</span><span style="color:#626d7c;background:#a5a6a1">&#9598;</span><span style="color:#a7a39b;background:#88959b">&#9606;</span><span style="color:#beb2a1;background:#929b9c">&#9604;</span><span style="color:#9f968e;background:#cbcbba">&#9473;</span><span style="color:#93908f;background:#c7cbbd">&#9473;</span><span style="color:#a4aea9;background:#99a3a4">&#9604;</span><span style="color:#b6c0ba;background:#96a5a5">&#9629;</span><span style="color:#768993;background:#b6c2b9">&#9596;</span><span style="color:#c0c8b9;background:#768891">&#9603;</span>`,
+    `<span style="color:transparent;background:#000000">&#32;</span><span style="color:#000000;background:#000000">&#32;</span><span style="color:#4e4c46;background:#030302">&#9601;</span><span style="color:#dcd8c8;background:#181817">&#9602;</span><span style="color:#d3d2c5;background:#000000">&#9605;</span><span style="color:#dcdccf;background:#232423">&#9605;</span><span style="color:#d4d5c9;background:#171715">&#9605;</span><span style="color:#bbbdb4;background:#0e0d0d">&#9604;</span><span style="color:#44433e;background:#040404">&#9601;</span><span style="color:#44433e;background:#000000">&#32;</span><span style="color:#44433e;background:#000000">&#32;</span><span style="color:#44433e;background:#000000">&#32;</span><span style="color:#44433e;background:#000000">&#32;</span><span style="color:#44433e;background:#000000">&#32;</span><span style="color:#44433e;background:#000000">&#32;</span><span style="color:#44433e;background:#000000">&#32;</span>`,
+    `<span style="color:#7f8886;background:#000000">&#9603;</span><span style="color:#cac5b4;background:#22221f">&#9604;</span><span style="color:#e5e1ce;background:#908c81">&#9607;</span><span style="color:#969c9e;background:#e8e5d4">&#9594;</span><span style="color:#4f647b;background:#a2a9a9">&#9473;</span><span style="color:#50677e;background:#a2a9a9">&#9607;</span><span style="color:#5f7386;background:#b4bbb8">&#9605;</span><span style="color:#9b9d96;background:#d6dacf">&#9601;</span><span style="color:#d5d8cd;background:#807e76">&#9607;</span><span style="color:#858883;background:#151514">&#9612;</span><span style="color:#858883;background:#000000">&#32;</span><span style="color:#858883;background:#000000">&#32;</span><span style="color:#858883;background:#000000">&#32;</span><span style="color:#858883;background:#000000">&#32;</span><span style="color:#858883;background:#000000">&#32;</span><span style="color:#3d3c36;background:#030302">&#9601;</span>`,
+    `<span style="color:#b2b4a6;background:#c5c5b4">&#9623;</span><span style="color:#7a878e;background:#b3b9b2">&#9603;</span><span style="color:#728490;background:#b1b8b1">&#9602;</span><span style="color:#778792;background:#c4c9be">&#9602;</span><span style="color:#869098;background:#c4c8bf">&#9605;</span><span style="color:#e0dfd2;background:#8d979d">&#9601;</span><span style="color:#5a7289;background:#192733">&#9611;</span><span style="color:#000102;background:#4f504d">&#9607;</span><span style="color:#080909;background:#969891">&#9606;</span><span style="color:#070707;background:#464948">&#9607;</span><span style="color:#070707;background:#000000">&#32;</span><span style="color:#070707;background:#000000">&#32;</span><span style="color:#070707;background:#000000">&#32;</span><span style="color:#686765;background:#070706">&#9602;</span><span style="color:#c5c1b0;background:#201f1c">&#9604;</span><span style="color:#d3d6c9;background:#8a877c">&#9607;</span>`,
+    `<span style="color:#909694;background:#c8c7b6">&#9495;</span><span style="color:#888e90;background:#c2c2b5">&#9473;</span><span style="color:#cfccba;background:#78838a">&#9606;</span><span style="color:#d6d7c7;background:#6a7c8a">&#9605;</span><span style="color:#e3e4d5;background:#a5abaa">&#9606;</span><span style="color:#dfe3d6;background:#f5f4e2">&#9605;</span><span style="color:#dadccf;background:#abb0af">&#9607;</span><span style="color:#c9ccc0;background:#10171f">&#9606;</span><span style="color:#9ea099;background:#030303">&#9605;</span><span style="color:#a7a59a;background:#070707">&#9606;</span><span style="color:#bcbbaf;background:#32322f">&#9606;</span><span style="color:#bfb9a8;background:#000000">&#9605;</span><span style="color:#c4c1b1;background:#0f141a">&#9606;</span><span style="color:#c3cac2;background:#969898">&#9607;</span><span style="color:#a1acac;background:#c2cbc3">&#9596;</span><span style="color:#b8c5be;background:#80919a">&#9605;</span>`,
+    `<span style="color:#7a8386;background:#d3cfbb">&#9605;</span><span style="color:#576b7b;background:#bfc6bb">&#9605;</span><span style="color:#4d6172;background:#adb5ae">&#9603;</span><span style="color:#5e707e;background:#c2c8bc">&#9622;</span><span style="color:#afb5ad;background:#d7dccd">&#9602;</span><span style="color:#a0a8a4;background:#c5c9be">&#9623;</span><span style="color:#888d92;background:#b1b6af">&#9629;</span><span style="color:#6d717d;background:#abaaa3">&#9598;</span><span style="color:#afaca3;background:#989896">&#9626;</span><span style="color:#bfb3a1;background:#969e9e">&#9604;</span><span style="color:#a59990;background:#cdccbb">&#9473;</span><span style="color:#979190;background:#c9ccbe">&#9473;</span><span style="color:#b1b6ad;background:#9ca5a5">&#9604;</span><span style="color:#d7dfcb;background:#a0aba9">&#9601;</span><span style="color:#828e95;background:#bcc6bb">&#9596;</span><span style="color:#c5ccbb;background:#7b8a92">&#9603;</span>`,
   ].join("\n"),
   consoleLogArgs: [
-    "%c %c %c▁%c▂%c▄%c▅%c▅%c▃%c╵%c %c %c %c %c %c %c \n%c▂%c▄%c▇%c╺%c▂%c▇%c▁%c▁%c▆%c▍%c %c %c %c %c %c╵\n%c▗%c▃%c▅%c▂%c▅%c▁%c▋%c▇%c▆%c▇%c %c %c %c▂%c▄%c▇\n%c┗%c━%c▆%c▅%c▆%c▅%c▇%c▆%c▄%c▅%c▆%c▄%c▅%c▇%c╼%c▅\n%c▅%c▅%c▃%c▖%c▂%c▗%c╲%c╾%c▆%c▄%c━%c━%c▄%c▝%c╼%c▃",
-    "color:transparent;background:#000000", "color:#000000;background:#000000", "color:#353431;background:#010101", "color:#d2cebf;background:#111111", "color:#e6e5d6;background:#121211", "color:#d7d7cb;background:#181818", "color:#cbccc1;background:#0e0e0d", "color:#c9cbc2;background:#181816", "color:#000000;background:#070707", "color:#000000;background:#000000", "color:#000000;background:#000000", "color:#000000;background:#000000", "color:#000000;background:#000000", "color:#000000;background:#000000", "color:#000000;background:#000000", "color:#000000;background:#000000", "color:#939d9b;background:#070808", "color:#c0bbab;background:#171615", "color:#e1decb;background:#726f67", "color:#869299;background:#e7e5d3", "color:#b5b8b3;background:#798894", "color:#4c657d;background:#9ba4a6", "color:#28445b;background:#84939d", "color:#888a84;background:#d5d9ce",
-    "color:#daddd3;background:#7f7e76", "color:#838682;background:#151514", "color:#838682;background:#000000", "color:#838682;background:#000000", "color:#838682;background:#000000", "color:#838682;background:#000000", "color:#838682;background:#000000", "color:#000000;background:#070606", "color:#b1b2a5;background:#c3c4b4", "color:#74838d;background:#b1b8b1", "color:#8a979c;background:#c1c8bc", "color:#748591;background:#c2c8bd", "color:#828e96;background:#c1c6be", "color:#ddddd0;background:#89949b", "color:#566e85;background:#121c24", "color:#000000;background:#242524", "color:#050505;background:#7c7d78", "color:#040404;background:#3c3e3e", "color:#040404;background:#000000", "color:#040404;background:#000000", "color:#040404;background:#000000", "color:#545352;background:#050504", "color:#bdb9a8;background:#131312", "color:#ccd0c4;background:#706e65",
-    "color:#8d9493;background:#c5c5b5", "color:#858c8f;background:#c0c0b4", "color:#cdcbb9;background:#748189", "color:#d4d6c6;background:#677a89", "color:#e2e3d4;background:#a2a8a9", "color:#dfe3d5;background:#f5f4e2", "color:#d8dace;background:#a4abab", "color:#c3c6bb;background:#0c1116", "color:#a4a9a4;background:#0f0e0d", "color:#acaa9f;background:#1e1e1c", "color:#b1b1a6;background:#1f1e1d", "color:#c9c3b2;background:#181613", "color:#cdccbc;background:#2b2c2b", "color:#c1c8c1;background:#8e9292", "color:#9ba8a9;background:#bec8c2", "color:#b3c2bd;background:#778c98", "color:#768085;background:#d2cfbb", "color:#546a7b;background:#bec5ba", "color:#4a6072;background:#aab2ad", "color:#5a6e7d;background:#c0c6bb", "color:#aeb4ac;background:#d6dbcc", "color:#9ea6a3;background:#c3c8be", "color:#c0c5bb;background:#91999b", "color:#626d7c;background:#a5a6a1",
-    "color:#a7a39b;background:#88959b", "color:#beb2a1;background:#929b9c", "color:#9f968e;background:#cbcbba", "color:#93908f;background:#c7cbbd", "color:#a4aea9;background:#99a3a4", "color:#b6c0ba;background:#96a5a5", "color:#768993;background:#b6c2b9", "color:#c0c8b9;background:#768891",
+    [
+      `%c %c %c\u{2581}%c\u{2582}%c\u{2585}%c\u{2585}%c\u{2585}%c\u{2584}%c\u{2581}%c %c %c %c %c %c %c `,
+      `%c\u{2583}%c\u{2584}%c\u{2587}%c\u{257a}%c\u{2501}%c\u{2587}%c\u{2585}%c\u{2581}%c\u{2587}%c\u{258c}%c %c %c %c %c %c\u{2581}`,
+      `%c\u{2597}%c\u{2583}%c\u{2582}%c\u{2582}%c\u{2585}%c\u{2581}%c\u{258b}%c\u{2587}%c\u{2586}%c\u{2587}%c %c %c %c\u{2582}%c\u{2584}%c\u{2587}`,
+      `%c\u{2517}%c\u{2501}%c\u{2586}%c\u{2585}%c\u{2586}%c\u{2585}%c\u{2587}%c\u{2586}%c\u{2585}%c\u{2586}%c\u{2586}%c\u{2585}%c\u{2586}%c\u{2587}%c\u{257c}%c\u{2585}`,
+      `%c\u{2585}%c\u{2585}%c\u{2583}%c\u{2596}%c\u{2582}%c\u{2597}%c\u{259d}%c\u{257e}%c\u{259a}%c\u{2584}%c\u{2501}%c\u{2501}%c\u{2584}%c\u{2581}%c\u{257c}%c\u{2583}`,
+    ].join("\n"),
+    "color:transparent;background:#000000","color:#000000;background:#000000","color:#4e4c46;background:#030302","color:#dcd8c8;background:#181817","color:#d3d2c5;background:#000000","color:#dcdccf;background:#232423","color:#d4d5c9;background:#171715","color:#bbbdb4;background:#0e0d0d","color:#44433e;background:#040404","color:#44433e;background:#000000","color:#44433e;background:#000000","color:#44433e;background:#000000","color:#44433e;background:#000000","color:#44433e;background:#000000","color:#44433e;background:#000000","color:#44433e;background:#000000","color:#7f8886;background:#000000","color:#cac5b4;background:#22221f","color:#e5e1ce;background:#908c81","color:#969c9e;background:#e8e5d4",
+    "color:#4f647b;background:#a2a9a9","color:#50677e;background:#a2a9a9","color:#5f7386;background:#b4bbb8","color:#9b9d96;background:#d6dacf","color:#d5d8cd;background:#807e76","color:#858883;background:#151514","color:#858883;background:#000000","color:#858883;background:#000000","color:#858883;background:#000000","color:#858883;background:#000000","color:#858883;background:#000000","color:#3d3c36;background:#030302","color:#b2b4a6;background:#c5c5b4","color:#7a878e;background:#b3b9b2","color:#728490;background:#b1b8b1","color:#778792;background:#c4c9be","color:#869098;background:#c4c8bf","color:#e0dfd2;background:#8d979d","color:#5a7289;background:#192733","color:#000102;background:#4f504d",
+    "color:#080909;background:#969891","color:#070707;background:#464948","color:#070707;background:#000000","color:#070707;background:#000000","color:#070707;background:#000000","color:#686765;background:#070706","color:#c5c1b0;background:#201f1c","color:#d3d6c9;background:#8a877c","color:#909694;background:#c8c7b6","color:#888e90;background:#c2c2b5","color:#cfccba;background:#78838a","color:#d6d7c7;background:#6a7c8a","color:#e3e4d5;background:#a5abaa","color:#dfe3d6;background:#f5f4e2","color:#dadccf;background:#abb0af","color:#c9ccc0;background:#10171f","color:#9ea099;background:#030303","color:#a7a59a;background:#070707","color:#bcbbaf;background:#32322f","color:#bfb9a8;background:#000000",
+    "color:#c4c1b1;background:#0f141a","color:#c3cac2;background:#969898","color:#a1acac;background:#c2cbc3","color:#b8c5be;background:#80919a","color:#7a8386;background:#d3cfbb","color:#576b7b;background:#bfc6bb","color:#4d6172;background:#adb5ae","color:#5e707e;background:#c2c8bc","color:#afb5ad;background:#d7dccd","color:#a0a8a4;background:#c5c9be","color:#888d92;background:#b1b6af","color:#6d717d;background:#abaaa3","color:#afaca3;background:#989896","color:#bfb3a1;background:#969e9e","color:#a59990;background:#cdccbb","color:#979190;background:#c9ccbe","color:#b1b6ad;background:#9ca5a5","color:#d7dfcb;background:#a0aba9","color:#828e95;background:#bcc6bb","color:#c5ccbb;background:#7b8a92",
   ],
   config: {
     in: {
@@ -141,7 +147,7 @@ describe("ANSI", () => {
 
   it("imageData (bad)", async () => {
     await assertRejects(async () => {
-      await imageToAnsi(data.badImageData, data.config.in)
+      await imageToAnsi(data.badImageData, data.config.in);
     });
   });
 
@@ -153,31 +159,37 @@ describe("ANSI", () => {
 
   it("PNG (bad)", async () => {
     await assertRejects(async () => {
-      await imageToAnsi(data.badPng.buffer, data.config.in)
+      await imageToAnsi(data.badPng.buffer, data.config.in);
     });
   });
 
   it("JPEG", async () => {
-    const { ansi, config } = await imageToAnsi(data.jpeg.buffer, data.config.in);
+    const { ansi, config } = await imageToAnsi(
+      data.jpeg.buffer,
+      data.config.in
+    );
     assertEquals(ansi, data.ansi);
     assertEquals(config, data.config.out);
   });
 
   it("JPEG (bad)", async () => {
     await assertRejects(async () => {
-      await imageToAnsi(data.badJpeg.buffer, data.config.in)
+      await imageToAnsi(data.badJpeg.buffer, data.config.in);
     });
   });
 
   it("WebP", async () => {
-    const { ansi, config } = await imageToAnsi(data.webp.buffer, data.config.in);
+    const { ansi, config } = await imageToAnsi(
+      data.webp.buffer,
+      data.config.in
+    );
     assertEquals(ansi, data.ansi);
     assertEquals(config, data.config.out);
   });
 
   it("WebP (bad)", async () => {
     await assertRejects(async () => {
-      await imageToAnsi(data.badWebp.buffer, data.config.in)
+      await imageToAnsi(data.badWebp.buffer, data.config.in);
     });
   });
 });
@@ -191,7 +203,7 @@ describe("HTML", () => {
 
   it("imageData (bad)", async () => {
     await assertRejects(async () => {
-      await imageToHtml(data.badImageData, data.config.in)
+      await imageToHtml(data.badImageData, data.config.in);
     });
   });
 
@@ -203,81 +215,99 @@ describe("HTML", () => {
 
   it("PNG (bad)", async () => {
     await assertRejects(async () => {
-      await imageToHtml(data.badPng.buffer, data.config.in)
+      await imageToHtml(data.badPng.buffer, data.config.in);
     });
   });
 
   it("JPEG", async () => {
-    const { html, config } = await imageToHtml(data.jpeg.buffer, data.config.in);
+    const { html, config } = await imageToHtml(
+      data.jpeg.buffer,
+      data.config.in
+    );
     assertEquals(html, data.html);
     assertEquals(config, data.config.out);
   });
 
   it("JPEG (bad)", async () => {
     await assertRejects(async () => {
-      await imageToHtml(data.badJpeg.buffer, data.config.in)
+      await imageToHtml(data.badJpeg.buffer, data.config.in);
     });
   });
 
   it("WebP", async () => {
-    const { html, config } = await imageToHtml(data.webp.buffer, data.config.in);
+    const { html, config } = await imageToHtml(
+      data.webp.buffer,
+      data.config.in
+    );
     assertEquals(html, data.html);
     assertEquals(config, data.config.out);
   });
 
   it("WebP (bad)", async () => {
     await assertRejects(async () => {
-      await imageToHtml(data.badWebp.buffer, data.config.in)
+      await imageToHtml(data.badWebp.buffer, data.config.in);
     });
   });
 });
 
 describe("console.log", () => {
   it("imageData", async () => {
-    const { args, config } = await imageToConsoleLogArgs(data.imageData, data.config.in);
+    const { args, config } = await imageToConsoleLogArgs(
+      data.imageData,
+      data.config.in
+    );
     assertEquals(args, data.consoleLogArgs);
     assertEquals(config, data.config.out);
   });
 
   it("imageData (bad)", async () => {
     await assertRejects(async () => {
-      await imageToConsoleLogArgs(data.badImageData, data.config.in)
+      await imageToConsoleLogArgs(data.badImageData, data.config.in);
     });
   });
 
   it("PNG", async () => {
-    const { args, config } = await imageToConsoleLogArgs(data.png.buffer, data.config.in);
+    const { args, config } = await imageToConsoleLogArgs(
+      data.png.buffer,
+      data.config.in
+    );
     assertEquals(args, data.consoleLogArgs);
     assertEquals(config, data.config.out);
   });
 
   it("PNG (bad)", async () => {
     await assertRejects(async () => {
-      await imageToConsoleLogArgs(data.badPng.buffer, data.config.in)
+      await imageToConsoleLogArgs(data.badPng.buffer, data.config.in);
     });
   });
 
   it("JPEG", async () => {
-    const { args, config } = await imageToConsoleLogArgs(data.jpeg.buffer, data.config.in);
+    const { args, config } = await imageToConsoleLogArgs(
+      data.jpeg.buffer,
+      data.config.in
+    );
     assertEquals(args, data.consoleLogArgs);
     assertEquals(config, data.config.out);
   });
 
   it("JPEG (bad)", async () => {
     await assertRejects(async () => {
-      await imageToConsoleLogArgs(data.badJpeg.buffer, data.config.in)
+      await imageToConsoleLogArgs(data.badJpeg.buffer, data.config.in);
     });
   });
 
   it("WebP", async () => {
-    const { args, config } = await imageToConsoleLogArgs(data.webp.buffer, data.config.in);
+    const { args, config } = await imageToConsoleLogArgs(
+      data.webp.buffer,
+      data.config.in
+    );
     assertEquals(args, data.consoleLogArgs);
     assertEquals(config, data.config.out);
   });
 
   it("WebP (bad)", async () => {
     await assertRejects(async () => {
-      await imageToConsoleLogArgs(data.badWebp.buffer, data.config.in)
+      await imageToConsoleLogArgs(data.badWebp.buffer, data.config.in);
     });
   });
 });
