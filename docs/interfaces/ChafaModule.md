@@ -25,6 +25,9 @@ An object that contains the Chafa WebAssembly module API.
 
 • **decodeImage**: (`image`: `ArrayBuffer` \| [`ImageDataLike`](../README.md#imagedatalike), `callback`: (`error`: ``null``, `image`: [`ImageDataLike`](../README.md#imagedatalike)) => `void`(`error`: `unknown`, `image`: ``null``) => `void`) => `void`
 
+Decodes a PNG, JPEG or WebP image into an ImageDataLike object.
+If an already decoded image is specified, it will be left as is.
+
 #### Type declaration
 
 ▸ (`image`, `callback`): `void`
@@ -48,6 +51,8 @@ ___
 ### imageToAnsi
 
 • **imageToAnsi**: (`image`: `ArrayBuffer` \| [`ImageDataLike`](../README.md#imagedatalike), `config`: [`PartialChafaConfig`](../README.md#partialchafaconfig), `callback`: (`error`: ``null``, `data`: \{ `ansi`: `string` ; `config`: [`ReadonlyChafaConfig`](../README.md#readonlychafaconfig)  }) => `void`(`error`: `unknown`, `data`: \{ `ansi`: ``null`` ; `config`: ``null``  }) => `void`) => `void`
+
+Converts an image into an ANSI string.
 
 #### Type declaration
 
@@ -73,6 +78,8 @@ ___
 
 • **imageToCanvas**: (`image`: `ArrayBuffer` \| [`ImageDataLike`](../README.md#imagedatalike), `config`: [`PartialChafaConfig`](../README.md#partialchafaconfig), `callback`: (`error`: ``null``, `data`: \{ `canvas`: `number` ; `config`: [`ReadonlyChafaConfig`](../README.md#readonlychafaconfig)  }) => `void`(`error`: `unknown`, `data`: \{ `canvas`: ``null`` ; `config`: ``null``  }) => `void`) => `void`
 
+Converts an image into a Chafa canvas pointer.
+
 #### Type declaration
 
 ▸ (`image`, `config`, `callback`): `void`
@@ -96,6 +103,8 @@ ___
 ### imageToConsoleLogArgs
 
 • **imageToConsoleLogArgs**: (`image`: `ArrayBuffer` \| [`ImageDataLike`](../README.md#imagedatalike), `config`: [`PartialChafaConfig`](../README.md#partialchafaconfig), `callback`: (`error`: ``null``, `data`: \{ `args`: `string`[] ; `config`: [`ReadonlyChafaConfig`](../README.md#readonlychafaconfig)  }) => `void`(`error`: `unknown`, `data`: \{ `args`: ``null`` ; `config`: ``null``  }) => `void`) => `void`
+
+Converts an image into an array of `console.log` arguments.
 
 #### Type declaration
 
@@ -121,6 +130,8 @@ ___
 
 • **imageToHtml**: (`image`: `ArrayBuffer` \| [`ImageDataLike`](../README.md#imagedatalike), `config`: [`PartialChafaConfig`](../README.md#partialchafaconfig), `callback`: (`error`: ``null``, `data`: \{ `config`: [`ReadonlyChafaConfig`](../README.md#readonlychafaconfig) ; `html`: `string`  }) => `void`(`error`: `unknown`, `data`: \{ `config`: ``null`` ; `html`: ``null``  }) => `void`) => `void`
 
+Converts an image into an HTML string.
+
 #### Type declaration
 
 ▸ (`image`, `config`, `callback`): `void`
@@ -144,6 +155,8 @@ ___
 ### imageToMatrix
 
 • **imageToMatrix**: (`image`: `ArrayBuffer` \| [`ImageDataLike`](../README.md#imagedatalike), `config`: [`PartialChafaConfig`](../README.md#partialchafaconfig), `callback`: (`error`: ``null``, `data`: \{ `config`: [`ReadonlyChafaConfig`](../README.md#readonlychafaconfig) ; `matrix`: `number`[][][]  }) => `void`(`error`: `unknown`, `data`: \{ `config`: ``null`` ; `matrix`: ``null``  }) => `void`) => `void`
+
+Converts an image into a matrix of characters.
 
 #### Type declaration
 
