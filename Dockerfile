@@ -32,7 +32,7 @@ RUN emmake make -j"$(nproc)" install
 RUN pkg-config --static --exists --print-errors zlib
 
 # Build libffi
-ARG LIBFFI_TREEISH=5b1944b4ce4b03e28a5843d36812756168d66b08
+ARG LIBFFI_TREEISH=622caabcd25f4e11f752241417d06c9062acdf1f
 ARG LIBFFI_REMOTE=https://github.com/libffi/libffi.git
 WORKDIR ${BUILDDIR}/dep/libffi/
 RUN git clone "${LIBFFI_REMOTE:?}" ./ \

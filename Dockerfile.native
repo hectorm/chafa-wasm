@@ -11,7 +11,7 @@ ENV PKG_CONFIG_SYSROOT_DIR=${SYSROOT}
 ENV PKG_CONFIG_LIBDIR=${SYSROOT}/lib/pkgconfig:${SYSROOT}/share/pkgconfig
 ENV PKG_CONFIG_PATH=${PKG_CONFIG_LIBDIR}
 ENV CPPFLAGS='-Wdate-time'
-ENV CFLAGS='-O3 -frandom-seed=42 -Wall -Wextra -Wformat -Werror=format-security'
+ENV CFLAGS='-O3 -fPIC -frandom-seed=42 -Wall -Wextra -Wformat -Werror=format-security'
 ENV CXXFLAGS=${CFLAGS}
 ENV LDFLAGS=''
 
@@ -30,7 +30,7 @@ RUN make -j"$(nproc)" install
 RUN pkg-config --static --exists --print-errors zlib
 
 # Build libffi
-ARG LIBFFI_TREEISH=5b1944b4ce4b03e28a5843d36812756168d66b08
+ARG LIBFFI_TREEISH=622caabcd25f4e11f752241417d06c9062acdf1f
 ARG LIBFFI_REMOTE=https://github.com/libffi/libffi.git
 WORKDIR ${BUILDDIR}/dep/libffi/
 RUN git clone "${LIBFFI_REMOTE:?}" ./ \
