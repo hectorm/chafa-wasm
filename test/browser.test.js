@@ -34,12 +34,38 @@ try {
     path: require.resolve("mocha/mocha.js"),
   });
 
-  const chaiJs = fs.readFileSync(require.resolve("chai/chai.js"));
+  const chaiJsUri = `data:application/javascript;base64,${fs
+    .readFileSync(require.resolve("chai/chai.js"))
+    .toString("base64")}`;
+
+  const chafaWasmUri = `data:application/octet-stream;base64,${fs
+    .readFileSync(require.resolve("../dist/chafa.wasm"))
+    .toString("base64")}`;
+
+  const chafaJsUri = `data:application/javascript;base64,${Buffer.from(fs
+    .readFileSync(require.resolve("../dist/chafa.js"))
+    .toString("utf-8")
+    .replaceAll("chafa.wasm", chafaWasmUri)).toString("base64")}`;
+
+  const testJsUri = `data:application/javascript;base64,${fs
+    .readFileSync(require.resolve("./test.js"))
+    .toString("base64")}`;
+
+  await page.addScriptTag({
+    type: "importmap",
+    content: JSON.stringify({
+      imports: {
+        chai: chaiJsUri,
+        chafa: chafaJsUri,
+        test: testJsUri,
+      },
+    }),
+  });
 
   await page.addScriptTag({
     type: "module",
     content: `
-      ${chaiJs.toString("utf-8")};
+      import { assert } from "chai";
 
       globalThis.assert = assert;
       globalThis.assertEquals = assert.deepEqual;
@@ -49,27 +75,13 @@ try {
         () => assert.fail("expected function to throw an error"),
         (e) => assert.throws(() => { throw e; })
       );
-    `,
-  });
 
-  const chafaJs = fs.readFileSync(require.resolve("../dist/chafa.js"));
-  const chafaWasm = fs.readFileSync(require.resolve("../dist/chafa.wasm"));
-  const testJs = fs.readFileSync(require.resolve("./test.js"));
-
-  await page.addScriptTag({
-    type: "module",
-    content: `
-      mocha.setup({ ui: "bdd", reporter: "tap" });
-
-      ${chafaJs.toString("utf-8").replaceAll(
-        "chafa.wasm",
-        `data:application/octet-stream;base64,${chafaWasm.toString("base64")}`
-      )};
+      import Chafa from "chafa";
 
       globalThis.Chafa = Chafa;
 
-      ${testJs.toString("utf-8")};
-
+      mocha.setup({ ui: "bdd", reporter: "tap" });
+      await import("test");
       mocha.run((code) => setTimeout(() => exit(code), 10));
     `,
   });

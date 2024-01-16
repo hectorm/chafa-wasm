@@ -7,15 +7,24 @@
       default-src 'none';
       connect-src 'self';
       img-src 'self' data:;
-      script-src 'self' 'unsafe-inline' 'unsafe-eval';
+      script-src 'self' 'unsafe-inline' 'unsafe-eval' data:;
       style-src 'self';"
     />
     <title>Mocha</title>
     <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg==" />
     <link rel="stylesheet" href="../node_modules/mocha/mocha.css" />
     <script src="../node_modules/mocha/mocha.js"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "chai": "../node_modules/chai/chai.js",
+          "chafa": "../dist/chafa.js",
+          "test": "./test.js"
+        }
+      }
+    </script>
     <script type="module">
-      import { assert } from "../node_modules/chai/chai.js";
+      import { assert } from "chai";
 
       globalThis.assert = assert;
       globalThis.assertEquals = assert.deepEqual;
@@ -25,16 +34,13 @@
         () => assert.fail("expected function to throw an error"),
         (e) => assert.throws(() => { throw e; })
       );
-    </script>
-    <script type="module">
-      mocha.setup({ ui: "bdd", reporter: "html" });
 
-      import Chafa from "../dist/chafa.js";
+      import Chafa from "chafa";
 
       globalThis.Chafa = Chafa;
 
-      await import("./test.js");
-
+      mocha.setup({ ui: "bdd", reporter: "html" });
+      await import("test");
       mocha.run();
     </script>
   </head>
