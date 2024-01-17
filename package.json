@@ -44,7 +44,7 @@
     "build-native": "docker buildx build ./ --file ./Dockerfile.native --output type=local,dest=./dist/",
     "docs": "typedoc ./types/chafa.d.ts --plugin typedoc-plugin-markdown --readme none --disableSources --cleanOutputDir --out ./docs/",
     "test": "run-s test:*",
-    "test:node": "node --test ./test/node.test.js",
+    "test:node": "node ./test/node.test.js",
     "test:deno": "deno test --allow-read=./dist/ ./test/deno.test.js",
     "test:bun": "bun test --cwd ./test/ bun",
     "test:browser": "run-s test:browser:*",
