@@ -14,7 +14,7 @@ const require = module.createRequire(import.meta.url);
  *     $ PW_TEST_CONNECT_WS_ENDPOINT=ws://127.0.0.1:3000/ npm run test:browser
  */
 
-const browserName = process.env.TEST_BROWSER;
+const browserName = process.argv[2];
 const browserWsEndpoint = process.env.PW_TEST_CONNECT_WS_ENDPOINT;
 const browser = browserWsEndpoint
   ? await playwright[browserName].connect(browserWsEndpoint)

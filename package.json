@@ -48,9 +48,9 @@
     "test:deno": "deno test --allow-read=./dist/ ./test/deno.test.js",
     "test:bun": "bun test --cwd ./test/ bun",
     "test:browser": "run-s test:browser:*",
-    "test:browser:chromium": "TEST_BROWSER=chromium node ./test/browser.test.js",
-    "test:browser:firefox": "TEST_BROWSER=firefox node ./test/browser.test.js",
-    "test:browser:webkit": "TEST_BROWSER=webkit node ./test/browser.test.js",
+    "test:browser:chromium": "node ./test/browser.test.js chromium",
+    "test:browser:firefox": "node ./test/browser.test.js firefox",
+    "test:browser:webkit": "node ./test/browser.test.js webkit",
     "version": "run-s all && git add -A ./docs/"
   },
   "devDependencies": {
