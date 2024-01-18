@@ -1,6 +1,6 @@
 {
   "name": "chafa-wasm",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Chafa WebAssembly module to convert images to text",
   "keywords": [
     "chafa",
