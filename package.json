@@ -54,10 +54,10 @@
     "version": "run-s all && git add -A ./docs/"
   },
   "devDependencies": {
-    "chai": "~5.0.0",
+    "chai": "~5.0.3",
     "mocha": "~10.2.0",
-    "npm-run-all2": "~6.1.1",
-    "playwright": "~1.41.1",
+    "npm-run-all2": "~6.1.2",
+    "playwright": "~1.41.2",
     "typedoc-plugin-markdown": "~3.17.1",
     "typedoc": "~0.25.7",
     "typescript": "~5.3.3"
