@@ -18,7 +18,7 @@ ENV CXXFLAGS=${CFLAGS}
 ENV LDFLAGS='-fwasm-exceptions'
 
 # Build zlib
-ARG ZLIB_TREEISH=v1.3
+ARG ZLIB_TREEISH=v1.3.1
 ARG ZLIB_REMOTE=https://github.com/madler/zlib.git
 WORKDIR ${BUILDDIR}/dep/zlib/
 RUN git clone "${ZLIB_REMOTE:?}" ./ \
