@@ -78,7 +78,7 @@ RUN emmake ninja -C ./build/ install
 RUN pkg-config --static --exists --print-errors glib-2.0
 
 # Build libpng
-ARG LIBPNG_TREEISH=v1.6.40
+ARG LIBPNG_TREEISH=v1.6.43
 ARG LIBPNG_REMOTE=https://github.com/glennrp/libpng.git
 WORKDIR ${BUILDDIR}/dep/libpng/
 RUN git clone "${LIBPNG_REMOTE:?}" ./ \
