@@ -30,7 +30,7 @@ RUN make -j"$(nproc)" install
 RUN pkg-config --static --exists --print-errors zlib
 
 # Build libffi
-ARG LIBFFI_TREEISH=622caabcd25f4e11f752241417d06c9062acdf1f
+ARG LIBFFI_TREEISH=v3.4.6
 ARG LIBFFI_REMOTE=https://github.com/libffi/libffi.git
 WORKDIR ${BUILDDIR}/dep/libffi/
 RUN git clone "${LIBFFI_REMOTE:?}" ./ \
