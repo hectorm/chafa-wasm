@@ -50,7 +50,7 @@ RUN emmake make -j"$(nproc)" install
 RUN pkg-config --static --exists --print-errors libffi
 
 # Build glib
-ARG GLIB_TREEISH=2.79.0
+ARG GLIB_TREEISH=2.79.2
 ARG GLIB_REMOTE=https://github.com/GNOME/glib.git
 WORKDIR ${BUILDDIR}/dep/glib/
 RUN git clone "${GLIB_REMOTE:?}" ./ \
