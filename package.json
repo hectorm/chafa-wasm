@@ -59,7 +59,7 @@
     "npm-run-all2": "~6.1.2",
     "playwright": "~1.41.2",
     "typedoc-plugin-markdown": "~3.17.1",
-    "typedoc": "~0.25.8",
+    "typedoc": "~0.25.9",
     "typescript": "~5.3.3"
   }
 }
