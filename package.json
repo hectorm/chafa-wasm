@@ -57,9 +57,9 @@
     "chai": "~5.1.0",
     "mocha": "~10.3.0",
     "npm-run-all2": "~6.1.2",
-    "playwright": "~1.41.2",
+    "playwright": "~1.42.1",
     "typedoc-plugin-markdown": "~3.17.1",
-    "typedoc": "~0.25.8",
+    "typedoc": "~0.25.10",
     "typescript": "~5.3.3"
   }
 }
