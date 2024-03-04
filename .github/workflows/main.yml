@@ -81,7 +81,7 @@ jobs:
         with:
           node-version: '${{ matrix.node_version }}'
       - name: 'Download module artifact'
-        uses: 'actions/download-artifact@eaceaf801fd36c7dee90939fad912460b18a1ffe'
+        uses: 'actions/download-artifact@c850b930e6ba138125429b7e5c93fc707a7f8427'
         with:
           name: 'dist'
           path: './dist/'
@@ -106,7 +106,7 @@ jobs:
         with:
           deno-version: '${{ matrix.deno_version }}'
       - name: 'Download module artifact'
-        uses: 'actions/download-artifact@eaceaf801fd36c7dee90939fad912460b18a1ffe'
+        uses: 'actions/download-artifact@c850b930e6ba138125429b7e5c93fc707a7f8427'
         with:
           name: 'dist'
           path: './dist/'
@@ -131,7 +131,7 @@ jobs:
         with:
           bun-version: '${{ matrix.bun_version }}'
       - name: 'Download module artifact'
-        uses: 'actions/download-artifact@eaceaf801fd36c7dee90939fad912460b18a1ffe'
+        uses: 'actions/download-artifact@c850b930e6ba138125429b7e5c93fc707a7f8427'
         with:
           name: 'dist'
           path: './dist/'
@@ -158,7 +158,7 @@ jobs:
       - name: 'Install dependencies'
         run: 'npm ci && npx playwright install --with-deps "${{ matrix.browser }}"'
       - name: 'Download module artifact'
-        uses: 'actions/download-artifact@eaceaf801fd36c7dee90939fad912460b18a1ffe'
+        uses: 'actions/download-artifact@c850b930e6ba138125429b7e5c93fc707a7f8427'
         with:
           name: 'dist'
           path: './dist/'
@@ -182,7 +182,7 @@ jobs:
           node-version: 'lts/*'
           registry-url: 'https://registry.npmjs.org'
       - name: 'Download module artifact'
-        uses: 'actions/download-artifact@eaceaf801fd36c7dee90939fad912460b18a1ffe'
+        uses: 'actions/download-artifact@c850b930e6ba138125429b7e5c93fc707a7f8427'
         with:
           name: 'dist'
           path: './dist/'
