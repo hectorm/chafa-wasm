@@ -60,6 +60,6 @@
     "playwright": "~1.42.1",
     "typedoc-plugin-markdown": "~3.17.1",
     "typedoc": "~0.25.12",
-    "typescript": "~5.4.2"
+    "typescript": "~5.4.3"
   }
 }
