@@ -55,11 +55,11 @@
   },
   "devDependencies": {
     "chai": "~5.1.0",
-    "mocha": "~10.3.0",
+    "mocha": "~10.4.0",
     "npm-run-all2": "~6.1.2",
     "playwright": "~1.42.1",
     "typedoc-plugin-markdown": "~3.17.1",
     "typedoc": "~0.25.12",
-    "typescript": "~5.4.2"
+    "typescript": "~5.4.3"
   }
 }
