@@ -2,7 +2,7 @@
 ## "build" stage
 ##################################################
 
-FROM docker.io/hectorm/wasm:v58@sha256:ec4b7dce36348bd1d3cde227d930a9a1fa1e6b94fd4587eec9165821abab32a0 AS build
+FROM docker.io/hectorm/wasm:v59@sha256:729b723f2d64056b72fea1d8b8ac2b578f87911663b19fec7284dbbc860c8186 AS build
 
 # Environment
 ENV BUILDDIR=/tmp/build
