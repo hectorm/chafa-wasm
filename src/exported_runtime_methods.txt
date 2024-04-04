@@ -5,3 +5,4 @@ setValue
 UTF8ToString
 stringToUTF8
 lengthBytesUTF8
+HEAPU8
