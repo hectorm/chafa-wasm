@@ -32,9 +32,6 @@ If an already decoded image is specified, it will be left as is.
 
 ▸ (`image`, `callback`): `void`
 
-Decodes a PNG, JPEG or WebP image into an ImageDataLike object.
-If an already decoded image is specified, it will be left as is.
-
 ##### Parameters
 
 | Name | Type |
@@ -57,8 +54,6 @@ Converts an image into an ANSI string.
 #### Type declaration
 
 ▸ (`image`, `config`, `callback`): `void`
-
-Converts an image into an ANSI string.
 
 ##### Parameters
 
@@ -84,8 +79,6 @@ Converts an image into a Chafa canvas pointer.
 
 ▸ (`image`, `config`, `callback`): `void`
 
-Converts an image into a Chafa canvas pointer.
-
 ##### Parameters
 
 | Name | Type |
@@ -109,8 +102,6 @@ Converts an image into an array of `console.log` arguments.
 #### Type declaration
 
 ▸ (`image`, `config`, `callback`): `void`
-
-Converts an image into an array of `console.log` arguments.
 
 ##### Parameters
 
@@ -136,8 +127,6 @@ Converts an image into an HTML string.
 
 ▸ (`image`, `config`, `callback`): `void`
 
-Converts an image into an HTML string.
-
 ##### Parameters
 
 | Name | Type |
@@ -161,8 +150,6 @@ Converts an image into a matrix of characters.
 #### Type declaration
 
 ▸ (`image`, `config`, `callback`): `void`
-
-Converts an image into a matrix of characters.
 
 ##### Parameters
 
