@@ -1,3 +1,7 @@
+[**chafa-wasm**](../README.md) • **Docs**
+
+***
+
 [chafa-wasm](../README.md) / ChafaModule
 
 # Interface: ChafaModule
@@ -6,159 +10,123 @@ An object that contains the Chafa WebAssembly module API.
 
 ## Indexable
 
-▪ [x: `string` \| `number` \| `symbol`]: `any`
-
-## Table of contents
-
-### Properties
-
-- [decodeImage](ChafaModule.md#decodeimage)
-- [imageToAnsi](ChafaModule.md#imagetoansi)
-- [imageToCanvas](ChafaModule.md#imagetocanvas)
-- [imageToConsoleLogArgs](ChafaModule.md#imagetoconsolelogargs)
-- [imageToHtml](ChafaModule.md#imagetohtml)
-- [imageToMatrix](ChafaModule.md#imagetomatrix)
+ \[`x`: `string` \| `number` \| `symbol`\]: `any`
 
 ## Properties
 
-### decodeImage
+### decodeImage()
 
-• **decodeImage**: (`image`: `ArrayBuffer` \| [`ImageDataLike`](../README.md#imagedatalike), `callback`: (`error`: ``null``, `image`: [`ImageDataLike`](../README.md#imagedatalike)) => `void`(`error`: `unknown`, `image`: ``null``) => `void`) => `void`
+> **decodeImage**: (`image`, `callback`) => `void`
 
 Decodes a PNG, JPEG or WebP image into an ImageDataLike object.
 If an already decoded image is specified, it will be left as is.
 
-#### Type declaration
+#### Parameters
 
-▸ (`image`, `callback`): `void`
+• **image**: `ArrayBuffer` \| [`ImageDataLike`](../type-aliases/ImageDataLike.md)
 
-##### Parameters
+• **callback**: [`Callback`](Callback.md)\<[`ImageDataLike`](../type-aliases/ImageDataLike.md), `null`\>
 
-| Name | Type |
-| :------ | :------ |
-| `image` | `ArrayBuffer` \| [`ImageDataLike`](../README.md#imagedatalike) |
-| `callback` | (`error`: ``null``, `image`: [`ImageDataLike`](../README.md#imagedatalike)) => `void`(`error`: `unknown`, `image`: ``null``) => `void` |
-
-##### Returns
+#### Returns
 
 `void`
 
-___
+***
 
-### imageToAnsi
+### imageToAnsi()
 
-• **imageToAnsi**: (`image`: `ArrayBuffer` \| [`ImageDataLike`](../README.md#imagedatalike), `config`: [`PartialChafaConfig`](../README.md#partialchafaconfig), `callback`: (`error`: ``null``, `data`: \{ `ansi`: `string` ; `config`: [`ReadonlyChafaConfig`](../README.md#readonlychafaconfig)  }) => `void`(`error`: `unknown`, `data`: \{ `ansi`: ``null`` ; `config`: ``null``  }) => `void`) => `void`
+> **imageToAnsi**: (`image`, `config`, `callback`) => `void`
 
 Converts an image into an ANSI string.
 
-#### Type declaration
+#### Parameters
 
-▸ (`image`, `config`, `callback`): `void`
+• **image**: `ArrayBuffer` \| [`ImageDataLike`](../type-aliases/ImageDataLike.md)
 
-##### Parameters
+• **config**: [`PartialChafaConfig`](../type-aliases/PartialChafaConfig.md)
 
-| Name | Type |
-| :------ | :------ |
-| `image` | `ArrayBuffer` \| [`ImageDataLike`](../README.md#imagedatalike) |
-| `config` | [`PartialChafaConfig`](../README.md#partialchafaconfig) |
-| `callback` | (`error`: ``null``, `data`: \{ `ansi`: `string` ; `config`: [`ReadonlyChafaConfig`](../README.md#readonlychafaconfig)  }) => `void`(`error`: `unknown`, `data`: \{ `ansi`: ``null`` ; `config`: ``null``  }) => `void` |
+• **callback**: [`Callback`](Callback.md)\<`object`, `object`\>
 
-##### Returns
+#### Returns
 
 `void`
 
-___
+***
 
-### imageToCanvas
+### imageToCanvas()
 
-• **imageToCanvas**: (`image`: `ArrayBuffer` \| [`ImageDataLike`](../README.md#imagedatalike), `config`: [`PartialChafaConfig`](../README.md#partialchafaconfig), `callback`: (`error`: ``null``, `data`: \{ `canvas`: `number` ; `config`: [`ReadonlyChafaConfig`](../README.md#readonlychafaconfig)  }) => `void`(`error`: `unknown`, `data`: \{ `canvas`: ``null`` ; `config`: ``null``  }) => `void`) => `void`
+> **imageToCanvas**: (`image`, `config`, `callback`) => `void`
 
 Converts an image into a Chafa canvas pointer.
 
-#### Type declaration
+#### Parameters
 
-▸ (`image`, `config`, `callback`): `void`
+• **image**: `ArrayBuffer` \| [`ImageDataLike`](../type-aliases/ImageDataLike.md)
 
-##### Parameters
+• **config**: [`PartialChafaConfig`](../type-aliases/PartialChafaConfig.md)
 
-| Name | Type |
-| :------ | :------ |
-| `image` | `ArrayBuffer` \| [`ImageDataLike`](../README.md#imagedatalike) |
-| `config` | [`PartialChafaConfig`](../README.md#partialchafaconfig) |
-| `callback` | (`error`: ``null``, `data`: \{ `canvas`: `number` ; `config`: [`ReadonlyChafaConfig`](../README.md#readonlychafaconfig)  }) => `void`(`error`: `unknown`, `data`: \{ `canvas`: ``null`` ; `config`: ``null``  }) => `void` |
+• **callback**: [`Callback`](Callback.md)\<`object`, `object`\>
 
-##### Returns
+#### Returns
 
 `void`
 
-___
+***
 
-### imageToConsoleLogArgs
+### imageToConsoleLogArgs()
 
-• **imageToConsoleLogArgs**: (`image`: `ArrayBuffer` \| [`ImageDataLike`](../README.md#imagedatalike), `config`: [`PartialChafaConfig`](../README.md#partialchafaconfig), `callback`: (`error`: ``null``, `data`: \{ `args`: `string`[] ; `config`: [`ReadonlyChafaConfig`](../README.md#readonlychafaconfig)  }) => `void`(`error`: `unknown`, `data`: \{ `args`: ``null`` ; `config`: ``null``  }) => `void`) => `void`
+> **imageToConsoleLogArgs**: (`image`, `config`, `callback`) => `void`
 
 Converts an image into an array of `console.log` arguments.
 
-#### Type declaration
+#### Parameters
 
-▸ (`image`, `config`, `callback`): `void`
+• **image**: `ArrayBuffer` \| [`ImageDataLike`](../type-aliases/ImageDataLike.md)
 
-##### Parameters
+• **config**: [`PartialChafaConfig`](../type-aliases/PartialChafaConfig.md)
 
-| Name | Type |
-| :------ | :------ |
-| `image` | `ArrayBuffer` \| [`ImageDataLike`](../README.md#imagedatalike) |
-| `config` | [`PartialChafaConfig`](../README.md#partialchafaconfig) |
-| `callback` | (`error`: ``null``, `data`: \{ `args`: `string`[] ; `config`: [`ReadonlyChafaConfig`](../README.md#readonlychafaconfig)  }) => `void`(`error`: `unknown`, `data`: \{ `args`: ``null`` ; `config`: ``null``  }) => `void` |
+• **callback**: [`Callback`](Callback.md)\<`object`, `object`\>
 
-##### Returns
+#### Returns
 
 `void`
 
-___
+***
 
-### imageToHtml
+### imageToHtml()
 
-• **imageToHtml**: (`image`: `ArrayBuffer` \| [`ImageDataLike`](../README.md#imagedatalike), `config`: [`PartialChafaConfig`](../README.md#partialchafaconfig), `callback`: (`error`: ``null``, `data`: \{ `config`: [`ReadonlyChafaConfig`](../README.md#readonlychafaconfig) ; `html`: `string`  }) => `void`(`error`: `unknown`, `data`: \{ `config`: ``null`` ; `html`: ``null``  }) => `void`) => `void`
+> **imageToHtml**: (`image`, `config`, `callback`) => `void`
 
 Converts an image into an HTML string.
 
-#### Type declaration
+#### Parameters
 
-▸ (`image`, `config`, `callback`): `void`
+• **image**: `ArrayBuffer` \| [`ImageDataLike`](../type-aliases/ImageDataLike.md)
 
-##### Parameters
+• **config**: [`PartialChafaConfig`](../type-aliases/PartialChafaConfig.md)
 
-| Name | Type |
-| :------ | :------ |
-| `image` | `ArrayBuffer` \| [`ImageDataLike`](../README.md#imagedatalike) |
-| `config` | [`PartialChafaConfig`](../README.md#partialchafaconfig) |
-| `callback` | (`error`: ``null``, `data`: \{ `config`: [`ReadonlyChafaConfig`](../README.md#readonlychafaconfig) ; `html`: `string`  }) => `void`(`error`: `unknown`, `data`: \{ `config`: ``null`` ; `html`: ``null``  }) => `void` |
+• **callback**: [`Callback`](Callback.md)\<`object`, `object`\>
 
-##### Returns
+#### Returns
 
 `void`
 
-___
+***
 
-### imageToMatrix
+### imageToMatrix()
 
-• **imageToMatrix**: (`image`: `ArrayBuffer` \| [`ImageDataLike`](../README.md#imagedatalike), `config`: [`PartialChafaConfig`](../README.md#partialchafaconfig), `callback`: (`error`: ``null``, `data`: \{ `config`: [`ReadonlyChafaConfig`](../README.md#readonlychafaconfig) ; `matrix`: `number`[][][]  }) => `void`(`error`: `unknown`, `data`: \{ `config`: ``null`` ; `matrix`: ``null``  }) => `void`) => `void`
+> **imageToMatrix**: (`image`, `config`, `callback`) => `void`
 
 Converts an image into a matrix of characters.
 
-#### Type declaration
+#### Parameters
 
-▸ (`image`, `config`, `callback`): `void`
+• **image**: `ArrayBuffer` \| [`ImageDataLike`](../type-aliases/ImageDataLike.md)
 
-##### Parameters
+• **config**: [`PartialChafaConfig`](../type-aliases/PartialChafaConfig.md)
 
-| Name | Type |
-| :------ | :------ |
-| `image` | `ArrayBuffer` \| [`ImageDataLike`](../README.md#imagedatalike) |
-| `config` | [`PartialChafaConfig`](../README.md#partialchafaconfig) |
-| `callback` | (`error`: ``null``, `data`: \{ `config`: [`ReadonlyChafaConfig`](../README.md#readonlychafaconfig) ; `matrix`: `number`[][][]  }) => `void`(`error`: `unknown`, `data`: \{ `config`: ``null`` ; `matrix`: ``null``  }) => `void` |
+• **callback**: [`Callback`](Callback.md)\<`object`, `object`\>
 
-##### Returns
+#### Returns
 
 `void`

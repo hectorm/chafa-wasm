@@ -1,21 +1,19 @@
+[**chafa-wasm**](../README.md) • **Docs**
+
+***
+
 [chafa-wasm](../README.md) / ChafaFactory
 
-# Interface: ChafaFactory
+# Interface: ChafaFactory()
 
 A factory function that returns a promise that resolves to a ChafaModule object.
 
-## Callable
+> **ChafaFactory**(`moduleArg`?): `Promise`\<[`ChafaModule`](ChafaModule.md)\>
 
-### ChafaFactory
+## Parameters
 
-▸ **ChafaFactory**(`moduleArg?`): `Promise`\<[`ChafaModule`](ChafaModule.md)\>
+• **moduleArg?**
 
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `moduleArg?` | `Object` |
-
-#### Returns
+## Returns
 
 `Promise`\<[`ChafaModule`](ChafaModule.md)\>
