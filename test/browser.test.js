@@ -15,10 +15,26 @@ const require = module.createRequire(import.meta.url);
  */
 
 const browserName = process.argv[2];
+/** @type playwright.BrowserType */
+let browserType;
+switch (browserName) {
+  case "chromium":
+    browserType = playwright.chromium;
+    break;
+  case "firefox":
+    browserType = playwright.firefox;
+    break;
+  case "webkit":
+    browserType = playwright.webkit;
+    break;
+  default:
+    console.error(`Invalid browser: ${browserName}`);
+    process.exit(1);
+}
 const browserWsEndpoint = process.env.PW_TEST_CONNECT_WS_ENDPOINT;
-const browser = browserWsEndpoint
-  ? await playwright[browserName].connect(browserWsEndpoint)
-  : await playwright[browserName].launch();
+const browser = await (browserWsEndpoint
+  ? browserType.connect(browserWsEndpoint)
+  : browserType.launch());
 
 try {
   const context = await browser.newContext();
@@ -43,10 +59,12 @@ try {
     .readFileSync(require.resolve("../dist/chafa.wasm"))
     .toString("base64")}`;
 
-  const chafaJsUri = `data:application/javascript;base64,${Buffer.from(fs
-    .readFileSync(require.resolve("../dist/chafa.js"))
-    .toString("utf-8")
-    .replaceAll("chafa.wasm", chafaWasmUri)).toString("base64")}`;
+  const chafaJsUri = `data:application/javascript;base64,${Buffer.from(
+    fs
+      .readFileSync(require.resolve("../dist/chafa.js"))
+      .toString("utf-8")
+      .replaceAll("chafa.wasm", chafaWasmUri)
+  ).toString("base64")}`;
 
   const testJsUri = `data:application/javascript;base64,${fs
     .readFileSync(require.resolve("./test.js"))

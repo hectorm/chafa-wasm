@@ -39,10 +39,10 @@
   ],
   "scripts": {
     "all": "run-s types build docs test",
-    "types": "tsc && mkdir -p ./dist/ && cp -a ./types/chafa.d.ts ./dist/chafa.d.ts",
+    "types": "tsc && mkdir -p ./dist/ && cp -a ./src/chafa.d.ts ./dist/chafa.d.ts",
     "build": "docker buildx build ./ --file ./Dockerfile --output type=local,dest=./dist/",
     "build-native": "docker buildx build ./ --file ./Dockerfile.native --output type=local,dest=./dist/",
-    "docs": "typedoc ./types/chafa.d.ts --plugin typedoc-plugin-markdown --readme none --disableSources --cleanOutputDir --out ./docs/",
+    "docs": "typedoc ./src/chafa.d.ts --plugin typedoc-plugin-markdown --readme none --disableSources --cleanOutputDir --out ./docs/",
     "test": "run-s test:*",
     "test:node": "node ./test/node.test.js",
     "test:deno": "deno test --allow-read=./dist/ ./test/deno.test.js",
@@ -58,8 +58,8 @@
     "mocha": "~10.4.0",
     "npm-run-all2": "~6.2.0",
     "playwright": "~1.44.1",
-    "typedoc-plugin-markdown": "~4.0.3",
     "typedoc": "~0.25.13",
+    "typedoc-plugin-markdown": "~4.0.3",
     "typescript": "~5.4.5"
   }
 }

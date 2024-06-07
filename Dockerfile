@@ -192,7 +192,6 @@ RUN em++ ${CPPFLAGS-} ${CXXFLAGS-} ${LDFLAGS-} \
 		-s FILESYSTEM=0 \
 		-s POLYFILL=0 \
 		--closure 1 \
-		--extern-pre-js "${BUILDDIR:?}"/src/pre.txt \
 		-o "${BUILDDIR:?}"/dist/chafa.js
 
 ##################################################

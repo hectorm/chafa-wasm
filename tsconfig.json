@@ -1,11 +1,12 @@
 {
   "include": ["./src/**/*"],
   "compilerOptions": {
-    "module": "esnext",
-    "target": "esnext",
-    "strict": true,
+    "noEmit": true,
     "allowJs": true,
     "checkJs": true,
-    "noEmit": true
+    "target": "ESNext",
+    "module": "ESNext",
+    "strict": true,
+    "noUnusedLocals": true
   }
 }
