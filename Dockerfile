@@ -50,7 +50,7 @@ RUN emmake make -j"$(nproc)" install
 RUN pkg-config --static --exists --print-errors libffi
 
 # Build glib
-ARG GLIB_TREEISH=2.80.0
+ARG GLIB_TREEISH=2.80.2
 ARG GLIB_REMOTE=https://github.com/GNOME/glib.git
 WORKDIR ${BUILDDIR}/dep/glib/
 RUN git clone "${GLIB_REMOTE:?}" ./ \
@@ -96,7 +96,7 @@ RUN emmake ninja -C ./build/ install
 RUN pkg-config --static --exists --print-errors libpng
 
 # Build libjpeg-turbo
-ARG LIBJPEG_TURBO_TREEISH=3.0.2
+ARG LIBJPEG_TURBO_TREEISH=3.0.3
 ARG LIBJPEG_TURBO_REMOTE=https://github.com/libjpeg-turbo/libjpeg-turbo.git
 WORKDIR ${BUILDDIR}/dep/libjpeg-turbo/
 RUN git clone "${LIBJPEG_TURBO_REMOTE:?}" ./ \
@@ -114,7 +114,7 @@ RUN emmake ninja -C ./build/ install
 RUN pkg-config --static --exists --print-errors libjpeg
 
 # Build libwebp
-ARG LIBWEBP_TREEISH=v1.3.2
+ARG LIBWEBP_TREEISH=v1.4.0
 ARG LIBWEBP_REMOTE=https://chromium.googlesource.com/webm/libwebp.git
 WORKDIR ${BUILDDIR}/dep/libwebp/
 RUN git clone "${LIBWEBP_REMOTE:?}" ./ \
