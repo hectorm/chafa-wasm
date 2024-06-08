@@ -5,6 +5,7 @@ import { promisify } from "node:util";
 import { argv, exit, stdout } from "node:process";
 
 /** @type {ChafaFactory} */
+// @ts-expect-error
 const Chafa = (await import("../dist/chafa.js")).default;
 
 const chafa = await Chafa();

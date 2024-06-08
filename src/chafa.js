@@ -4,6 +4,8 @@ const fileSignatures = {
   "webp": [0x52, 0x49, 0x46, 0x46],
 };
 
+const emptyImageData = { width: 0, height: 0, data: new Uint8ClampedArray() };
+
 Module["decodeImage"] = (image, callback) => {
   if (globalThis.ArrayBuffer && image instanceof ArrayBuffer) {
     try {
@@ -35,10 +37,10 @@ Module["decodeImage"] = (image, callback) => {
         return;
       }
 
-      callback(new Error("Failed to decode image"), null);
+      callback(new Error("Failed to decode image"), emptyImageData);
       return;
     } catch (error) {
-      callback(error, null);
+      callback(error, emptyImageData);
       return;
     }
   } else if (
@@ -50,20 +52,20 @@ Module["decodeImage"] = (image, callback) => {
     return;
   }
 
-  callback(new Error("Unsupported image type"), null);
+  callback(new Error("Unsupported image type"), emptyImageData);
 };
 
 Module["imageToCanvas"] = (image, partialConfig, callback) => {
   Module["decodeImage"](image, (error, imageData) => {
-    if (error != null || imageData == null) {
-      callback(error, { "canvas": null, "config": null });
+    if (error != null) {
+      callback(error, { "canvas": 0, "config": null });
       return;
     }
 
     partialConfig = partialConfig ?? {};
 
     if (typeof partialConfig !== "object") {
-      callback(new Error("Configuration must be an object"), { "canvas": null, "config": null });
+      callback(new Error("Configuration must be an object"), { "canvas": 0, "config": null });
       return;
     }
 
@@ -76,7 +78,7 @@ Module["imageToCanvas"] = (image, partialConfig, callback) => {
       : 0.5;
 
     if (Number.isNaN(config["fontRatio"]) || config["fontRatio"] < 0) {
-      callback(new Error("Font ratio must be at least 0"), { "canvas": null, "config": null });
+      callback(new Error("Font ratio must be at least 0"), { "canvas": 0, "config": null });
       return;
     }
 
@@ -109,12 +111,12 @@ Module["imageToCanvas"] = (image, partialConfig, callback) => {
     }
 
     if (Number.isNaN(config["width"]) || config["width"] < 1) {
-      callback(new Error("Width must be at least 1"), { "canvas": null, "config": null });
+      callback(new Error("Width must be at least 1"), { "canvas": 0, "config": null });
       return;
     }
 
     if (Number.isNaN(config["height"]) || config["height"] < 1) {
-      callback(new Error("Height must be at least 1"), { "canvas": null, "config": null });
+      callback(new Error("Height must be at least 1"), { "canvas": 0, "config": null });
       return;
     }
 
@@ -124,7 +126,7 @@ Module["imageToCanvas"] = (image, partialConfig, callback) => {
       : Module["ChafaCanvasMode"]["CHAFA_CANVAS_MODE_TRUECOLOR"].value;
 
     if (config["colors"] == null) {
-      callback(new Error("Invalid color mode"), { "canvas": null, "config": null });
+      callback(new Error("Invalid color mode"), { "canvas": 0, "config": null });
       return;
     }
 
@@ -134,7 +136,7 @@ Module["imageToCanvas"] = (image, partialConfig, callback) => {
       : Module["ChafaColorExtractor"]["CHAFA_COLOR_EXTRACTOR_AVERAGE"].value;
 
     if (config["colorExtractor"] == null) {
-      callback(new Error("Invalid color extractor"), { "canvas": null, "config": null });
+      callback(new Error("Invalid color extractor"), { "canvas": 0, "config": null });
       return;
     }
 
@@ -144,7 +146,7 @@ Module["imageToCanvas"] = (image, partialConfig, callback) => {
       : Module["ChafaColorSpace"]["CHAFA_COLOR_SPACE_RGB"].value;
 
     if (config["colorSpace"] == null) {
-      callback(new Error("Invalid color space"), { "canvas": null, "config": null });
+      callback(new Error("Invalid color space"), { "canvas": 0, "config": null });
       return;
     }
 
@@ -155,7 +157,7 @@ Module["imageToCanvas"] = (image, partialConfig, callback) => {
         : "block+border+space-wide-inverted";
 
     if (!config["symbols"]) {
-      callback(new Error("Symbol map cannot be empty"), { "canvas": null, "config": null });
+      callback(new Error("Symbol map cannot be empty"), { "canvas": 0, "config": null });
       return;
     }
 
@@ -172,7 +174,7 @@ Module["imageToCanvas"] = (image, partialConfig, callback) => {
       : 0xffffff;
 
     if (Number.isNaN(config["fg"]) || config["fg"] < 0 || config["fg"] > 0xffffff) {
-      callback(new Error("Foreground color must be between 0 and 0xffffff"), { "canvas": null, "config": null });
+      callback(new Error("Foreground color must be between 0 and 0xffffff"), { "canvas": 0, "config": null });
       return;
     }
 
@@ -185,7 +187,7 @@ Module["imageToCanvas"] = (image, partialConfig, callback) => {
       : 0x000000;
 
     if (Number.isNaN(config["bg"]) || config["bg"] < 0 || config["bg"] > 0xffffff) {
-      callback(new Error("Background color must be between 0 and 0xffffff"), { "canvas": null, "config": null });
+      callback(new Error("Background color must be between 0 and 0xffffff"), { "canvas": 0, "config": null });
       return;
     }
 
@@ -201,7 +203,7 @@ Module["imageToCanvas"] = (image, partialConfig, callback) => {
       : Module["ChafaDitherMode"]["CHAFA_DITHER_MODE_NONE"].value;
 
     if (config["dither"] == null) {
-      callback(new Error("Invalid dither mode"), { "canvas": null, "config": null });
+      callback(new Error("Invalid dither mode"), { "canvas": 0, "config": null });
       return;
     }
 
@@ -212,7 +214,7 @@ Module["imageToCanvas"] = (image, partialConfig, callback) => {
       : 4;
 
     if (![1, 2, 4, 8].includes(config["ditherGrainWidth"])) {
-      callback(new Error("Grain width must be exactly 1, 2, 4 or 8"), { "canvas": null, "config": null });
+      callback(new Error("Grain width must be exactly 1, 2, 4 or 8"), { "canvas": 0, "config": null });
       return;
     }
 
@@ -223,7 +225,7 @@ Module["imageToCanvas"] = (image, partialConfig, callback) => {
       : config["ditherGrainWidth"];
 
     if (![1, 2, 4, 8].includes(config["ditherGrainHeight"])) {
-      callback(new Error("Grain height must be exactly 1, 2, 4 or 8"), { "canvas": null, "config": null });
+      callback(new Error("Grain height must be exactly 1, 2, 4 or 8"), { "canvas": 0, "config": null });
       return;
     }
 
@@ -234,7 +236,7 @@ Module["imageToCanvas"] = (image, partialConfig, callback) => {
       : 1.0;
 
     if (Number.isNaN(config["ditherIntensity"]) || config["ditherIntensity"] < 0) {
-      callback(new Error("Dither intensity must be at least 0"), { "canvas": null, "config": null });
+      callback(new Error("Dither intensity must be at least 0"), { "canvas": 0, "config": null });
       return;
     }
 
@@ -251,7 +253,7 @@ Module["imageToCanvas"] = (image, partialConfig, callback) => {
       : 0.5;
 
     if (Number.isNaN(config["threshold"]) || config["threshold"] < 0 || config["threshold"] > 1) {
-      callback(new Error("Transparency threshold must be between 0 and 1"), { "canvas": null, "config": null });
+      callback(new Error("Transparency threshold must be between 0 and 1"), { "canvas": 0, "config": null });
       return;
     }
 
@@ -264,7 +266,7 @@ Module["imageToCanvas"] = (image, partialConfig, callback) => {
         : 5;
 
     if (Number.isNaN(config["optimize"]) || config["optimize"] < 0 || config["optimize"] > 9) {
-      callback(new Error("Optimization level must be between 0 and 9"), { "canvas": null, "config": null });
+      callback(new Error("Optimization level must be between 0 and 9"), { "canvas": 0, "config": null });
       return;
     }
 
@@ -275,7 +277,7 @@ Module["imageToCanvas"] = (image, partialConfig, callback) => {
       : 5;
 
     if (Number.isNaN(config["work"]) || config["work"] < 1 || config["work"] > 9) {
-      callback(new Error("Work factor must be between 1 and 9"), { "canvas": null, "config": null });
+      callback(new Error("Work factor must be between 1 and 9"), { "canvas": 0, "config": null });
       return;
     }
 
@@ -354,7 +356,7 @@ Module["imageToCanvas"] = (image, partialConfig, callback) => {
       // Pass canvas to callback
       callback(null, { "canvas": canvasPtr, "config": config });
     } catch (error) {
-      callback(error, { "canvas": null, "config": null });
+      callback(error, { "canvas": 0, "config": null });
     } finally {
       if (canvasPtr != null) Module["_chafa_canvas_unref"](canvasPtr);
       if (canvasConfigPtr != null) Module["_chafa_canvas_config_unref"](canvasConfigPtr);
@@ -369,8 +371,8 @@ Module["imageToCanvas"] = (image, partialConfig, callback) => {
 
 Module["imageToMatrix"] = (image, partialConfig, callback) => {
   Module["imageToCanvas"](image, partialConfig, (error, { canvas, config }) => {
-    if (error != null || canvas == null || config == null) {
-      callback(error, { "matrix": null, "config": null });
+    if (error != null || config == null) {
+      callback(error, { "matrix": [], "config": config });
       return;
     }
 
@@ -397,7 +399,7 @@ Module["imageToMatrix"] = (image, partialConfig, callback) => {
 
           matrix[y][x] = [char, fg, bg];
         } catch (error) {
-          callback(error, { "matrix": null, "config": null });
+          callback(error, { "matrix": [], "config": config });
           return;
         } finally {
           if (fgPtr != null) Module["_free"](fgPtr);
@@ -412,8 +414,8 @@ Module["imageToMatrix"] = (image, partialConfig, callback) => {
 
 Module["imageToAnsi"] = (image, partialConfig, callback) => {
   Module["imageToCanvas"](image, partialConfig, (error, { canvas, config }) => {
-    if (error != null || canvas == null || config == null) {
-      callback(error, { "ansi": null, "config": null });
+    if (error != null || config == null) {
+      callback(error, { "ansi": "", "config": config });
       return;
     }
 
@@ -425,7 +427,7 @@ Module["imageToAnsi"] = (image, partialConfig, callback) => {
       const ansi = Module["UTF8ToString"](charPtr);
       callback(null, { "ansi": ansi, "config": config });
     } catch (error) {
-      callback(error, { "ansi": null, "config": null });
+      callback(error, { "ansi": "", "config": config });
     } finally {
       if (gstrPtr != null) Module["_free"](gstrPtr);
       if (charPtr != null) Module["_free"](charPtr);
@@ -435,8 +437,8 @@ Module["imageToAnsi"] = (image, partialConfig, callback) => {
 
 Module["imageToHtml"] = (image, partialConfig, callback) => {
   Module["imageToMatrix"](image, partialConfig, (error, { matrix, config }) => {
-    if (error != null || matrix == null || config == null) {
-      callback(error, { "html": null, "config": null });
+    if (error != null || config == null) {
+      callback(error, { "html": "", "config": config });
       return;
     }
 
@@ -460,8 +462,8 @@ Module["imageToHtml"] = (image, partialConfig, callback) => {
 
 Module["imageToConsoleLogArgs"] = (image, partialConfig, callback) => {
   Module["imageToMatrix"](image, partialConfig, (error, { matrix, config }) => {
-    if (error != null || matrix == null || config == null) {
-      callback(error, { "args": null, "config": null });
+    if (error != null || config == null) {
+      callback(error, { "args": [], "config": config });
       return;
     }
 

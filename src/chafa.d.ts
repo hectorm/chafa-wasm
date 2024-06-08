@@ -16,7 +16,7 @@ interface ChafaModule {
   decodeImage: {
     (
       image: ArrayBuffer | ImageDataLike,
-      callback: Callback<ImageDataLike, null>
+      callback: Callback<ImageDataLike>
     ): void;
   };
 
@@ -27,10 +27,7 @@ interface ChafaModule {
     (
       image: ArrayBuffer | ImageDataLike,
       config: PartialChafaConfig,
-      callback: Callback<
-        { canvas: number; config: ReadonlyChafaConfig },
-        { canvas: null; config: null }
-      >
+      callback: Callback<{ canvas: number; config: ReadonlyChafaConfig | null }>
     ): void;
   };
 
@@ -41,10 +38,7 @@ interface ChafaModule {
     (
       image: ArrayBuffer | ImageDataLike,
       config: PartialChafaConfig,
-      callback: Callback<
-        { matrix: number[][][]; config: ReadonlyChafaConfig },
-        { matrix: null; config: null }
-      >
+      callback: Callback<{ matrix: number[][][]; config: ReadonlyChafaConfig | null }>
     ): void;
   };
 
@@ -55,10 +49,7 @@ interface ChafaModule {
     (
       image: ArrayBuffer | ImageDataLike,
       config: PartialChafaConfig,
-      callback: Callback<
-        { ansi: string; config: ReadonlyChafaConfig },
-        { ansi: null; config: null }
-      >
+      callback: Callback<{ ansi: string; config: ReadonlyChafaConfig | null }>
     ): void;
   };
 
@@ -69,10 +60,7 @@ interface ChafaModule {
     (
       image: ArrayBuffer | ImageDataLike,
       config: PartialChafaConfig,
-      callback: Callback<
-        { html: string; config: ReadonlyChafaConfig },
-        { html: null; config: null }
-      >
+      callback: Callback<{ html: string; config: ReadonlyChafaConfig | null }>
     ): void;
   };
 
@@ -83,10 +71,7 @@ interface ChafaModule {
     (
       image: ArrayBuffer | ImageDataLike,
       config: PartialChafaConfig,
-      callback: Callback<
-        { args: string[]; config: ReadonlyChafaConfig },
-        { args: null; config: null }
-      >
+      callback: Callback<{ args: string[]; config: ReadonlyChafaConfig | null }>
     ): void;
   };
 
@@ -135,10 +120,7 @@ type ImageDataLike = {
   [x: string | number | symbol]: any;
 };
 
-interface Callback<T, U> {
-  (error: unknown, result: U): void;
-  (error: null, result: T): void;
-}
+type Callback<T> = (error: unknown, data: T) => void;
 
 declare module "chafa-wasm" {
   const factory: ChafaFactory;

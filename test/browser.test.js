@@ -42,7 +42,7 @@ try {
 
   page.on("console", (msg) => process.stdout.write(msg.text()));
 
-  await page.exposeFunction("exit", async (code) => {
+  await page.exposeFunction("exit", async (/** @type number */ code) => {
     await browser.close();
     process.exit(code);
   });

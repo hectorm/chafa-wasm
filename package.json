@@ -54,6 +54,7 @@
     "version": "run-s all && git add -A ./docs/"
   },
   "devDependencies": {
+    "@types/node": "~20.14.2",
     "chai": "~5.1.1",
     "mocha": "~10.4.0",
     "npm-run-all2": "~6.2.0",

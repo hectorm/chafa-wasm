@@ -1,11 +1,12 @@
 {
-  "include": ["./src/**/*"],
+  "include": ["./src/**/*", "./test/**/*"],
   "compilerOptions": {
     "noEmit": true,
+    "skipLibCheck": true,
     "allowJs": true,
     "checkJs": true,
     "target": "ESNext",
-    "module": "ESNext",
+    "module": "NodeNext",
     "strict": true,
     "noUnusedLocals": true
   }

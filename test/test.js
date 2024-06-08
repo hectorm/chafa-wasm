@@ -124,6 +124,7 @@ const data = {
   },
 };
 
+/** @type {(fn: (arg1: any, arg2: any, cb: (err: any, res: any) => void) => void) => (arg1: any, arg2: any) => Promise<any>} */
 const promisify = (fn) => (...args) => {
   return new Promise((resolve, reject) => {
     fn(...args, (error, result) => {
@@ -133,6 +134,7 @@ const promisify = (fn) => (...args) => {
   });
 };
 
+/** @type {ChafaModule} */
 const chafa = await Chafa();
 const imageToAnsi = promisify(chafa.imageToAnsi);
 const imageToHtml = promisify(chafa.imageToHtml);

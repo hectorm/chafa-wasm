@@ -34,6 +34,7 @@ if (isMainThread) {
   }
 } else {
   /** @type {ChafaFactory} */
+  // @ts-expect-error
   const Chafa = (await import("../dist/chafa.js")).default;
 
   const chafa = await Chafa();
@@ -48,6 +49,7 @@ if (isMainThread) {
   if (!path) exit(1);
 
   const image = await fs.readFile(path);
+  /** @type {Array<[string, () => Promise<any>]>} */
   const functions = [
     ["decodeImage", () => decodeImage(image.buffer)],
     ["imageToCanvas", () => imageToCanvas(image.buffer, {})],
@@ -57,7 +59,7 @@ if (isMainThread) {
     ["imageToConsoleLogArgs", () => imageToConsoleLogArgs(image.buffer, {})],
   ];
 
-  parentPort.on("message", async ({ i }) => {
+  parentPort?.on("message", async ({ i }) => {
     const [name, func] = functions[i];
 
     const iterations = 1000;
@@ -68,11 +70,11 @@ if (isMainThread) {
     const fnTime = (totalTime / iterations).toFixed(10);
     const ops = ((1000 / totalTime) * iterations).toFixed(2);
 
-    parentPort.postMessage(
+    parentPort?.postMessage(
       `Execution time for ${name}:\n` +
         `  total: ${totalTime} ms, time: ${fnTime} ms, op/sec: ${ops}`
     );
   });
 
-  parentPort.postMessage("ready");
+  parentPort?.postMessage("ready");
 }

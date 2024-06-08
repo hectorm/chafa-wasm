@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { test, describe, it, expect } from "bun:test";
 
 globalThis.test = test;
