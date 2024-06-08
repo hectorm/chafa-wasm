@@ -65,6 +65,10 @@ https://hpjansson.org/chafa/man/
 
 > **fontRatio**: `number`
 
+### format
+
+> **format**: `number` \| `string`
+
 ### height
 
 > **height**: `number`
