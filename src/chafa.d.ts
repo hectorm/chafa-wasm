@@ -84,6 +84,7 @@ interface ChafaModule {
  * @see https://hpjansson.org/chafa/man/
  */
 type ChafaConfig = {
+  format: number | string,
   width: number;
   height: number;
   fontRatio: number;

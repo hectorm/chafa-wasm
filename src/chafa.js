@@ -71,11 +71,24 @@ Module["imageToCanvas"] = (image, partialConfig, callback) => {
 
     const config = {};
 
+    config["format"] = partialConfig["format"] != null
+      ? Module["ChafaPixelMode"][partialConfig["format"]]?.value ??
+        Module["ChafaPixelMode"].values[partialConfig["format"]]?.value
+      : Module["ChafaPixelMode"]["CHAFA_PIXEL_MODE_SYMBOLS"].value;
+
+    if (config["format"] == null) {
+      callback(new Error("Invalid format"), { "canvas": 0, "config": null });
+      return;
+    }
+
     config["fontRatio"] = partialConfig["fontRatio"] != null
       ? typeof partialConfig["fontRatio"] !== "number"
         ? Number.parseFloat(partialConfig["fontRatio"])
         : partialConfig["fontRatio"]
-      : 0.5;
+      : config["format"] === Module["ChafaPixelMode"]["CHAFA_PIXEL_MODE_SYMBOLS"].value ||
+        config["format"] === Module["ChafaPixelMode"]["CHAFA_PIXEL_MODE_KITTY"].value
+        ? 0.5
+        : 1.0;
 
     if (Number.isNaN(config["fontRatio"]) || config["fontRatio"] < 0) {
       callback(new Error("Font ratio must be at least 0"), { "canvas": 0, "config": null });
@@ -321,9 +334,9 @@ Module["imageToCanvas"] = (image, partialConfig, callback) => {
 
       // Specify canvas configuration
       canvasConfigPtr = Module["_chafa_canvas_config_new"]();
+      Module["_chafa_canvas_config_set_pixel_mode"](canvasConfigPtr, config["format"]);
       Module["_chafa_canvas_config_set_geometry"](canvasConfigPtr, config["width"], config["height"]);
       Module["_chafa_canvas_config_set_passthrough"](canvasConfigPtr, Module["ChafaPassthrough"]["CHAFA_PASSTHROUGH_NONE"].value);
-      Module["_chafa_canvas_config_set_pixel_mode"](canvasConfigPtr, Module["ChafaPixelMode"]["CHAFA_PIXEL_MODE_SYMBOLS"].value);
       Module["_chafa_canvas_config_set_symbol_map"](canvasConfigPtr, symbolMapPtr);
       Module["_chafa_canvas_config_set_fill_symbol_map"](canvasConfigPtr, fillSymbolMapPtr);
       Module["_chafa_canvas_config_set_canvas_mode"](canvasConfigPtr, config["colors"]);

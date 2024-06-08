@@ -101,6 +101,7 @@ const data = {
       width: 16,
     },
     out: {
+      format: 0,
       width: 16,
       height: 5,
       fontRatio: 0.5,
