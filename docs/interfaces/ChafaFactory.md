@@ -17,3 +17,13 @@ A factory function that returns a promise that resolves to a ChafaModule object.
 ## Returns
 
 `Promise`\<[`ChafaModule`](ChafaModule.md)\>
+
+> **ChafaFactory**(`moduleArg`?): `Promise`\<[`ChafaModule`](ChafaModule.md)\>
+
+## Parameters
+
+• **moduleArg?**
+
+## Returns
+
+`Promise`\<[`ChafaModule`](ChafaModule.md)\>

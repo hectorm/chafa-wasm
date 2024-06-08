@@ -25,7 +25,7 @@ If an already decoded image is specified, it will be left as is.
 
 • **image**: `ArrayBuffer` \| [`ImageDataLike`](../type-aliases/ImageDataLike.md)
 
-• **callback**: [`Callback`](Callback.md)\<[`ImageDataLike`](../type-aliases/ImageDataLike.md), `null`\>
+• **callback**: [`Callback`](../type-aliases/Callback.md)\<[`ImageDataLike`](../type-aliases/ImageDataLike.md)\>
 
 #### Returns
 
@@ -45,7 +45,7 @@ Converts an image into an ANSI string.
 
 • **config**: [`PartialChafaConfig`](../type-aliases/PartialChafaConfig.md)
 
-• **callback**: [`Callback`](Callback.md)\<`object`, `object`\>
+• **callback**: [`Callback`](../type-aliases/Callback.md)\<`object`\>
 
 #### Returns
 
@@ -65,7 +65,7 @@ Converts an image into a Chafa canvas pointer.
 
 • **config**: [`PartialChafaConfig`](../type-aliases/PartialChafaConfig.md)
 
-• **callback**: [`Callback`](Callback.md)\<`object`, `object`\>
+• **callback**: [`Callback`](../type-aliases/Callback.md)\<`object`\>
 
 #### Returns
 
@@ -85,7 +85,7 @@ Converts an image into an array of `console.log` arguments.
 
 • **config**: [`PartialChafaConfig`](../type-aliases/PartialChafaConfig.md)
 
-• **callback**: [`Callback`](Callback.md)\<`object`, `object`\>
+• **callback**: [`Callback`](../type-aliases/Callback.md)\<`object`\>
 
 #### Returns
 
@@ -105,7 +105,7 @@ Converts an image into an HTML string.
 
 • **config**: [`PartialChafaConfig`](../type-aliases/PartialChafaConfig.md)
 
-• **callback**: [`Callback`](Callback.md)\<`object`, `object`\>
+• **callback**: [`Callback`](../type-aliases/Callback.md)\<`object`\>
 
 #### Returns
 
@@ -125,7 +125,7 @@ Converts an image into a matrix of characters.
 
 • **config**: [`PartialChafaConfig`](../type-aliases/PartialChafaConfig.md)
 
-• **callback**: [`Callback`](Callback.md)\<`object`, `object`\>
+• **callback**: [`Callback`](../type-aliases/Callback.md)\<`object`\>
 
 #### Returns
 

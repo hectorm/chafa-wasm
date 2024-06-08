@@ -6,12 +6,26 @@
 
 # Function: default()
 
+## default(moduleArg)
+
 > **default**(`moduleArg`?): `Promise`\<[`ChafaModule`](../../../interfaces/ChafaModule.md)\>
 
-## Parameters
+### Parameters
 
 • **moduleArg?**
 
-## Returns
+### Returns
+
+`Promise`\<[`ChafaModule`](../../../interfaces/ChafaModule.md)\>
+
+## default(moduleArg)
+
+> **default**(`moduleArg`?): `Promise`\<[`ChafaModule`](../../../interfaces/ChafaModule.md)\>
+
+### Parameters
+
+• **moduleArg?**
+
+### Returns
 
 `Promise`\<[`ChafaModule`](../../../interfaces/ChafaModule.md)\>
