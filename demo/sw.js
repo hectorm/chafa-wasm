@@ -5,7 +5,7 @@
     /** @type {unknown} */ (globalThis.self)
   );
 
-  const cacheVersion = 1;
+  const cacheVersion = 2;
   const currentCaches = { main: `main-cache-v${cacheVersion}` };
 
   self.addEventListener("activate", (event) => {
