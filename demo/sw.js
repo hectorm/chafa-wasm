@@ -25,7 +25,12 @@
   });
 
   self.addEventListener("fetch", (event) => {
-    if (event.request.method !== "GET" || !self.origin.startsWith("https://")) {
+    if (
+      !self.location.origin.startsWith("https://") ||
+      !event.request.url.startsWith(self.location.origin) ||
+      !event.request.url.startsWith("https://cdnjs.cloudflare.com/") ||
+      event.request.method !== "GET"
+    ) {
       return;
     }
     event.respondWith(
