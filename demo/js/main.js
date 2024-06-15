@@ -249,7 +249,7 @@ $ansi.srcdoc = `
         font-weight: 400;
         font-style: normal;
         font-display: block;
-        src: local("Iosevka Fixed SS15"), url("./fonts/iosevka-fixed-ss15-regular-unhinted-v27.3.4.woff2") format("woff2");
+        src: local("Iosevka Fixed SS15"), url("./fonts/iosevka-fixed-ss15-regular-unhinted-v30.2.0.woff2") format("woff2");
       }
       :root, body {
         display: block;
