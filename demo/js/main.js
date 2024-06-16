@@ -147,14 +147,13 @@ const setConfig = async (config) => {
         break;
       case "symbols":
       case "fill":
-        const datalist = target.nextElementSibling;
-        if (target instanceof HTMLInputElement && datalist instanceof HTMLDataListElement) {
-          datalist.innerHTML = "";
+        if (target instanceof HTMLInputElement && target.nextElementSibling instanceof HTMLDataListElement) {
+          target.nextElementSibling.innerHTML = "";
           for (const v of chafaSymbolClasses) {
             const option = document.createElement("option");
             option.value = v;
             option.dataset.suffix = v;
-            datalist.appendChild(option);
+            target.nextElementSibling.appendChild(option);
           }
           target.value = value;
         }
@@ -229,12 +228,14 @@ const copyToClipboard = async (getText) => {
       const item = new ClipboardItem({ "text/plain": getText() });
       await navigator.clipboard.write([item]);
       copied = true;
+    // eslint-disable-next-line no-empty, no-unused-vars
     } catch (_) {}
   }
   if (!copied) {
     try {
       await navigator.clipboard.writeText(await getText());
       copied = true;
+    // eslint-disable-next-line no-empty, no-unused-vars
     } catch (_) {}
   }
   return copied;

@@ -1,3 +1,4 @@
+/* global Deno */
 // @ts-nocheck
 import { describe, it } from "https://deno.land/std/testing/bdd.ts";
 import { assert, assertEquals, assertMatch, assertThrows, assertRejects } from "https://deno.land/std/assert/mod.ts";
