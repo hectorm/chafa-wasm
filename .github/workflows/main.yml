@@ -35,12 +35,13 @@ jobs:
         uses: 'actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8'
         with:
           node-version: 'lts/*'
+          cache: 'npm'
       - name: 'Install dependencies'
         run: 'npm ci'
       - name: 'Check types'
         run: 'npm run types'
       - name: 'Build module'
-        run: 'npm run build -- --pull --cache-from type=gha --cache-to type=gha,mode=max'
+        run: 'npm run build:wasm:docker -- --pull --cache-from type=gha --cache-to type=gha,mode=max'
       - name: 'Build docs'
         run: 'npm run docs'
       - name: 'Build demo'
@@ -56,7 +57,7 @@ jobs:
           name: 'dist'
           path: './dist/'
           retention-days: 1
-      - name: 'Upload GitHub Pages artifact'
+      - name: 'Upload demo artifact'
         if: "startsWith(github.ref, 'refs/tags/v')"
         uses: 'actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa'
         with:
@@ -64,104 +65,121 @@ jobs:
           retention-days: 1
 
   test-node:
-    name: 'Test on Node.js ${{ matrix.node_version }}'
+    name: 'Test on Node.js ${{ matrix.node_version }} on ${{ matrix.os }}'
     needs: ['build']
-    runs-on: 'ubuntu-latest'
+    runs-on: '${{ matrix.os }}'
     permissions:
       contents: 'read'
     strategy:
       fail-fast: false
       matrix:
-        node_version: ['lts/*', 'current']
+        node_version: ['lts/-1', 'lts/*', 'current']
+        os: ['ubuntu-latest', 'windows-latest', 'macos-latest']
     steps:
       - name: 'Checkout'
         uses: 'actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29'
-      - name: 'Use Node.js ${{ matrix.node_version }}'
-        uses: 'actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8'
-        with:
-          node-version: '${{ matrix.node_version }}'
       - name: 'Download module artifact'
         uses: 'actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e'
         with:
           name: 'dist'
           path: './dist/'
+      - name: 'Use Node.js ${{ matrix.node_version }}'
+        uses: 'actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8'
+        with:
+          node-version: '${{ matrix.node_version }}'
+          cache: 'npm'
+      - name: 'Install dependencies'
+        run: 'npm ci'
       - name: 'Test'
         run: 'npm run test:node'
 
   test-deno:
-    name: 'Test on Deno ${{ matrix.deno_version }}'
+    name: 'Test on Deno ${{ matrix.deno_version }} on ${{ matrix.os }}'
     needs: ['build']
-    runs-on: 'ubuntu-latest'
+    runs-on: '${{ matrix.os }}'
     permissions:
       contents: 'read'
     strategy:
       fail-fast: false
       matrix:
         deno_version: ['vx.x.x']
+        os: ['ubuntu-latest', 'windows-latest', 'macos-latest']
     steps:
       - name: 'Checkout'
         uses: 'actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29'
-      - name: 'Use Deno ${{ matrix.deno_version }}'
-        uses: 'denoland/setup-deno@041b854f97b325bd60e53e9dc2de9cb9f9ac0cba'
-        with:
-          deno-version: '${{ matrix.deno_version }}'
       - name: 'Download module artifact'
         uses: 'actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e'
         with:
           name: 'dist'
           path: './dist/'
+      - name: 'Use Deno ${{ matrix.deno_version }}'
+        uses: 'denoland/setup-deno@041b854f97b325bd60e53e9dc2de9cb9f9ac0cba'
+        with:
+          deno-version: '${{ matrix.deno_version }}'
+      - name: 'Use Node.js lts/*'
+        uses: 'actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8'
+        with:
+          node-version: 'lts/*'
+          cache: 'npm'
+      - name: 'Install dependencies'
+        run: 'npm ci'
       - name: 'Test'
-        run: 'deno task test:deno'
+        run: 'npm run test:deno'
 
   test-bun:
-    name: 'Test on Bun ${{ matrix.bun_version }}'
+    name: 'Test on Bun ${{ matrix.bun_version }} on ${{ matrix.os }}'
     needs: ['build']
-    runs-on: 'ubuntu-latest'
+    runs-on: '${{ matrix.os }}'
     permissions:
       contents: 'read'
     strategy:
       fail-fast: false
       matrix:
         bun_version: ['latest']
+        os: ['ubuntu-latest', 'windows-latest', 'macos-latest']
     steps:
       - name: 'Checkout'
         uses: 'actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29'
-      - name: 'Use Bun ${{ matrix.bun_version }}'
-        uses: 'oven-sh/setup-bun@f4d14e03ff726c06358e5557344e1da148b56cf7'
-        with:
-          bun-version: '${{ matrix.bun_version }}'
       - name: 'Download module artifact'
         uses: 'actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e'
         with:
           name: 'dist'
           path: './dist/'
+      - name: 'Use Bun ${{ matrix.bun_version }}'
+        uses: 'oven-sh/setup-bun@f4d14e03ff726c06358e5557344e1da148b56cf7'
+        with:
+          bun-version: '${{ matrix.bun_version }}'
+      - name: 'Install dependencies'
+        run: 'bun install --frozen-lockfile'
       - name: 'Test'
         run: 'bun run test:bun'
 
   test-browser:
-    name: 'Test on ${{ matrix.browser }}'
+    name: 'Test on ${{ matrix.browser }} browser on ${{ matrix.os }}'
     needs: ['build']
-    runs-on: 'ubuntu-latest'
+    runs-on: '${{ matrix.os }}'
     permissions:
       contents: 'read'
     strategy:
       fail-fast: false
       matrix:
         browser: ['chromium', 'firefox', 'webkit']
+        os: ['ubuntu-latest']
     steps:
       - name: 'Checkout'
         uses: 'actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29'
-      - name: 'Use Node.js lts/*'
-        uses: 'actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8'
-        with:
-          node-version: 'lts/*'
-      - name: 'Install dependencies'
-        run: 'npm ci && npx playwright install --with-deps "${{ matrix.browser }}"'
       - name: 'Download module artifact'
         uses: 'actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e'
         with:
           name: 'dist'
           path: './dist/'
+      - name: 'Use Node.js lts/*'
+        uses: 'actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8'
+        with:
+          node-version: 'lts/*'
+          cache: 'npm'
+      - name: 'Install dependencies'
+        run: 'npm ci && npx playwright install --with-deps "${{ matrix.browser }}"'
       - name: 'Test'
         run: 'npm run test:browser:"${{ matrix.browser }}"'
 
@@ -176,16 +194,16 @@ jobs:
     steps:
       - name: 'Checkout'
         uses: 'actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29'
-      - name: 'Use Node.js lts/*'
-        uses: 'actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8'
-        with:
-          node-version: 'lts/*'
-          registry-url: 'https://registry.npmjs.org'
       - name: 'Download module artifact'
         uses: 'actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e'
         with:
           name: 'dist'
           path: './dist/'
+      - name: 'Use Node.js lts/*'
+        uses: 'actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8'
+        with:
+          node-version: 'lts/*'
+          registry-url: 'https://registry.npmjs.org'
       - name: 'Publish'
         env:
           NODE_AUTH_TOKEN: '${{ secrets.NPM_TOKEN }}'
@@ -204,23 +222,7 @@ jobs:
       contents: 'write'
     steps:
       - name: 'Publish'
-        env:
-          GITHUB_PAT: '${{ secrets.GITHUB_TOKEN }}'
-        run: |
-          RELEASE_STATUS="$(curl -fs --proto '=https' --tlsv1.3 --globoff \
-            --url "https://api.github.com/repos/${GITHUB_REPOSITORY:?}/releases/tags/${GITHUB_REF_NAME:?}" \
-            --header "Authorization: Bearer ${GITHUB_PAT:?}" \
-            --header 'Accept: application/vnd.github.v3+json' \
-            --header 'Content-Type: application/json' \
-            --write-out '%{http_code}' --output /dev/null ||:)"
-          if [ "${RELEASE_STATUS:?}" = '200' ]; then exit 0; fi
-          RELEASE_ID="$(curl -fsS --proto '=https' --tlsv1.3 --globoff \
-            --url "https://api.github.com/repos/${GITHUB_REPOSITORY:?}/releases" \
-            --header "Authorization: Bearer ${GITHUB_PAT:?}" \
-            --header 'Accept: application/vnd.github.v3+json' \
-            --header 'Content-Type: application/json' \
-            --data "$(jq -rn --arg tag "${GITHUB_REF_NAME:?}" '{"name": $tag, "tag_name": $tag, "generate_release_notes": true}')" | jq -r '.id')"
-          if [ -z "${RELEASE_ID-}" ] || [ "${RELEASE_ID:?}" = 'null' ]; then exit 1; fi
+        uses: 'hectorm/ghaction-release@066200d04c3549852afa243d631ea3dc93390f68'
 
   publish-github-pages:
     name: 'Publish GitHub Pages'

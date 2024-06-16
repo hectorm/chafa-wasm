@@ -39,10 +39,19 @@
   ],
   "scripts": {
     "all": "run-s types build docs test",
-    "types": "tsc && mkdir -p ./dist/ && cp -a ./src/chafa.d.ts ./dist/chafa.d.ts",
-    "build": "docker buildx build ./ --file ./Dockerfile --output type=local,dest=./dist/",
-    "build-native": "docker buildx build ./ --file ./Dockerfile.native --output type=local,dest=./dist/",
-    "docs": "typedoc ./src/chafa.d.ts --plugin typedoc-plugin-markdown --readme none --disableSources --cleanOutputDir --out ./docs/",
+    "types": "run-s types:clean types:copy",
+    "types:clean": "node --import=fs -e \"fs.rmSync('./dist/chafa.d.ts', { force: true })\"",
+    "types:copy": "node --import=fs -e \"fs.cpSync('./src/chafa.d.ts', './dist/chafa.d.ts')\"",
+    "build": "run-s build:wasm",
+    "build:wasm": "run-s build:wasm:clean build:wasm:docker",
+    "build:wasm:clean": "node --import=fs -e \"['./dist/chafa.js', './dist/chafa.wasm'].map(f => fs.rmSync(f, { force: true }))\"",
+    "build:wasm:docker": "docker buildx build ./ --file ./Dockerfile --output type=local,dest=./dist/",
+    "build:native": "run-s build:native:clean build:native:docker",
+    "build:native:clean": "node --import=fs -e \"fs.rmSync('./dist/chafa', { force: true })\"",
+    "build:native:docker": "docker buildx build ./ --file ./Dockerfile.native --output type=local,dest=./dist/",
+    "docs": "run-s docs:clean docs:build",
+    "docs:clean": "node --import=fs -e \"fs.rmSync('./docs/', { force: true, recursive: true })\"",
+    "docs:build": "typedoc ./src/chafa.d.ts --plugin typedoc-plugin-markdown --readme none --disableSources --out ./docs/",
     "test": "run-s test:*",
     "test:node": "node ./test/node.test.js",
     "test:deno": "deno test --allow-read=./dist/ ./test/deno.test.js",
@@ -51,7 +60,8 @@
     "test:browser:chromium": "node ./test/browser.test.js chromium",
     "test:browser:firefox": "node ./test/browser.test.js firefox",
     "test:browser:webkit": "node ./test/browser.test.js webkit",
-    "version": "run-s all && git add -A ./docs/"
+    "version": "run-s all version:git",
+    "version:git": "git add -A ./docs/"
   },
   "devDependencies": {
     "@types/node": "~20.14.2",

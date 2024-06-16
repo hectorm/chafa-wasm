@@ -1,5 +1,6 @@
 {
-  "include": ["./src/**/*", "./test/**/*", "./demo/**/*"],
+  "include": ["**/*"],
+  "exclude": ["node_modules/**", "dist/**", "docs/**"],
   "compilerOptions": {
     "noEmit": true,
     "skipLibCheck": true,
