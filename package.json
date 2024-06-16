@@ -38,7 +38,7 @@
     "dist/"
   ],
   "scripts": {
-    "all": "run-s types build docs test",
+    "all": "run-s types build docs lint test",
     "types": "run-s types:clean types:copy",
     "types:clean": "node --import=fs -e \"fs.rmSync('./dist/chafa.d.ts', { force: true })\"",
     "types:copy": "node --import=fs -e \"fs.cpSync('./src/chafa.d.ts', './dist/chafa.d.ts')\"",
@@ -51,7 +51,9 @@
     "build:native:docker": "docker buildx build ./ --file ./Dockerfile.native --output type=local,dest=./dist/",
     "docs": "run-s docs:clean docs:build",
     "docs:clean": "node --import=fs -e \"fs.rmSync('./docs/', { force: true, recursive: true })\"",
-    "docs:build": "typedoc ./src/chafa.d.ts --plugin typedoc-plugin-markdown --readme none --disableSources --out ./docs/",
+    "docs:build": "typedoc ./dist/chafa.d.ts --tsconfig ./tsconfig.docs.json --plugin typedoc-plugin-markdown --readme none --disableSources --treatWarningsAsErrors --out ./docs/",
+    "lint": "run-s lint:*",
+    "lint:tsc": "tsc --noEmit",
     "test": "run-s test:*",
     "test:node": "node ./test/node.test.js",
     "test:deno": "deno test --allow-read=./dist/ ./test/deno.test.js",
