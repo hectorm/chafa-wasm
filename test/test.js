@@ -147,14 +147,16 @@ const data = {
 };
 
 /** @type {(fn: (arg1: any, arg2: any, cb: (err: any, res: any) => void) => void) => (arg1: any, arg2: any) => Promise<any>} */
-const promisify = (fn) => (...args) => {
-  return new Promise((resolve, reject) => {
-    fn(...args, (error, result) => {
-      if (error) reject(error);
-      else resolve(result);
+const promisify =
+  (fn) =>
+  (...args) => {
+    return new Promise((resolve, reject) => {
+      fn(...args, (error, result) => {
+        if (error) reject(error);
+        else resolve(result);
+      });
     });
-  });
-};
+  };
 
 const chafa = await Chafa();
 const imageToAnsi = promisify(chafa.imageToAnsi);
@@ -187,10 +189,7 @@ describe("ANSI", () => {
   });
 
   it("JPEG", async () => {
-    const { ansi, config } = await imageToAnsi(
-      data.jpeg.buffer,
-      data.config.in
-    );
+    const { ansi, config } = await imageToAnsi(data.jpeg.buffer, data.config.in);
     assertEquals(ansi, data.ansi);
     assertEquals(config, data.config.out);
   });
@@ -202,10 +201,7 @@ describe("ANSI", () => {
   });
 
   it("WebP", async () => {
-    const { ansi, config } = await imageToAnsi(
-      data.webp.buffer,
-      data.config.in
-    );
+    const { ansi, config } = await imageToAnsi(data.webp.buffer, data.config.in);
     assertEquals(ansi, data.ansi);
     assertEquals(config, data.config.out);
   });
@@ -243,10 +239,7 @@ describe("HTML", () => {
   });
 
   it("JPEG", async () => {
-    const { html, config } = await imageToHtml(
-      data.jpeg.buffer,
-      data.config.in
-    );
+    const { html, config } = await imageToHtml(data.jpeg.buffer, data.config.in);
     assertEquals(html, data.html);
     assertEquals(config, data.config.out);
   });
@@ -258,10 +251,7 @@ describe("HTML", () => {
   });
 
   it("WebP", async () => {
-    const { html, config } = await imageToHtml(
-      data.webp.buffer,
-      data.config.in
-    );
+    const { html, config } = await imageToHtml(data.webp.buffer, data.config.in);
     assertEquals(html, data.html);
     assertEquals(config, data.config.out);
   });
@@ -275,10 +265,7 @@ describe("HTML", () => {
 
 describe("console.log", () => {
   it("imageData", async () => {
-    const { args, config } = await imageToConsoleLogArgs(
-      data.imageData,
-      data.config.in
-    );
+    const { args, config } = await imageToConsoleLogArgs(data.imageData, data.config.in);
     assertEquals(args, data.consoleLogArgs);
     assertEquals(config, data.config.out);
   });
@@ -290,10 +277,7 @@ describe("console.log", () => {
   });
 
   it("PNG", async () => {
-    const { args, config } = await imageToConsoleLogArgs(
-      data.png.buffer,
-      data.config.in
-    );
+    const { args, config } = await imageToConsoleLogArgs(data.png.buffer, data.config.in);
     assertEquals(args, data.consoleLogArgs);
     assertEquals(config, data.config.out);
   });
@@ -305,10 +289,7 @@ describe("console.log", () => {
   });
 
   it("JPEG", async () => {
-    const { args, config } = await imageToConsoleLogArgs(
-      data.jpeg.buffer,
-      data.config.in
-    );
+    const { args, config } = await imageToConsoleLogArgs(data.jpeg.buffer, data.config.in);
     assertEquals(args, data.consoleLogArgs);
     assertEquals(config, data.config.out);
   });
@@ -320,10 +301,7 @@ describe("console.log", () => {
   });
 
   it("WebP", async () => {
-    const { args, config } = await imageToConsoleLogArgs(
-      data.webp.buffer,
-      data.config.in
-    );
+    const { args, config } = await imageToConsoleLogArgs(data.webp.buffer, data.config.in);
     assertEquals(args, data.consoleLogArgs);
     assertEquals(config, data.config.out);
   });

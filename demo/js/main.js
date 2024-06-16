@@ -47,24 +47,50 @@ const chafaEnums = Promise.all(
     ["colorExtractor", "ChafaColorExtractor", "CHAFA_COLOR_EXTRACTOR_"],
     ["colorSpace", "ChafaColorSpace", "CHAFA_COLOR_SPACE_"],
     ["dither", "ChafaDitherMode", "CHAFA_DITHER_MODE_"],
-  ].map(async ([key, value, prefix]) => [key, await chafaWorkerExec(value), prefix])
-).then((entry) => entry.reduce((acc, [key, value, prefix]) => {
-  /** @type {Record<string, string[]>} */
-  const newValue = {};
-  for (const [k, v] of Object.entries(value)) {
-    if (k.startsWith(prefix) && !k.endsWith("_MAX")) {
-      newValue[k.slice(prefix.length)] = v;
+  ].map(async ([key, value, prefix]) => [key, await chafaWorkerExec(value), prefix]),
+).then((entry) => {
+  return entry.reduce((acc, [key, value, prefix]) => {
+    /** @type {Record<string, string[]>} */
+    const newValue = {};
+    for (const [k, v] of Object.entries(value)) {
+      if (k.startsWith(prefix) && !k.endsWith("_MAX")) {
+        newValue[k.slice(prefix.length)] = v;
+      }
     }
-  }
-  return { ...acc, [key]: newValue };
-}, {}));
+    return { ...acc, [key]: newValue };
+  }, {});
+});
 
 /** @type {string[]} */
 const chafaSymbolClasses = [
-  "all", "alnum", "alpha", "ascii", "block", "border", "braille",
-  "diagonal", "digit", "dot", "extra", "geometric", "half", "hhalf",
-  "inverted", "latin", "legacy", "narrow", "none", "quad", "sextant",
-  "solid", "space", "stipple", "technical", "vhalf", "wedge", "wide",
+  "all",
+  "alnum",
+  "alpha",
+  "ascii",
+  "block",
+  "border",
+  "braille",
+  "diagonal",
+  "digit",
+  "dot",
+  "extra",
+  "geometric",
+  "half",
+  "hhalf",
+  "inverted",
+  "latin",
+  "legacy",
+  "narrow",
+  "none",
+  "quad",
+  "sextant",
+  "solid",
+  "space",
+  "stipple",
+  "technical",
+  "vhalf",
+  "wedge",
+  "wide",
 ];
 
 /** @type {ImageDataLike} */
@@ -228,14 +254,14 @@ const copyToClipboard = async (getText) => {
       const item = new ClipboardItem({ "text/plain": getText() });
       await navigator.clipboard.write([item]);
       copied = true;
-    // eslint-disable-next-line no-empty, no-unused-vars
+      // eslint-disable-next-line no-empty, no-unused-vars
     } catch (_) {}
   }
   if (!copied) {
     try {
       await navigator.clipboard.writeText(await getText());
       copied = true;
-    // eslint-disable-next-line no-empty, no-unused-vars
+      // eslint-disable-next-line no-empty, no-unused-vars
     } catch (_) {}
   }
   return copied;
@@ -277,14 +303,17 @@ $ansi.srcdoc = `
   <body>&nbsp;</body>
 `.replace(/^\s+|\s+$|\n/gm, "");
 
-$settings.addEventListener("change", (() => {
-  /** @type {ReturnType<typeof setTimeout>} */
-  let timer;
-  return () => {
-    clearTimeout(timer);
-    timer = setTimeout(() => render(), 100);
-  };
-})());
+$settings.addEventListener(
+  "change",
+  (() => {
+    /** @type {ReturnType<typeof setTimeout>} */
+    let timer;
+    return () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => render(), 100);
+    };
+  })(),
+);
 
 $settings.addEventListener("input", (event) => {
   if (event.target instanceof HTMLInputElement) {

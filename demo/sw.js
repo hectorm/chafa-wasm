@@ -1,9 +1,7 @@
 /// <reference lib="webworker" />
 
 (() => {
-  const self = /** @type {ServiceWorkerGlobalScope} */ (
-    /** @type {unknown} */ (globalThis.self)
-  );
+  const self = /** @type {ServiceWorkerGlobalScope} */ (/** @type {unknown} */ (globalThis.self));
 
   const cacheVersion = 2;
   const currentCaches = { main: `main-cache-v${cacheVersion}` };
@@ -18,9 +16,9 @@
             if (expectedCacheNames.indexOf(cacheName) === -1) {
               return caches.delete(cacheName);
             }
-          })
+          }),
         );
-      })()
+      })(),
     );
   });
 
@@ -44,7 +42,7 @@
           return fetchResponse;
         });
         return cacheResponse ?? fetchPromise;
-      })()
+      })(),
     );
   });
 })();

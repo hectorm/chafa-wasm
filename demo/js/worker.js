@@ -4,9 +4,7 @@
 import moduleFactory from "../../dist/chafa.js";
 
 (() => {
-  const self = /** @type {DedicatedWorkerGlobalScope} */ (
-    /** @type {unknown} */ (globalThis.self)
-  );
+  const self = /** @type {DedicatedWorkerGlobalScope} */ (/** @type {unknown} */ (globalThis.self));
 
   /** @type {Promise<ChafaModule>} */
   const modulePromise = moduleFactory();
@@ -28,7 +26,7 @@ import moduleFactory from "../../dist/chafa.js";
             return dict;
           },
           {},
-        )
+        ),
       );
     } else if (typeof obj === "function") {
       obj(

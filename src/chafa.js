@@ -46,9 +46,12 @@ Module["decodeImage"] = (image, callback) => {
       return;
     }
   } else if (
-    ("width" in image && typeof image.width === "number") &&
-    ("height" in image && typeof image.height === "number") &&
-    ("data" in image && image.data instanceof Uint8ClampedArray)
+    "width" in image &&
+    typeof image.width === "number" &&
+    "height" in image &&
+    typeof image.height === "number" &&
+    "data" in image &&
+    image.data instanceof Uint8ClampedArray
   ) {
     callback(null, image);
     return;
@@ -73,24 +76,26 @@ Module["imageToCanvas"] = (image, partialConfig, callback) => {
 
     const config = {};
 
-    config["format"] = partialConfig["format"] != null
-      ? Module["ChafaPixelMode"][partialConfig["format"]]?.value ??
-        Module["ChafaPixelMode"].values[partialConfig["format"]]?.value
-      : Module["ChafaPixelMode"]["CHAFA_PIXEL_MODE_SYMBOLS"].value;
+    config["format"] =
+      partialConfig["format"] != null
+        ? Module["ChafaPixelMode"][partialConfig["format"]]?.value ??
+          Module["ChafaPixelMode"].values[partialConfig["format"]]?.value
+        : Module["ChafaPixelMode"]["CHAFA_PIXEL_MODE_SYMBOLS"].value;
 
     if (config["format"] == null) {
       callback(new Error("Invalid format"), { "canvas": 0, "config": null });
       return;
     }
 
-    config["fontRatio"] = partialConfig["fontRatio"] != null
-      ? typeof partialConfig["fontRatio"] !== "number"
-        ? Number.parseFloat(partialConfig["fontRatio"])
-        : partialConfig["fontRatio"]
-      : config["format"] === Module["ChafaPixelMode"]["CHAFA_PIXEL_MODE_SYMBOLS"].value ||
-        config["format"] === Module["ChafaPixelMode"]["CHAFA_PIXEL_MODE_KITTY"].value
-        ? 0.5
-        : 1.0;
+    config["fontRatio"] =
+      partialConfig["fontRatio"] != null
+        ? typeof partialConfig["fontRatio"] !== "number"
+          ? Number.parseFloat(partialConfig["fontRatio"])
+          : partialConfig["fontRatio"]
+        : config["format"] === Module["ChafaPixelMode"]["CHAFA_PIXEL_MODE_SYMBOLS"].value ||
+            config["format"] === Module["ChafaPixelMode"]["CHAFA_PIXEL_MODE_KITTY"].value
+          ? 0.5
+          : 1.0;
 
     if (Number.isNaN(config["fontRatio"]) || config["fontRatio"] < 0) {
       callback(new Error("Font ratio must be at least 0"), { "canvas": 0, "config": null });
@@ -107,22 +112,26 @@ Module["imageToCanvas"] = (image, partialConfig, callback) => {
         config["width"] = Math.round((imageData.width / imageData.height) * (config["height"] / config["fontRatio"]));
       }
     } else if (partialConfig["width"] != null && partialConfig["height"] == null) {
-      config["width"] = typeof partialConfig["width"] !== "number"
-        ? Number.parseInt(partialConfig["width"], 10)
-        : partialConfig["width"] | 0;
+      config["width"] =
+        typeof partialConfig["width"] !== "number"
+          ? Number.parseInt(partialConfig["width"], 10)
+          : partialConfig["width"] | 0;
       config["height"] = Math.round((imageData.height / imageData.width) * (config["width"] * config["fontRatio"]));
     } else if (partialConfig["width"] == null && partialConfig["height"] != null) {
-      config["height"] = typeof partialConfig["height"] !== "number"
-        ? Number.parseInt(partialConfig["height"], 10)
-        : partialConfig["height"] | 0;
+      config["height"] =
+        typeof partialConfig["height"] !== "number"
+          ? Number.parseInt(partialConfig["height"], 10)
+          : partialConfig["height"] | 0;
       config["width"] = Math.round((imageData.width / imageData.height) * (config["height"] / config["fontRatio"]));
     } else if (partialConfig["width"] != null && partialConfig["height"] != null) {
-      config["width"] = typeof partialConfig["width"] !== "number"
-        ? Number.parseInt(partialConfig["width"], 10)
-        : partialConfig["width"] | 0;
-      config["height"] = typeof partialConfig["height"] !== "number"
-        ? Number.parseInt(partialConfig["height"], 10)
-        : partialConfig["height"] | 0;
+      config["width"] =
+        typeof partialConfig["width"] !== "number"
+          ? Number.parseInt(partialConfig["width"], 10)
+          : partialConfig["width"] | 0;
+      config["height"] =
+        typeof partialConfig["height"] !== "number"
+          ? Number.parseInt(partialConfig["height"], 10)
+          : partialConfig["height"] | 0;
     }
 
     if (Number.isNaN(config["width"]) || config["width"] < 1) {
@@ -135,161 +144,174 @@ Module["imageToCanvas"] = (image, partialConfig, callback) => {
       return;
     }
 
-    config["colors"] = partialConfig["colors"] != null
-      ? Module["ChafaCanvasMode"][partialConfig["colors"]]?.value ??
-        Module["ChafaCanvasMode"].values[partialConfig["colors"]]?.value
-      : Module["ChafaCanvasMode"]["CHAFA_CANVAS_MODE_TRUECOLOR"].value;
+    config["colors"] =
+      partialConfig["colors"] != null
+        ? Module["ChafaCanvasMode"][partialConfig["colors"]]?.value ??
+          Module["ChafaCanvasMode"].values[partialConfig["colors"]]?.value
+        : Module["ChafaCanvasMode"]["CHAFA_CANVAS_MODE_TRUECOLOR"].value;
 
     if (config["colors"] == null) {
       callback(new Error("Invalid color mode"), { "canvas": 0, "config": null });
       return;
     }
 
-    config["colorExtractor"] = partialConfig["colorExtractor"] != null
-      ? Module["ChafaColorExtractor"][partialConfig["colorExtractor"]]?.value ??
-        Module["ChafaColorExtractor"].values[partialConfig["colorExtractor"]]?.value
-      : Module["ChafaColorExtractor"]["CHAFA_COLOR_EXTRACTOR_AVERAGE"].value;
+    config["colorExtractor"] =
+      partialConfig["colorExtractor"] != null
+        ? Module["ChafaColorExtractor"][partialConfig["colorExtractor"]]?.value ??
+          Module["ChafaColorExtractor"].values[partialConfig["colorExtractor"]]?.value
+        : Module["ChafaColorExtractor"]["CHAFA_COLOR_EXTRACTOR_AVERAGE"].value;
 
     if (config["colorExtractor"] == null) {
       callback(new Error("Invalid color extractor"), { "canvas": 0, "config": null });
       return;
     }
 
-    config["colorSpace"] = partialConfig["colorSpace"] != null
-      ? Module["ChafaColorSpace"][partialConfig["colorSpace"]]?.value ??
-        Module["ChafaColorSpace"].values[partialConfig["colorSpace"]]?.value
-      : Module["ChafaColorSpace"]["CHAFA_COLOR_SPACE_RGB"].value;
+    config["colorSpace"] =
+      partialConfig["colorSpace"] != null
+        ? Module["ChafaColorSpace"][partialConfig["colorSpace"]]?.value ??
+          Module["ChafaColorSpace"].values[partialConfig["colorSpace"]]?.value
+        : Module["ChafaColorSpace"]["CHAFA_COLOR_SPACE_RGB"].value;
 
     if (config["colorSpace"] == null) {
       callback(new Error("Invalid color space"), { "canvas": 0, "config": null });
       return;
     }
 
-    config["symbols"] = partialConfig["symbols"] != null
-      ? String(partialConfig["symbols"])
-      : config["colors"] === Module["ChafaCanvasMode"]["CHAFA_CANVAS_MODE_FGBG"].value
-        ? "block+border+space-wide"
-        : "block+border+space-wide-inverted";
+    config["symbols"] =
+      partialConfig["symbols"] != null
+        ? String(partialConfig["symbols"])
+        : config["colors"] === Module["ChafaCanvasMode"]["CHAFA_CANVAS_MODE_FGBG"].value
+          ? "block+border+space-wide"
+          : "block+border+space-wide-inverted";
 
     if (!config["symbols"]) {
       callback(new Error("Symbol map cannot be empty"), { "canvas": 0, "config": null });
       return;
     }
 
-    config["fill"] = partialConfig["fill"] != null
-      ? String(partialConfig["fill"])
-      : "none";
+    config["fill"] = partialConfig["fill"] != null ? String(partialConfig["fill"]) : "none";
 
-    config["fg"] = partialConfig["fg"] != null
-      ? typeof partialConfig["fg"] !== "number"
-        ? String(partialConfig["fg"]).startsWith("#")
-          ? Number.parseInt(partialConfig["fg"].slice(1), 16)
-          : Number.parseInt(partialConfig["fg"], 10)
-        : partialConfig["fg"] | 0
-      : 0xffffff;
+    config["fg"] =
+      partialConfig["fg"] != null
+        ? typeof partialConfig["fg"] !== "number"
+          ? String(partialConfig["fg"]).startsWith("#")
+            ? Number.parseInt(partialConfig["fg"].slice(1), 16)
+            : Number.parseInt(partialConfig["fg"], 10)
+          : partialConfig["fg"] | 0
+        : 0xffffff;
 
     if (Number.isNaN(config["fg"]) || config["fg"] < 0 || config["fg"] > 0xffffff) {
       callback(new Error("Foreground color must be between 0 and 0xffffff"), { "canvas": 0, "config": null });
       return;
     }
 
-    config["bg"] = partialConfig["bg"] != null
-      ? typeof partialConfig["bg"] !== "number"
-        ? String(partialConfig["bg"]).startsWith("#")
-          ? Number.parseInt(partialConfig["bg"].slice(1), 16)
-          : Number.parseInt(partialConfig["bg"], 10)
-        : partialConfig["bg"] | 0
-      : 0x000000;
+    config["bg"] =
+      partialConfig["bg"] != null
+        ? typeof partialConfig["bg"] !== "number"
+          ? String(partialConfig["bg"]).startsWith("#")
+            ? Number.parseInt(partialConfig["bg"].slice(1), 16)
+            : Number.parseInt(partialConfig["bg"], 10)
+          : partialConfig["bg"] | 0
+        : 0x000000;
 
     if (Number.isNaN(config["bg"]) || config["bg"] < 0 || config["bg"] > 0xffffff) {
       callback(new Error("Background color must be between 0 and 0xffffff"), { "canvas": 0, "config": null });
       return;
     }
 
-    config["fgOnly"] = partialConfig["fgOnly"] != null
-      ? typeof partialConfig["fgOnly"] !== "boolean"
-        ? ["true", "yes", "on"].includes(String(partialConfig["fgOnly"]).toLowerCase())
-        : partialConfig["fgOnly"]
-      : false;
+    config["fgOnly"] =
+      partialConfig["fgOnly"] != null
+        ? typeof partialConfig["fgOnly"] !== "boolean"
+          ? ["true", "yes", "on"].includes(String(partialConfig["fgOnly"]).toLowerCase())
+          : partialConfig["fgOnly"]
+        : false;
 
-    config["dither"] = partialConfig["dither"] != null
-      ? Module["ChafaDitherMode"][partialConfig["dither"]]?.value ??
-        Module["ChafaDitherMode"].values[partialConfig["dither"]]?.value
-      : Module["ChafaDitherMode"]["CHAFA_DITHER_MODE_NONE"].value;
+    config["dither"] =
+      partialConfig["dither"] != null
+        ? Module["ChafaDitherMode"][partialConfig["dither"]]?.value ??
+          Module["ChafaDitherMode"].values[partialConfig["dither"]]?.value
+        : Module["ChafaDitherMode"]["CHAFA_DITHER_MODE_NONE"].value;
 
     if (config["dither"] == null) {
       callback(new Error("Invalid dither mode"), { "canvas": 0, "config": null });
       return;
     }
 
-    config["ditherGrainWidth"] = partialConfig["ditherGrainWidth"] != null
-      ? typeof partialConfig["ditherGrainWidth"] !== "number"
-        ? Number.parseInt(partialConfig["ditherGrainWidth"], 10)
-        : partialConfig["ditherGrainWidth"] | 0
-      : 4;
+    config["ditherGrainWidth"] =
+      partialConfig["ditherGrainWidth"] != null
+        ? typeof partialConfig["ditherGrainWidth"] !== "number"
+          ? Number.parseInt(partialConfig["ditherGrainWidth"], 10)
+          : partialConfig["ditherGrainWidth"] | 0
+        : 4;
 
     if (![1, 2, 4, 8].includes(config["ditherGrainWidth"])) {
       callback(new Error("Grain width must be exactly 1, 2, 4 or 8"), { "canvas": 0, "config": null });
       return;
     }
 
-    config["ditherGrainHeight"] = partialConfig["ditherGrainHeight"] != null
-      ? typeof partialConfig["ditherGrainHeight"] !== "number"
-        ? Number.parseInt(partialConfig["ditherGrainHeight"], 10)
-        : partialConfig["ditherGrainHeight"] | 0
-      : config["ditherGrainWidth"];
+    config["ditherGrainHeight"] =
+      partialConfig["ditherGrainHeight"] != null
+        ? typeof partialConfig["ditherGrainHeight"] !== "number"
+          ? Number.parseInt(partialConfig["ditherGrainHeight"], 10)
+          : partialConfig["ditherGrainHeight"] | 0
+        : config["ditherGrainWidth"];
 
     if (![1, 2, 4, 8].includes(config["ditherGrainHeight"])) {
       callback(new Error("Grain height must be exactly 1, 2, 4 or 8"), { "canvas": 0, "config": null });
       return;
     }
 
-    config["ditherIntensity"] = partialConfig["ditherIntensity"] != null
-      ? typeof partialConfig["ditherIntensity"] !== "number"
-        ? Number.parseFloat(partialConfig["ditherIntensity"])
-        : partialConfig["ditherIntensity"]
-      : 1.0;
+    config["ditherIntensity"] =
+      partialConfig["ditherIntensity"] != null
+        ? typeof partialConfig["ditherIntensity"] !== "number"
+          ? Number.parseFloat(partialConfig["ditherIntensity"])
+          : partialConfig["ditherIntensity"]
+        : 1.0;
 
     if (Number.isNaN(config["ditherIntensity"]) || config["ditherIntensity"] < 0) {
       callback(new Error("Dither intensity must be at least 0"), { "canvas": 0, "config": null });
       return;
     }
 
-    config["preprocess"] = partialConfig["preprocess"] != null
-      ? typeof partialConfig["preprocess"] !== "boolean"
-        ? ["true", "yes", "on"].includes(String(partialConfig["preprocess"]).toLowerCase())
-        : partialConfig["preprocess"]
-      : true;
+    config["preprocess"] =
+      partialConfig["preprocess"] != null
+        ? typeof partialConfig["preprocess"] !== "boolean"
+          ? ["true", "yes", "on"].includes(String(partialConfig["preprocess"]).toLowerCase())
+          : partialConfig["preprocess"]
+        : true;
 
-    config["threshold"] = partialConfig["threshold"] != null
-      ? typeof partialConfig["threshold"] !== "number"
-        ? Number.parseFloat(partialConfig["threshold"])
-        : partialConfig["threshold"]
-      : 0.5;
+    config["threshold"] =
+      partialConfig["threshold"] != null
+        ? typeof partialConfig["threshold"] !== "number"
+          ? Number.parseFloat(partialConfig["threshold"])
+          : partialConfig["threshold"]
+        : 0.5;
 
     if (Number.isNaN(config["threshold"]) || config["threshold"] < 0 || config["threshold"] > 1) {
       callback(new Error("Transparency threshold must be between 0 and 1"), { "canvas": 0, "config": null });
       return;
     }
 
-    config["optimize"] = partialConfig["optimize"] != null
-      ? typeof partialConfig["optimize"] !== "number"
-        ? Number.parseInt(partialConfig["optimize"], 10)
-        : partialConfig["optimize"] | 0
-      : config["colors"] === Module["ChafaCanvasMode"]["CHAFA_CANVAS_MODE_FGBG"].value
-        ? 0
-        : 5;
+    config["optimize"] =
+      partialConfig["optimize"] != null
+        ? typeof partialConfig["optimize"] !== "number"
+          ? Number.parseInt(partialConfig["optimize"], 10)
+          : partialConfig["optimize"] | 0
+        : config["colors"] === Module["ChafaCanvasMode"]["CHAFA_CANVAS_MODE_FGBG"].value
+          ? 0
+          : 5;
 
     if (Number.isNaN(config["optimize"]) || config["optimize"] < 0 || config["optimize"] > 9) {
       callback(new Error("Optimization level must be between 0 and 9"), { "canvas": 0, "config": null });
       return;
     }
 
-    config["work"] = partialConfig["work"] != null
-      ? typeof partialConfig["work"] !== "number"
-        ? Number.parseInt(partialConfig["work"], 10)
-        : partialConfig["work"] | 0
-      : 5;
+    config["work"] =
+      partialConfig["work"] != null
+        ? typeof partialConfig["work"] !== "number"
+          ? Number.parseInt(partialConfig["work"], 10)
+          : partialConfig["work"] | 0
+        : 5;
 
     if (Number.isNaN(config["work"]) || config["work"] < 1 || config["work"] > 9) {
       callback(new Error("Work factor must be between 1 and 9"), { "canvas": 0, "config": null });
@@ -298,10 +320,11 @@ Module["imageToCanvas"] = (image, partialConfig, callback) => {
 
     Object.freeze(config);
 
-    const optimizations = Module["ChafaOptimizations"]["CHAFA_OPTIMIZATION_NONE"].value
-      | (config["optimize"] >= 1 ? Module["ChafaOptimizations"]["CHAFA_OPTIMIZATION_REUSE_ATTRIBUTES"].value : 0)
-      | (config["optimize"] >= 6 ? Module["ChafaOptimizations"]["CHAFA_OPTIMIZATION_REPEAT_CELLS"].value : 0)
-      | (config["optimize"] >= 7 ? Module["ChafaOptimizations"]["CHAFA_OPTIMIZATION_SKIP_CELLS"].value : 0);
+    const optimizations =
+      Module["ChafaOptimizations"]["CHAFA_OPTIMIZATION_NONE"].value |
+      (config["optimize"] >= 1 ? Module["ChafaOptimizations"]["CHAFA_OPTIMIZATION_REUSE_ATTRIBUTES"].value : 0) |
+      (config["optimize"] >= 6 ? Module["ChafaOptimizations"]["CHAFA_OPTIMIZATION_REPEAT_CELLS"].value : 0) |
+      (config["optimize"] >= 7 ? Module["ChafaOptimizations"]["CHAFA_OPTIMIZATION_SKIP_CELLS"].value : 0);
 
     const workFactor = (config["work"] - 1) / 8;
 
@@ -338,6 +361,7 @@ Module["imageToCanvas"] = (image, partialConfig, callback) => {
       canvasConfigPtr = Module["_chafa_canvas_config_new"]();
       Module["_chafa_canvas_config_set_pixel_mode"](canvasConfigPtr, config["format"]);
       Module["_chafa_canvas_config_set_geometry"](canvasConfigPtr, config["width"], config["height"]);
+      // prettier-ignore
       Module["_chafa_canvas_config_set_passthrough"](canvasConfigPtr, Module["ChafaPassthrough"]["CHAFA_PASSTHROUGH_NONE"].value);
       Module["_chafa_canvas_config_set_symbol_map"](canvasConfigPtr, symbolMapPtr);
       Module["_chafa_canvas_config_set_fill_symbol_map"](canvasConfigPtr, fillSymbolMapPtr);
@@ -348,6 +372,7 @@ Module["imageToCanvas"] = (image, partialConfig, callback) => {
       Module["_chafa_canvas_config_set_bg_color"](canvasConfigPtr, config["bg"]);
       Module["_chafa_canvas_config_set_fg_only_enabled"](canvasConfigPtr, config["fgOnly"]);
       Module["_chafa_canvas_config_set_dither_mode"](canvasConfigPtr, config["dither"]);
+      // prettier-ignore
       Module["_chafa_canvas_config_set_dither_grain_size"](canvasConfigPtr, config["ditherGrainWidth"], config["ditherGrainHeight"]);
       Module["_chafa_canvas_config_set_dither_intensity"](canvasConfigPtr, config["ditherIntensity"]);
       Module["_chafa_canvas_config_set_preprocessing_enabled"](canvasConfigPtr, config["preprocess"]);
@@ -365,7 +390,7 @@ Module["imageToCanvas"] = (image, partialConfig, callback) => {
         pixelsPtr,
         imageData.width,
         imageData.height,
-        imageData.width * 4
+        imageData.width * 4,
       );
 
       // Pass canvas to callback

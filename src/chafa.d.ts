@@ -14,10 +14,7 @@ interface ChafaModule {
    * If an already decoded image is specified, it will be left as is.
    */
   decodeImage: {
-    (
-      image: ArrayBuffer | ImageDataLike,
-      callback: Callback<ImageDataLike>
-    ): void;
+    (image: ArrayBuffer | ImageDataLike, callback: Callback<ImageDataLike>): void;
   };
 
   /**
@@ -27,7 +24,7 @@ interface ChafaModule {
     (
       image: ArrayBuffer | ImageDataLike,
       config: PartialChafaConfig,
-      callback: Callback<{ canvas: number; config: ReadonlyChafaConfig | null }>
+      callback: Callback<{ canvas: number; config: ReadonlyChafaConfig | null }>,
     ): void;
   };
 
@@ -38,7 +35,7 @@ interface ChafaModule {
     (
       image: ArrayBuffer | ImageDataLike,
       config: PartialChafaConfig,
-      callback: Callback<{ matrix: number[][][]; config: ReadonlyChafaConfig | null }>
+      callback: Callback<{ matrix: number[][][]; config: ReadonlyChafaConfig | null }>,
     ): void;
   };
 
@@ -49,7 +46,7 @@ interface ChafaModule {
     (
       image: ArrayBuffer | ImageDataLike,
       config: PartialChafaConfig,
-      callback: Callback<{ ansi: string; config: ReadonlyChafaConfig | null }>
+      callback: Callback<{ ansi: string; config: ReadonlyChafaConfig | null }>,
     ): void;
   };
 
@@ -60,7 +57,7 @@ interface ChafaModule {
     (
       image: ArrayBuffer | ImageDataLike,
       config: PartialChafaConfig,
-      callback: Callback<{ html: string; config: ReadonlyChafaConfig | null }>
+      callback: Callback<{ html: string; config: ReadonlyChafaConfig | null }>,
     ): void;
   };
 
@@ -71,7 +68,7 @@ interface ChafaModule {
     (
       image: ArrayBuffer | ImageDataLike,
       config: PartialChafaConfig,
-      callback: Callback<{ args: string[]; config: ReadonlyChafaConfig | null }>
+      callback: Callback<{ args: string[]; config: ReadonlyChafaConfig | null }>,
     ): void;
   };
 
@@ -84,7 +81,7 @@ interface ChafaModule {
  * @see https://hpjansson.org/chafa/man/
  */
 type ChafaConfig = {
-  format: number | string,
+  format: number | string;
   width: number;
   height: number;
   fontRatio: number;

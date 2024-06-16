@@ -32,9 +32,7 @@ switch (browserName) {
     process.exit(1);
 }
 const browserWsEndpoint = process.env.PW_TEST_CONNECT_WS_ENDPOINT;
-const browser = await (browserWsEndpoint
-  ? browserType.connect(browserWsEndpoint)
-  : browserType.launch());
+const browser = await (browserWsEndpoint ? browserType.connect(browserWsEndpoint) : browserType.launch());
 
 try {
   const context = await browser.newContext();
@@ -51,24 +49,18 @@ try {
     path: require.resolve("mocha/mocha.js"),
   });
 
-  const chaiJsUri = `data:application/javascript;base64,${fs
-    .readFileSync(require.resolve("chai/chai.js"))
-    .toString("base64")}`;
+  const chaiJsData = fs.readFileSync(require.resolve("chai/chai.js"));
+  const chaiJsUri = `data:application/javascript;base64,${chaiJsData.toString("base64")}`;
 
-  const chafaWasmUri = `data:application/octet-stream;base64,${fs
-    .readFileSync(require.resolve("../dist/chafa.wasm"))
-    .toString("base64")}`;
+  const chafaWasmData = fs.readFileSync(require.resolve("../dist/chafa.wasm"));
+  const chafaWasmUri = `data:application/octet-stream;base64,${chafaWasmData.toString("base64")}`;
 
-  const chafaJsUri = `data:application/javascript;base64,${Buffer.from(
-    fs
-      .readFileSync(require.resolve("../dist/chafa.js"))
-      .toString("utf-8")
-      .replaceAll("chafa.wasm", chafaWasmUri)
-  ).toString("base64")}`;
+  const chafaJsData = fs.readFileSync(require.resolve("../dist/chafa.js"));
+  const chafaJsPatchedData = Buffer.from(chafaJsData.toString("utf-8").replaceAll("chafa.wasm", chafaWasmUri));
+  const chafaJsUri = `data:application/javascript;base64,${chafaJsPatchedData.toString("base64")}`;
 
-  const testJsUri = `data:application/javascript;base64,${fs
-    .readFileSync(require.resolve("./test.js"))
-    .toString("base64")}`;
+  const testJsData = fs.readFileSync(require.resolve("./test.js"));
+  const testJsUri = `data:application/javascript;base64,${testJsData.toString("base64")}`;
 
   await page.addScriptTag({
     type: "importmap",

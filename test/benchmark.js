@@ -71,8 +71,7 @@ if (isMainThread) {
     const ops = ((1000 / totalTime) * iterations).toFixed(2);
 
     parentPort?.postMessage(
-      `Execution time for ${name}:\n` +
-        `  total: ${totalTime} ms, time: ${fnTime} ms, op/sec: ${ops}`
+      `Execution time for ${name}:\n  total: ${totalTime} ms, time: ${fnTime} ms, op/sec: ${ops}`,
     );
   });
 
