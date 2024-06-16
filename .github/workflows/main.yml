@@ -20,7 +20,7 @@ jobs:
       contents: "read"
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29"
+        uses: "actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332"
       - name: "Expose GitHub Actions variables"
         uses: "actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea"
         with:
@@ -76,7 +76,7 @@ jobs:
         os: ["ubuntu-latest", "windows-latest", "macos-latest"]
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29"
+        uses: "actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332"
       - name: "Download module artifact"
         uses: "actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e"
         with:
@@ -105,7 +105,7 @@ jobs:
         os: ["ubuntu-latest", "windows-latest", "macos-latest"]
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29"
+        uses: "actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332"
       - name: "Download module artifact"
         uses: "actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e"
         with:
@@ -138,7 +138,7 @@ jobs:
         os: ["ubuntu-latest", "windows-latest", "macos-latest"]
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29"
+        uses: "actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332"
       - name: "Download module artifact"
         uses: "actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e"
         with:
@@ -166,7 +166,7 @@ jobs:
         os: ["ubuntu-latest"]
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29"
+        uses: "actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332"
       - name: "Download module artifact"
         uses: "actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e"
         with:
@@ -192,7 +192,7 @@ jobs:
       id-token: "write"
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29"
+        uses: "actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332"
       - name: "Download module artifact"
         uses: "actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e"
         with:
