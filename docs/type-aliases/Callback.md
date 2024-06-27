@@ -4,11 +4,11 @@
 
 [chafa-wasm](../README.md) / Callback
 
-# Type alias: Callback()\<T\>
+# Type Alias: Callback()\<T\>
 
 > **Callback**\<`T`\>: (`error`, `data`) => `void`
 
-## Type parameters
+## Type Parameters
 
 • **T**
 

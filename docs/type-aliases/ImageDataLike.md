@@ -4,11 +4,11 @@
 
 [chafa-wasm](../README.md) / ImageDataLike
 
-# Type alias: ImageDataLike
+# Type Alias: ImageDataLike
 
 > **ImageDataLike**: `object`
 
-## Index signature
+## Index Signature
 
  \[`x`: `string` \| `number` \| `symbol`\]: `any`
 

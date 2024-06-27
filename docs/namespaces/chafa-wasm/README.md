@@ -4,7 +4,7 @@
 
 [chafa-wasm](../../README.md) / "chafa-wasm"
 
-# Namespace: "chafa-wasm"
+# "chafa-wasm"
 
 ## Index
 

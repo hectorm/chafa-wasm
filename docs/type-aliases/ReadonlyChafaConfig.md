@@ -4,6 +4,6 @@
 
 [chafa-wasm](../README.md) / ReadonlyChafaConfig
 
-# Type alias: ReadonlyChafaConfig
+# Type Alias: ReadonlyChafaConfig
 
 > **ReadonlyChafaConfig**: `{ readonly [P in keyof ChafaConfig]: ChafaConfig[P] }`

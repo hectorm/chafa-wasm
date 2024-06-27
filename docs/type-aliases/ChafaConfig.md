@@ -4,7 +4,7 @@
 
 [chafa-wasm](../README.md) / ChafaConfig
 
-# Type alias: ChafaConfig
+# Type Alias: ChafaConfig
 
 > **ChafaConfig**: `object`
 
