@@ -75,7 +75,7 @@
     "@types/eslint": "~8.56.10",
     "@types/eslint-config-prettier": "~6.11.3",
     "@types/eslint__js": "~8.42.3",
-    "@types/node": "~20.14.2",
+    "@types/node": "~20.14.8",
     "chai": "~5.1.1",
     "eslint": "~9.5.0",
     "eslint-config-prettier": "~9.1.0",
@@ -84,8 +84,8 @@
     "npm-run-all2": "~6.2.0",
     "playwright": "~1.44.1",
     "prettier": "~3.3.2",
-    "typedoc": "~0.25.13",
-    "typedoc-plugin-markdown": "~4.0.3",
-    "typescript": "~5.4.5"
+    "typedoc": "~0.26.2",
+    "typedoc-plugin-markdown": "~4.1.0",
+    "typescript": "~5.5.2"
   }
 }
