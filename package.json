@@ -61,7 +61,7 @@
     "format:prettier": "prettier --write ./",
     "test": "run-s test:*",
     "test:node": "node ./test/node.test.js",
-    "test:deno": "deno test --allow-read=./dist/ ./test/deno.test.js",
+    "test:deno": "deno test --no-lock --allow-read=./dist/ ./test/deno.test.js",
     "test:bun": "bun test --cwd ./test/ bun",
     "test:browser": "run-s test:browser:*",
     "test:browser:chromium": "node ./test/browser.test.js chromium",
