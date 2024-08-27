@@ -135,7 +135,7 @@ RUN ninja -C ./build/ install
 RUN pkg-config --static --exists --print-errors libwebp
 
 # Build FreeType
-ARG FREETYPE_TREEISH=VER-2-13-2
+ARG FREETYPE_TREEISH=VER-2-13-3
 ARG FREETYPE_REMOTE=https://gitlab.freedesktop.org/freetype/freetype.git
 WORKDIR ${BUILDDIR}/dep/freetype/
 RUN git clone "${FREETYPE_REMOTE:?}" ./ \
