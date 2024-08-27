@@ -141,7 +141,7 @@ RUN emmake ninja -C ./build/ install
 RUN pkg-config --static --exists --print-errors libwebp
 
 # Build Chafa
-ARG CHAFA_TREEISH=1.14.1
+ARG CHAFA_TREEISH=1.14.2
 ARG CHAFA_REMOTE=https://github.com/hpjansson/chafa.git
 WORKDIR ${BUILDDIR}/dep/chafa/
 RUN git clone "${CHAFA_REMOTE:?}" ./ \
