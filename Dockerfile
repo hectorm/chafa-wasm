@@ -90,8 +90,11 @@ RUN emcmake cmake -G 'Ninja' -S ./ -B ./build/ \
 		-D CMAKE_FIND_ROOT_PATH="${SYSROOT:?}" \
 		-D CMAKE_FIND_ROOT_PATH_MODE_PACKAGE=BOTH \
 		-D CMAKE_BUILD_TYPE=Release \
+		-D BUILD_TESTING=OFF \
 		-D PNG_STATIC=ON \
-		-D PNG_SHARED=OFF
+		-D PNG_SHARED=OFF \
+		-D PNG_TOOLS=OFF \
+		-D PNG_TESTS=OFF
 RUN emmake ninja -C ./build/ install
 RUN pkg-config --static --exists --print-errors libpng
 
@@ -108,6 +111,7 @@ RUN emcmake cmake -G 'Ninja' -S ./ -B ./build/ \
 		-D CMAKE_FIND_ROOT_PATH="${SYSROOT:?}" \
 		-D CMAKE_FIND_ROOT_PATH_MODE_PACKAGE=BOTH \
 		-D CMAKE_BUILD_TYPE=Release \
+		-D BUILD_TESTING=OFF \
 		-D ENABLE_STATIC=ON \
 		-D ENABLE_SHARED=OFF
 RUN emmake ninja -C ./build/ install
@@ -126,6 +130,7 @@ RUN emcmake cmake -G 'Ninja' -S ./ -B ./build/ \
 		-D CMAKE_FIND_ROOT_PATH="${SYSROOT:?}" \
 		-D CMAKE_FIND_ROOT_PATH_MODE_PACKAGE=BOTH \
 		-D CMAKE_BUILD_TYPE=Release \
+		-D BUILD_TESTING=OFF \
 		-D BUILD_SHARED_LIBS=OFF \
 		-D WEBP_USE_THREAD=OFF \
 		-D WEBP_BUILD_CWEBP=OFF \
