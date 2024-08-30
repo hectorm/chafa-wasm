@@ -13,7 +13,7 @@ avifs := $(patsubst %.png,%.avif,$(wildcard *.png))
 all: build
 
 .PHONY: build
-build: $(jpgs) $(webps)
+build: $(jpgs) $(jxls) $(webps)
 
 %.pnm: %.png
 	png2pnm "$<" "$@"

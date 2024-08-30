@@ -6,6 +6,7 @@
 #include <vector>
 
 #include <jpeglib.h>
+#include <jxl/decode.h>
 #include <png.h>
 #include <webp/decode.h>
 
@@ -109,6 +110,58 @@ ImageDataLike decode_jpeg(std::string bytes) {
   }
 }
 
+ImageDataLike decode_jpegxl(std::string bytes) {
+  try {
+    JxlDecoder *decoder = JxlDecoderCreate(nullptr);
+    if (decoder == nullptr) {
+      throw std::runtime_error("JxlDecoderCreate failed");
+    }
+
+    if (JxlDecoderSubscribeEvents(decoder, JXL_DEC_BASIC_INFO | JXL_DEC_FULL_IMAGE) != JXL_DEC_SUCCESS) {
+      JxlDecoderDestroy(decoder);
+      throw std::runtime_error("JxlDecoderSubscribeEvents failed");
+    }
+
+    if (JxlDecoderSetInput(decoder, reinterpret_cast<const std::uint8_t *>(bytes.c_str()), bytes.size()) != JXL_DEC_SUCCESS) {
+      JxlDecoderDestroy(decoder);
+      throw std::runtime_error("JxlDecoderSetInput failed");
+    }
+
+    if (JxlDecoderProcessInput(decoder) != JXL_DEC_BASIC_INFO) {
+      JxlDecoderDestroy(decoder);
+      throw std::runtime_error("JxlDecoderProcessInput failed");
+    }
+
+    JxlBasicInfo info;
+    if (JxlDecoderGetBasicInfo(decoder, &info) != JXL_DEC_SUCCESS) {
+      JxlDecoderDestroy(decoder);
+      throw std::runtime_error("JxlDecoderGetBasicInfo failed");
+    }
+
+    std::vector<std::uint8_t> buffer(info.xsize * info.ysize * 4);
+    JxlPixelFormat format = {4, JXL_TYPE_UINT8, JXL_LITTLE_ENDIAN, 0};
+    if (JxlDecoderSetImageOutBuffer(decoder, &format, buffer.data(), buffer.size()) != JXL_DEC_SUCCESS) {
+      JxlDecoderDestroy(decoder);
+      throw std::runtime_error("JxlDecoderSetImageOutBuffer failed");
+    }
+
+    if (JxlDecoderProcessInput(decoder) != JXL_DEC_FULL_IMAGE) {
+      JxlDecoderDestroy(decoder);
+      throw std::runtime_error("JxlDecoderProcessInput failed");
+    }
+
+    JxlDecoderDestroy(decoder);
+
+    return ImageDataLike{
+        std::make_unsigned_t<std::uint32_t>(info.xsize),
+        std::make_unsigned_t<std::uint32_t>(info.ysize),
+        Uint8ClampedArray.new_(emscripten::typed_memory_view(buffer.size(), buffer.data()))};
+  } catch (std::exception &e) {
+    std::cerr << e.what() << std::endl;
+    return ImageDataLike{0, 0, Uint8ClampedArray.new_()};
+  }
+}
+
 ImageDataLike decode_webp(std::string bytes) {
   try {
     WebPDecoderConfig config;
@@ -151,5 +204,6 @@ EMSCRIPTEN_BINDINGS(Util) {
       .field("data", &ImageDataLike::data);
   emscripten::function("_decode_png", &decode_png);
   emscripten::function("_decode_jpeg", &decode_jpeg);
+  emscripten::function("_decode_jpegxl", &decode_jpegxl);
   emscripten::function("_decode_webp", &decode_webp);
 }

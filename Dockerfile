@@ -31,6 +31,24 @@ RUN emconfigure ./configure \
 RUN emmake make -j"$(nproc)" install
 RUN pkg-config --static --exists --print-errors zlib
 
+# Build brotli
+ARG BROTLI_TREEISH=v1.1.0
+ARG BROTLI_REMOTE=https://github.com/google/brotli.git
+WORKDIR ${BUILDDIR}/dep/brotli/
+RUN git clone "${BROTLI_REMOTE:?}" ./ \
+	&& git checkout "${BROTLI_TREEISH:?}" \
+	&& git submodule update --init --recursive
+RUN emcmake cmake -G 'Ninja' -S ./ -B ./build/ \
+		-D CMAKE_INSTALL_PREFIX="${SYSROOT:?}" \
+		-D CMAKE_INSTALL_LIBDIR="${SYSROOT:?}"/lib \
+		-D CMAKE_FIND_ROOT_PATH="${SYSROOT:?}" \
+		-D CMAKE_FIND_ROOT_PATH_MODE_PACKAGE=BOTH \
+		-D CMAKE_BUILD_TYPE=Release \
+		-D BUILD_TESTING=OFF \
+		-D BUILD_SHARED_LIBS=OFF
+RUN emmake ninja -C ./build/ install
+RUN pkg-config --static --exists --print-errors libbrotlidec
+
 # Build libffi
 ARG LIBFFI_TREEISH=v3.4.6
 ARG LIBFFI_REMOTE=https://github.com/libffi/libffi.git
@@ -77,6 +95,24 @@ RUN emconfigure meson setup ./build/ \
 RUN emmake ninja -C ./build/ install
 RUN pkg-config --static --exists --print-errors glib-2.0
 
+# Build highway
+ARG HIGHWAY_TREEISH=1.2.0
+ARG HIGHWAY_REMOTE=https://github.com/google/highway.git
+WORKDIR ${BUILDDIR}/dep/highway/
+RUN git clone "${HIGHWAY_REMOTE:?}" ./ \
+	&& git checkout "${HIGHWAY_TREEISH:?}" \
+	&& git submodule update --init --recursive
+RUN emcmake cmake -G 'Ninja' -S ./ -B ./build/ \
+		-D CMAKE_INSTALL_PREFIX="${SYSROOT:?}" \
+		-D CMAKE_INSTALL_LIBDIR="${SYSROOT:?}"/lib \
+		-D CMAKE_FIND_ROOT_PATH="${SYSROOT:?}" \
+		-D CMAKE_FIND_ROOT_PATH_MODE_PACKAGE=BOTH \
+		-D CMAKE_BUILD_TYPE=Release \
+		-D BUILD_TESTING=OFF \
+		-D BUILD_SHARED_LIBS=OFF
+RUN emmake ninja -C ./build/ install
+RUN pkg-config --static --exists --print-errors libhwy
+
 # Build libpng
 ARG LIBPNG_TREEISH=v1.6.43
 ARG LIBPNG_REMOTE=https://github.com/glennrp/libpng.git
@@ -116,6 +152,37 @@ RUN emcmake cmake -G 'Ninja' -S ./ -B ./build/ \
 		-D ENABLE_SHARED=OFF
 RUN emmake ninja -C ./build/ install
 RUN pkg-config --static --exists --print-errors libjpeg
+
+# Build libjxl
+ARG LIBJXL_TREEISH=v0.10.3
+ARG LIBJXL_REMOTE=https://github.com/libjxl/libjxl.git
+WORKDIR ${BUILDDIR}/dep/libjxl/
+RUN git clone "${LIBJXL_REMOTE:?}" ./ \
+	&& git checkout "${LIBJXL_TREEISH:?}" \
+	&& git submodule update --init --recursive
+RUN emcmake cmake -G 'Ninja' -S ./ -B ./build/ \
+		-D CMAKE_INSTALL_PREFIX="${SYSROOT:?}" \
+		-D CMAKE_INSTALL_LIBDIR="${SYSROOT:?}"/lib \
+		-D CMAKE_FIND_ROOT_PATH="${SYSROOT:?}" \
+		-D CMAKE_FIND_ROOT_PATH_MODE_PACKAGE=BOTH \
+		-D CMAKE_BUILD_TYPE=Release \
+		-D BUILD_TESTING=OFF \
+		-D JPEGXL_STATIC=ON \
+		-D JPEGXL_FORCE_SYSTEM_BROTLI=ON \
+		-D JPEGXL_FORCE_SYSTEM_HWY=ON \
+		-D JPEGXL_BUNDLE_LIBPNG=OFF \
+		-D JPEGXL_ENABLE_JPEGLI=OFF \
+		-D JPEGXL_ENABLE_MANPAGES=OFF \
+		-D JPEGXL_ENABLE_DOXYGEN=OFF \
+		-D JPEGXL_ENABLE_TOOLS=OFF \
+		-D JPEGXL_ENABLE_VIEWERS=OFF \
+		-D JPEGXL_ENABLE_DEVTOOLS=OFF \
+		-D JPEGXL_ENABLE_EXAMPLES=OFF \
+		-D JPEGXL_ENABLE_COVERAGE=OFF \
+		-D JPEGXL_ENABLE_FUZZERS=OFF \
+		-D JPEGXL_ENABLE_BENCHMARK=OFF
+RUN emmake ninja -C ./build/ install
+RUN pkg-config --static --exists --print-errors libjxl
 
 # Build libwebp
 ARG LIBWEBP_TREEISH=v1.4.0
@@ -179,10 +246,14 @@ RUN em++ ${CPPFLAGS-} ${CXXFLAGS-} ${LDFLAGS-} \
 		-L"${SYSROOT:?}"/lib \
 		-I"${SYSROOT:?}"/lib/glib-2.0/include \
 		-lembind -lchafa -lglib-2.0 \
+		$(pkg-config --libs --cflags zlib) \
+		$(pkg-config --libs --cflags libbrotlicommon) \
+		$(pkg-config --libs --cflags libbrotlidec) \
+		$(pkg-config --libs --cflags libhwy) \
 		$(pkg-config --libs --cflags libpng) \
 		$(pkg-config --libs --cflags libjpeg) \
+		$(pkg-config --libs --cflags libjxl) \
 		$(pkg-config --libs --cflags libwebp) \
-		$(pkg-config --libs --cflags zlib) \
 		-s ENVIRONMENT=web,worker,node \
 		-s MODULARIZE=1 \
 		-s EXPORT_ES6=1 \

@@ -1,10 +1,18 @@
 /* global Module */
 
-const fileSignatures = {
-  "png": [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a],
-  "jpeg": [0xff, 0xd8, 0xff],
-  "webp": [0x52, 0x49, 0x46, 0x46],
-};
+/** @type {[number[], string][]} */
+const signatures = [
+  // PNG
+  [[0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a], "_decode_png"],
+  // JPEG
+  [[0xff, 0xd8], "_decode_jpeg"],
+  // JPEG XL (codestream)
+  [[0xff, 0x0a], "_decode_jpegxl"],
+  // JPEG XL (container)
+  [[0x00, 0x00, 0x00, 0x0c, 0x4a, 0x58, 0x4c, 0x20, 0x0d, 0x0a, 0x87, 0x0a], "_decode_jpegxl"],
+  // WebP
+  [[0x52, 0x49, 0x46, 0x46], "_decode_webp"],
+];
 
 const emptyImageData = { width: 0, height: 0, data: new Uint8ClampedArray() };
 
@@ -13,24 +21,12 @@ Module["decodeImage"] = (image, callback) => {
     try {
       let imageData;
 
-      if (!imageData && image.byteLength >= fileSignatures.png.length) {
-        const signature = new Uint8ClampedArray(image, 0, fileSignatures.png.length);
-        if (signature.every((b, i) => b === fileSignatures.png[i])) {
-          imageData = Module["_decode_png"](image);
-        }
-      }
-
-      if (!imageData && image.byteLength >= fileSignatures.jpeg.length) {
-        const signature = new Uint8ClampedArray(image, 0, fileSignatures.jpeg.length);
-        if (signature.every((b, i) => b === fileSignatures.jpeg[i])) {
-          imageData = Module["_decode_jpeg"](image);
-        }
-      }
-
-      if (!imageData && image.byteLength >= fileSignatures.webp.length) {
-        const signature = new Uint8ClampedArray(image, 0, fileSignatures.webp.length);
-        if (signature.every((b, i) => b === fileSignatures.webp[i])) {
-          imageData = Module["_decode_webp"](image);
+      for (const [signature, decoder] of signatures) {
+        if (image.byteLength < signature.length) continue;
+        const header = new Uint8ClampedArray(image, 0, signature.length);
+        if (header.every((b, i) => b === signature[i])) {
+          imageData = Module[decoder](image);
+          break;
         }
       }
 
@@ -39,8 +35,7 @@ Module["decodeImage"] = (image, callback) => {
         return;
       }
 
-      callback(new Error("Failed to decode image"), emptyImageData);
-      return;
+      throw new Error("Failed to decode image");
     } catch (error) {
       callback(error, emptyImageData);
       return;
