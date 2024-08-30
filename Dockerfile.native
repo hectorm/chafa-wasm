@@ -113,7 +113,7 @@ RUN pkg-config --static --exists --print-errors libjpeg
 
 # Build libwebp
 ARG LIBWEBP_TREEISH=v1.4.0
-ARG LIBWEBP_REMOTE=https://chromium.googlesource.com/webm/libwebp.git
+ARG LIBWEBP_REMOTE=https://github.com/webmproject/libwebp.git
 WORKDIR ${BUILDDIR}/dep/libwebp/
 RUN git clone "${LIBWEBP_REMOTE:?}" ./ \
 	&& git checkout "${LIBWEBP_TREEISH:?}" \
