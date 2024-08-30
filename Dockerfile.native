@@ -13,7 +13,7 @@ ENV PKG_CONFIG_PATH=${PKG_CONFIG_LIBDIR}
 ENV CPPFLAGS='-Wdate-time'
 ENV CFLAGS='-O3 -fPIC -frandom-seed=42 -Wall -Wextra -Wformat -Werror=format-security'
 ENV CXXFLAGS=${CFLAGS}
-ENV LDFLAGS=''
+ENV LDFLAGS='-fuse-ld=mold'
 
 # Build zlib
 ARG ZLIB_TREEISH=v1.3.1
