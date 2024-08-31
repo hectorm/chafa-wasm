@@ -14,7 +14,7 @@ interface ChafaModule {
    * If an already decoded image is specified, it will be left as is.
    */
   decodeImage: {
-    (image: ArrayBuffer | ImageDataLike, callback: Callback<ImageDataLike>): void;
+    (image: ArrayBufferLike | ImageDataLike, callback: Callback<ImageDataLike>): void;
   };
 
   /**
@@ -22,7 +22,7 @@ interface ChafaModule {
    */
   imageToCanvas: {
     (
-      image: ArrayBuffer | ImageDataLike,
+      image: ArrayBufferLike | ImageDataLike,
       config: PartialChafaConfig,
       callback: Callback<{ canvas: number; config: ReadonlyChafaConfig | null }>,
     ): void;
@@ -33,7 +33,7 @@ interface ChafaModule {
    */
   imageToMatrix: {
     (
-      image: ArrayBuffer | ImageDataLike,
+      image: ArrayBufferLike | ImageDataLike,
       config: PartialChafaConfig,
       callback: Callback<{ matrix: number[][][]; config: ReadonlyChafaConfig | null }>,
     ): void;
@@ -44,7 +44,7 @@ interface ChafaModule {
    */
   imageToAnsi: {
     (
-      image: ArrayBuffer | ImageDataLike,
+      image: ArrayBufferLike | ImageDataLike,
       config: PartialChafaConfig,
       callback: Callback<{ ansi: string; config: ReadonlyChafaConfig | null }>,
     ): void;
@@ -55,7 +55,7 @@ interface ChafaModule {
    */
   imageToHtml: {
     (
-      image: ArrayBuffer | ImageDataLike,
+      image: ArrayBufferLike | ImageDataLike,
       config: PartialChafaConfig,
       callback: Callback<{ html: string; config: ReadonlyChafaConfig | null }>,
     ): void;
@@ -66,7 +66,7 @@ interface ChafaModule {
    */
   imageToConsoleLogArgs: {
     (
-      image: ArrayBuffer | ImageDataLike,
+      image: ArrayBufferLike | ImageDataLike,
       config: PartialChafaConfig,
       callback: Callback<{ args: string[]; config: ReadonlyChafaConfig | null }>,
     ): void;

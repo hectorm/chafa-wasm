@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { test, describe, it } from "node:test";
 import assert from "node:assert/strict";
 
@@ -11,6 +10,7 @@ globalThis.assertMatch = assert.match;
 globalThis.assertThrows = assert.throws;
 globalThis.assertRejects = assert.rejects;
 
+// @ts-ignore
 import Chafa from "../dist/chafa.js";
 
 globalThis.Chafa = Chafa;

@@ -4,7 +4,7 @@ const describe = globalThis.describe;
 const it = globalThis.it;
 /** @type {(a: unknown, b: unknown) => void} */
 const assertEquals = globalThis.assertEquals;
-/** @type {(a: () => Promise<unknown>) => Promise<void>} */
+/** @type {(a: () => Promise<unknown>) => void} */
 const assertRejects = globalThis.assertRejects;
 /** @type {ChafaFactory} */
 const Chafa = globalThis.Chafa;

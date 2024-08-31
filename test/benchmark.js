@@ -34,7 +34,7 @@ if (isMainThread) {
   }
 } else {
   /** @type {ChafaFactory} */
-  // @ts-expect-error
+  // @ts-ignore
   const Chafa = (await import("../dist/chafa.js")).default;
 
   const chafa = await Chafa();

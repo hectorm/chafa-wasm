@@ -1,6 +1,6 @@
 /// <reference lib="webworker" />
 
-// @ts-expect-error
+// @ts-ignore
 import moduleFactory from "../../dist/chafa.js";
 
 (() => {
