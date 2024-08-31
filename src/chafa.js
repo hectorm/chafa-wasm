@@ -1,17 +1,16 @@
 /* global Module */
 
-/** @type {[number[], string][]} */
 const signatures = [
   // PNG
-  [[0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a], "_decode_png"],
+  { sig: [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a], dec: "_decode_png" },
   // JPEG
-  [[0xff, 0xd8], "_decode_jpeg"],
+  { sig: [0xff, 0xd8], dec: "_decode_jpeg" },
   // JPEG XL (codestream)
-  [[0xff, 0x0a], "_decode_jpegxl"],
+  { sig: [0xff, 0x0a], dec: "_decode_jpegxl" },
   // JPEG XL (container)
-  [[0x00, 0x00, 0x00, 0x0c, 0x4a, 0x58, 0x4c, 0x20, 0x0d, 0x0a, 0x87, 0x0a], "_decode_jpegxl"],
+  { sig: [0x00, 0x00, 0x00, 0x0c, 0x4a, 0x58, 0x4c, 0x20, 0x0d, 0x0a, 0x87, 0x0a], dec: "_decode_jpegxl" },
   // WebP
-  [[0x52, 0x49, 0x46, 0x46], "_decode_webp"],
+  { sig: [0x52, 0x49, 0x46, 0x46], dec: "_decode_webp" },
 ];
 
 const emptyImageData = { width: 0, height: 0, data: new Uint8ClampedArray() };
@@ -21,11 +20,11 @@ Module["decodeImage"] = (image, callback) => {
     try {
       let imageData;
 
-      for (const [signature, decoder] of signatures) {
-        if (image.byteLength < signature.length) continue;
-        const header = new Uint8ClampedArray(image, 0, signature.length);
-        if (header.every((b, i) => b === signature[i])) {
-          imageData = Module[decoder](image);
+      for (const { sig, dec } of signatures) {
+        if (image.byteLength < sig.length) continue;
+        const header = new Uint8ClampedArray(image, 0, sig.length);
+        if (header.every((b, i) => b === sig[i])) {
+          imageData = Module[dec](image);
           break;
         }
       }
