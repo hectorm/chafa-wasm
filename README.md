@@ -35,20 +35,22 @@ const imageToAnsi = promisify(chafa.imageToAnsi);
 
 const image = await fs.readFile("./example.png");
 const { ansi } = await imageToAnsi(image.buffer, {
-  width: 80,
+  // Default values:
+  format: chafa.ChafaPixelMode.CHAFA_PIXEL_MODE_SYMBOLS.value,
+  height: 25,
   fontRatio: 0.5,
-  colors: 0,
-  colorExtractor: 0,
-  colorSpace: 0,
+  colors: chafa.ChafaCanvasMode.CHAFA_CANVAS_MODE_TRUECOLOR.value,
+  colorExtractor: chafa.ChafaColorExtractor.CHAFA_COLOR_EXTRACTOR_AVERAGE.value,
+  colorSpace: chafa.ChafaColorSpace.CHAFA_COLOR_SPACE_RGB.value,
   symbols: "block+border+space-wide-inverted",
   fill: "none",
   fg: 0xffffff,
   bg: 0x000000,
   fgOnly: false,
-  dither: 0,
+  dither: chafa.ChafaDitherMode.CHAFA_DITHER_MODE_NONE.value,
   ditherGrainWidth: 4,
   ditherGrainHeight: 4,
-  ditherIntensity: 1,
+  ditherIntensity: 1.0,
   preprocess: true,
   threshold: 0.5,
   optimize: 5,
