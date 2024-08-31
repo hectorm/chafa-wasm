@@ -17,18 +17,25 @@ ENV CFLAGS='-O3 -fwasm-exceptions -frandom-seed=42 -Wall -Wextra -Wformat -Werro
 ENV CXXFLAGS=${CFLAGS}
 ENV LDFLAGS='-fwasm-exceptions'
 
-# Build zlib
-ARG ZLIB_TREEISH=v1.3.1
-ARG ZLIB_REMOTE=https://github.com/madler/zlib.git
-WORKDIR ${BUILDDIR}/dep/zlib/
-RUN git clone "${ZLIB_REMOTE:?}" ./ \
-	&& git checkout "${ZLIB_TREEISH:?}" \
+# Build zlib-ng
+ARG ZLIB_NG_TREEISH=2.2.1
+ARG ZLIB_NG_REMOTE=https://github.com/zlib-ng/zlib-ng.git
+WORKDIR ${BUILDDIR}/dep/zlib-ng/
+RUN git clone "${ZLIB_NG_REMOTE:?}" ./ \
+	&& git checkout "${ZLIB_NG_TREEISH:?}" \
 	&& git submodule update --init --recursive
-RUN emconfigure ./configure \
-		--prefix="${SYSROOT:?}" \
-		--libdir="${SYSROOT:?}"/lib \
-		--static
-RUN emmake make -j"$(nproc)" install
+RUN emcmake cmake -G 'Ninja' -S ./ -B ./build/ \
+	-D CMAKE_INSTALL_PREFIX="${SYSROOT:?}" \
+	-D CMAKE_INSTALL_LIBDIR="${SYSROOT:?}"/lib \
+	-D CMAKE_FIND_ROOT_PATH="${SYSROOT:?}" \
+	-D CMAKE_FIND_ROOT_PATH_MODE_PACKAGE=BOTH \
+	-D CMAKE_BUILD_TYPE=Release \
+	-D BUILD_TESTING=OFF \
+	-D BUILD_SHARED_LIBS=OFF \
+	-D ZLIB_COMPAT=ON \
+	-D ZLIB_ENABLE_TESTS=OFF \
+	-D ZLIBNG_ENABLE_TESTS=OFF
+RUN emmake ninja -C ./build/ install
 RUN pkg-config --static --exists --print-errors zlib
 
 # Build brotli
