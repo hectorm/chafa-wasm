@@ -41,9 +41,7 @@ jobs:
       - name: "Build module"
         run: "npm run build:wasm:docker -- --pull --cache-from type=gha --cache-to type=gha,mode=max"
       - name: "Build types"
-        run: "npm run types"
-      - name: "Lint"
-        run: "npm run lint"
+        run: "npm run build:types"
       - name: "Build docs"
         run: "npm run docs"
       - name: "Build demo"
@@ -53,6 +51,8 @@ jobs:
           sed -ri 's|"[^"]+/(chafa\.js)"|"../dist/\1"|' ./demo/js/worker.js
           find ./demo/ -type f -not -perm 0644 -exec chmod 0644 '{}' '+'
           find ./demo/ -type d -not -perm 0755 -exec chmod 0755 '{}' '+'
+      - name: "Lint"
+        run: "npm run lint"
       - name: "Upload module artifact"
         uses: "actions/upload-artifact@834a144ee995460fba8ed112a2fc961b36a5ec5a"
         with:
