@@ -73,8 +73,8 @@ Module["imageToCanvas"] = (image, partialConfig, callback) => {
 
     config["format"] =
       partialConfig["format"] != null
-        ? Module["ChafaPixelMode"][partialConfig["format"]]?.value ??
-          Module["ChafaPixelMode"].values[partialConfig["format"]]?.value
+        ? (Module["ChafaPixelMode"][partialConfig["format"]]?.value ??
+          Module["ChafaPixelMode"].values[partialConfig["format"]]?.value)
         : Module["ChafaPixelMode"]["CHAFA_PIXEL_MODE_SYMBOLS"].value;
 
     if (config["format"] == null) {
@@ -141,8 +141,8 @@ Module["imageToCanvas"] = (image, partialConfig, callback) => {
 
     config["colors"] =
       partialConfig["colors"] != null
-        ? Module["ChafaCanvasMode"][partialConfig["colors"]]?.value ??
-          Module["ChafaCanvasMode"].values[partialConfig["colors"]]?.value
+        ? (Module["ChafaCanvasMode"][partialConfig["colors"]]?.value ??
+          Module["ChafaCanvasMode"].values[partialConfig["colors"]]?.value)
         : Module["ChafaCanvasMode"]["CHAFA_CANVAS_MODE_TRUECOLOR"].value;
 
     if (config["colors"] == null) {
@@ -152,8 +152,8 @@ Module["imageToCanvas"] = (image, partialConfig, callback) => {
 
     config["colorExtractor"] =
       partialConfig["colorExtractor"] != null
-        ? Module["ChafaColorExtractor"][partialConfig["colorExtractor"]]?.value ??
-          Module["ChafaColorExtractor"].values[partialConfig["colorExtractor"]]?.value
+        ? (Module["ChafaColorExtractor"][partialConfig["colorExtractor"]]?.value ??
+          Module["ChafaColorExtractor"].values[partialConfig["colorExtractor"]]?.value)
         : Module["ChafaColorExtractor"]["CHAFA_COLOR_EXTRACTOR_AVERAGE"].value;
 
     if (config["colorExtractor"] == null) {
@@ -163,8 +163,8 @@ Module["imageToCanvas"] = (image, partialConfig, callback) => {
 
     config["colorSpace"] =
       partialConfig["colorSpace"] != null
-        ? Module["ChafaColorSpace"][partialConfig["colorSpace"]]?.value ??
-          Module["ChafaColorSpace"].values[partialConfig["colorSpace"]]?.value
+        ? (Module["ChafaColorSpace"][partialConfig["colorSpace"]]?.value ??
+          Module["ChafaColorSpace"].values[partialConfig["colorSpace"]]?.value)
         : Module["ChafaColorSpace"]["CHAFA_COLOR_SPACE_RGB"].value;
 
     if (config["colorSpace"] == null) {
@@ -223,8 +223,8 @@ Module["imageToCanvas"] = (image, partialConfig, callback) => {
 
     config["dither"] =
       partialConfig["dither"] != null
-        ? Module["ChafaDitherMode"][partialConfig["dither"]]?.value ??
-          Module["ChafaDitherMode"].values[partialConfig["dither"]]?.value
+        ? (Module["ChafaDitherMode"][partialConfig["dither"]]?.value ??
+          Module["ChafaDitherMode"].values[partialConfig["dither"]]?.value)
         : Module["ChafaDitherMode"]["CHAFA_DITHER_MODE_NONE"].value;
 
     if (config["dither"] == null) {
