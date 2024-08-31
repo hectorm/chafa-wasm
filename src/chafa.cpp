@@ -7,7 +7,7 @@
 
 #include <jpeglib.h>
 #include <jxl/decode.h>
-#include <png.h>
+#include <spng.h>
 #include <webp/decode.h>
 
 #include <emscripten/bind.h>
@@ -25,29 +25,39 @@ struct ImageDataLike {
 
 ImageDataLike decode_png(std::string bytes) {
   try {
-    png_image image;
-
-    memset(&image, 0, sizeof(image));
-    image.version = PNG_IMAGE_VERSION;
-
-    if (png_image_begin_read_from_memory(&image, bytes.c_str(), bytes.size()) == 0) {
-      png_image_free(&image);
-      throw std::runtime_error("png_image_begin_read_from_memory failed");
+    spng_ctx *ctx = spng_ctx_new(0);
+    if (ctx == nullptr) {
+      throw std::runtime_error("spng_ctx_new failed");
     }
 
-    image.format = PNG_FORMAT_RGBA;
-
-    std::vector<std::uint8_t> buffer(PNG_IMAGE_SIZE(image));
-    if (png_image_finish_read(&image, nullptr, buffer.data(), 0, nullptr) == 0) {
-      png_image_free(&image);
-      throw std::runtime_error("png_image_finish_read failed");
+    if (spng_set_png_buffer(ctx, reinterpret_cast<const std::uint8_t *>(bytes.c_str()), bytes.size()) != SPNG_OK) {
+      spng_ctx_free(ctx);
+      throw std::runtime_error("spng_set_png_buffer failed");
     }
 
-    png_image_free(&image);
+    size_t out_size{};
+    if (spng_decoded_image_size(ctx, SPNG_FMT_RGBA8, &out_size) != SPNG_OK) {
+      spng_ctx_free(ctx);
+      throw std::runtime_error("spng_decoded_image_size failed");
+    }
+
+    std::vector<std::uint8_t> buffer(out_size);
+    if (spng_decode_image(ctx, buffer.data(), out_size, SPNG_FMT_RGBA8, 0) != SPNG_OK) {
+      spng_ctx_free(ctx);
+      throw std::runtime_error("spng_decode_image failed");
+    }
+
+    spng_ihdr ihdr{};
+    if (spng_get_ihdr(ctx, &ihdr) != SPNG_OK) {
+      spng_ctx_free(ctx);
+      throw std::runtime_error("spng_get_ihdr failed");
+    }
+
+    spng_ctx_free(ctx);
 
     return ImageDataLike{
-        std::make_unsigned_t<std::uint32_t>(image.width),
-        std::make_unsigned_t<std::uint32_t>(image.height),
+        std::make_unsigned_t<std::uint32_t>(ihdr.width),
+        std::make_unsigned_t<std::uint32_t>(ihdr.height),
         Uint8ClampedArray.new_(emscripten::typed_memory_view(buffer.size(), buffer.data()))};
   } catch (std::exception &e) {
     std::cerr << e.what() << std::endl;

@@ -120,12 +120,12 @@ RUN emcmake cmake -G 'Ninja' -S ./ -B ./build/ \
 RUN emmake ninja -C ./build/ install
 RUN pkg-config --static --exists --print-errors libhwy
 
-# Build libpng
-ARG LIBPNG_TREEISH=v1.6.43
-ARG LIBPNG_REMOTE=https://github.com/glennrp/libpng.git
-WORKDIR ${BUILDDIR}/dep/libpng/
-RUN git clone "${LIBPNG_REMOTE:?}" ./ \
-	&& git checkout "${LIBPNG_TREEISH:?}" \
+# Build libspng
+ARG LIBSPNG_TREEISH=v0.7.4
+ARG LIBSPNG_REMOTE=https://github.com/randy408/libspng.git
+WORKDIR ${BUILDDIR}/dep/libspng/
+RUN git clone "${LIBSPNG_REMOTE:?}" ./ \
+	&& git checkout "${LIBSPNG_TREEISH:?}" \
 	&& git submodule update --init --recursive
 RUN emcmake cmake -G 'Ninja' -S ./ -B ./build/ \
 		-D CMAKE_INSTALL_PREFIX="${SYSROOT:?}" \
@@ -134,12 +134,11 @@ RUN emcmake cmake -G 'Ninja' -S ./ -B ./build/ \
 		-D CMAKE_FIND_ROOT_PATH_MODE_PACKAGE=BOTH \
 		-D CMAKE_BUILD_TYPE=Release \
 		-D BUILD_TESTING=OFF \
-		-D PNG_STATIC=ON \
-		-D PNG_SHARED=OFF \
-		-D PNG_TOOLS=OFF \
-		-D PNG_TESTS=OFF
+		-D SPNG_STATIC=ON \
+		-D SPNG_SHARED=OFF \
+		-D BUILD_EXAMPLES=OFF
 RUN emmake ninja -C ./build/ install
-RUN pkg-config --static --exists --print-errors libpng
+RUN pkg-config --static --exists --print-errors libspng_static
 
 # Build libjpeg-turbo
 ARG LIBJPEG_TURBO_TREEISH=3.0.3
@@ -257,7 +256,7 @@ RUN em++ ${CPPFLAGS-} ${CXXFLAGS-} ${LDFLAGS-} \
 		$(pkg-config --libs --cflags libbrotlicommon) \
 		$(pkg-config --libs --cflags libbrotlidec) \
 		$(pkg-config --libs --cflags libhwy) \
-		$(pkg-config --libs --cflags libpng) \
+		$(pkg-config --libs --cflags libspng_static) \
 		$(pkg-config --libs --cflags libjpeg) \
 		$(pkg-config --libs --cflags libjxl) \
 		$(pkg-config --libs --cflags libwebp) \
