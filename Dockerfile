@@ -13,7 +13,7 @@ ENV PKG_CONFIG_PATH=${PKG_CONFIG_LIBDIR}
 ENV EM_PKG_CONFIG_PATH=${PKG_CONFIG_LIBDIR}
 ENV CHOST=wasm32-unknown-emscripten
 ENV CPPFLAGS='-Wdate-time'
-ENV CFLAGS='-O3 -fwasm-exceptions -frandom-seed=42 -Wall -Wextra -Wformat -Werror=format-security'
+ENV CFLAGS='-O3 -msimd128 -fwasm-exceptions -frandom-seed=42 -Wall -Wextra -Wformat -Werror=format-security'
 ENV CXXFLAGS=${CFLAGS}
 ENV LDFLAGS='-fwasm-exceptions'
 
@@ -30,11 +30,14 @@ RUN emcmake cmake -G 'Ninja' -S ./ -B ./build/ \
 	-D CMAKE_FIND_ROOT_PATH="${SYSROOT:?}" \
 	-D CMAKE_FIND_ROOT_PATH_MODE_PACKAGE=BOTH \
 	-D CMAKE_BUILD_TYPE=Release \
-	-D BUILD_TESTING=OFF \
 	-D BUILD_SHARED_LIBS=OFF \
 	-D ZLIB_COMPAT=ON \
 	-D ZLIB_ENABLE_TESTS=OFF \
-	-D ZLIBNG_ENABLE_TESTS=OFF
+	-D ZLIBNG_ENABLE_TESTS=OFF \
+	-D WITH_GTEST=OFF \
+	-D WITH_RUNTIME_CPU_DETECTION=OFF \
+	-D BASEARCH_X86_FOUND=ON \
+	-D FORCE_SSE2=ON
 RUN emmake ninja -C ./build/ install
 RUN pkg-config --static --exists --print-errors zlib
 
@@ -51,8 +54,8 @@ RUN emcmake cmake -G 'Ninja' -S ./ -B ./build/ \
 		-D CMAKE_FIND_ROOT_PATH="${SYSROOT:?}" \
 		-D CMAKE_FIND_ROOT_PATH_MODE_PACKAGE=BOTH \
 		-D CMAKE_BUILD_TYPE=Release \
-		-D BUILD_TESTING=OFF \
-		-D BUILD_SHARED_LIBS=OFF
+		-D BUILD_SHARED_LIBS=OFF \
+		-D BUILD_TESTING=OFF
 RUN emmake ninja -C ./build/ install
 RUN pkg-config --static --exists --print-errors libbrotlidec
 
@@ -115,8 +118,8 @@ RUN emcmake cmake -G 'Ninja' -S ./ -B ./build/ \
 		-D CMAKE_FIND_ROOT_PATH="${SYSROOT:?}" \
 		-D CMAKE_FIND_ROOT_PATH_MODE_PACKAGE=BOTH \
 		-D CMAKE_BUILD_TYPE=Release \
-		-D BUILD_TESTING=OFF \
-		-D BUILD_SHARED_LIBS=OFF
+		-D BUILD_SHARED_LIBS=OFF \
+		-D BUILD_TESTING=OFF
 RUN emmake ninja -C ./build/ install
 RUN pkg-config --static --exists --print-errors libhwy
 
@@ -133,7 +136,7 @@ RUN emcmake cmake -G 'Ninja' -S ./ -B ./build/ \
 		-D CMAKE_FIND_ROOT_PATH="${SYSROOT:?}" \
 		-D CMAKE_FIND_ROOT_PATH_MODE_PACKAGE=BOTH \
 		-D CMAKE_BUILD_TYPE=Release \
-		-D BUILD_TESTING=OFF \
+		-D CMAKE_C_FLAGS="${CFLAGS:-} -msse4.2 -DSPNG_SSE=4 -D__x86_64__" \
 		-D SPNG_STATIC=ON \
 		-D SPNG_SHARED=OFF \
 		-D BUILD_EXAMPLES=OFF
@@ -153,11 +156,11 @@ RUN emcmake cmake -G 'Ninja' -S ./ -B ./build/ \
 		-D CMAKE_FIND_ROOT_PATH="${SYSROOT:?}" \
 		-D CMAKE_FIND_ROOT_PATH_MODE_PACKAGE=BOTH \
 		-D CMAKE_BUILD_TYPE=Release \
-		-D BUILD_TESTING=OFF \
 		-D ENABLE_STATIC=ON \
 		-D ENABLE_SHARED=OFF \
 		-D WITH_JPEG8=ON \
-		-D WITH_TURBOJPEG=OFF
+		-D WITH_TURBOJPEG=OFF \
+		-D WITH_SIMD=0
 RUN emmake ninja -C ./build/ install
 RUN pkg-config --static --exists --print-errors libjpeg
 
@@ -174,7 +177,6 @@ RUN emcmake cmake -G 'Ninja' -S ./ -B ./build/ \
 		-D CMAKE_FIND_ROOT_PATH="${SYSROOT:?}" \
 		-D CMAKE_FIND_ROOT_PATH_MODE_PACKAGE=BOTH \
 		-D CMAKE_BUILD_TYPE=Release \
-		-D BUILD_TESTING=OFF \
 		-D JPEGXL_STATIC=ON \
 		-D JPEGXL_FORCE_SYSTEM_BROTLI=ON \
 		-D JPEGXL_FORCE_SYSTEM_HWY=ON \
@@ -188,7 +190,8 @@ RUN emcmake cmake -G 'Ninja' -S ./ -B ./build/ \
 		-D JPEGXL_ENABLE_EXAMPLES=OFF \
 		-D JPEGXL_ENABLE_COVERAGE=OFF \
 		-D JPEGXL_ENABLE_FUZZERS=OFF \
-		-D JPEGXL_ENABLE_BENCHMARK=OFF
+		-D JPEGXL_ENABLE_BENCHMARK=OFF \
+		-D BUILD_TESTING=OFF
 RUN emmake ninja -C ./build/ install
 RUN pkg-config --static --exists --print-errors libjxl
 
@@ -205,16 +208,17 @@ RUN emcmake cmake -G 'Ninja' -S ./ -B ./build/ \
 		-D CMAKE_FIND_ROOT_PATH="${SYSROOT:?}" \
 		-D CMAKE_FIND_ROOT_PATH_MODE_PACKAGE=BOTH \
 		-D CMAKE_BUILD_TYPE=Release \
-		-D BUILD_TESTING=OFF \
 		-D BUILD_SHARED_LIBS=OFF \
+		-D WEBP_ENABLE_SIMD=ON \
 		-D WEBP_USE_THREAD=OFF \
 		-D WEBP_BUILD_CWEBP=OFF \
 		-D WEBP_BUILD_DWEBP=OFF \
+		-D WEBP_BUILD_GIF2WEBP=OFF \
+		-D WEBP_BUILD_IMG2WEBP=OFF \
 		-D WEBP_BUILD_VWEBP=OFF \
 		-D WEBP_BUILD_WEBPINFO=OFF \
+		-D WEBP_BUILD_LIBWEBPMUX=OFF \
 		-D WEBP_BUILD_WEBPMUX=OFF \
-		-D WEBP_BUILD_IMG2WEBP=OFF \
-		-D WEBP_BUILD_GIF2WEBP=OFF \
 		-D WEBP_BUILD_ANIM_UTILS=OFF \
 		-D WEBP_BUILD_EXTRAS=OFF
 RUN emmake ninja -C ./build/ install
