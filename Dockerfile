@@ -155,7 +155,9 @@ RUN emcmake cmake -G 'Ninja' -S ./ -B ./build/ \
 		-D CMAKE_BUILD_TYPE=Release \
 		-D BUILD_TESTING=OFF \
 		-D ENABLE_STATIC=ON \
-		-D ENABLE_SHARED=OFF
+		-D ENABLE_SHARED=OFF \
+		-D WITH_JPEG8=ON \
+		-D WITH_TURBOJPEG=OFF
 RUN emmake ninja -C ./build/ install
 RUN pkg-config --static --exists --print-errors libjpeg
 
