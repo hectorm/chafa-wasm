@@ -113,7 +113,7 @@ const getConfig = async () => {
   /** @type {Record<string, any>} */
   const config = {};
   if (image == null) {
-    const urlParams = new URLSearchParams(location.search);
+    const urlParams = new URLSearchParams(location.hash.slice(1));
     for (const [key, value] of urlParams.entries()) {
       config[key] = value;
     }
@@ -205,7 +205,7 @@ const setConfig = async (config) => {
   }
   const urlParams = new URLSearchParams(config);
   urlParams.delete("height");
-  history.replaceState(config, "", `?${urlParams.toString()}`);
+  history.replaceState(config, "", `#${urlParams.toString()}`);
 };
 
 /** @type {(config?: Record<string, any>) => Promise<void>} */
