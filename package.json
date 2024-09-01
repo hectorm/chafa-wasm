@@ -76,7 +76,7 @@
     "@types/eslint": "~9.6.1",
     "@types/eslint-config-prettier": "~6.11.3",
     "@types/eslint__js": "~8.42.3",
-    "@types/node": "~22.5.1",
+    "@types/node": "~22.5.2",
     "chai": "~5.1.1",
     "eslint": "~9.9.1",
     "eslint-config-prettier": "~9.1.0",
