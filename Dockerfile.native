@@ -23,16 +23,16 @@ RUN git clone "${ZLIB_NG_REMOTE:?}" ./ \
 	&& git checkout "${ZLIB_NG_TREEISH:?}" \
 	&& git submodule update --init --recursive
 RUN cmake -G 'Ninja' -S ./ -B ./build/ \
-	-D CMAKE_INSTALL_PREFIX="${SYSROOT:?}" \
-	-D CMAKE_INSTALL_LIBDIR="${SYSROOT:?}"/lib \
-	-D CMAKE_FIND_ROOT_PATH="${SYSROOT:?}" \
-	-D CMAKE_FIND_ROOT_PATH_MODE_PACKAGE=BOTH \
-	-D CMAKE_BUILD_TYPE=Release \
-	-D BUILD_SHARED_LIBS=OFF \
-	-D ZLIB_COMPAT=ON \
-	-D ZLIB_ENABLE_TESTS=OFF \
-	-D ZLIBNG_ENABLE_TESTS=OFF \
-	-D WITH_GTEST=OFF
+		-D CMAKE_INSTALL_PREFIX="${SYSROOT:?}" \
+		-D CMAKE_INSTALL_LIBDIR="${SYSROOT:?}"/lib \
+		-D CMAKE_FIND_ROOT_PATH="${SYSROOT:?}" \
+		-D CMAKE_FIND_ROOT_PATH_MODE_PACKAGE=BOTH \
+		-D CMAKE_BUILD_TYPE=Release \
+		-D BUILD_SHARED_LIBS=OFF \
+		-D ZLIB_COMPAT=ON \
+		-D ZLIB_ENABLE_TESTS=OFF \
+		-D ZLIBNG_ENABLE_TESTS=OFF \
+		-D WITH_GTEST=OFF
 RUN ninja -C ./build/ install
 RUN pkg-config --static --exists --print-errors zlib
 
