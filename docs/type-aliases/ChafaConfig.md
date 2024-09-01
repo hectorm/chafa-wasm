@@ -11,10 +11,6 @@
 An object that holds the output configuration.
 Supports most of the options of the Chafa command-line utility, see its documentation for details.
 
-## See
-
-https://hpjansson.org/chafa/man/
-
 ## Type declaration
 
 ### bg
@@ -96,3 +92,7 @@ https://hpjansson.org/chafa/man/
 ### work
 
 > **work**: `number`
+
+## See
+
+https://hpjansson.org/chafa/man/

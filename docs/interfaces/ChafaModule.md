@@ -23,7 +23,7 @@ If an already decoded image is specified, it will be left as is.
 
 #### Parameters
 
-• **image**: `ArrayBuffer` \| [`ImageDataLike`](../type-aliases/ImageDataLike.md)
+• **image**: `ArrayBufferLike` \| [`ImageDataLike`](../type-aliases/ImageDataLike.md)
 
 • **callback**: [`Callback`](../type-aliases/Callback.md)\<[`ImageDataLike`](../type-aliases/ImageDataLike.md)\>
 
@@ -41,7 +41,7 @@ Converts an image into an ANSI string.
 
 #### Parameters
 
-• **image**: `ArrayBuffer` \| [`ImageDataLike`](../type-aliases/ImageDataLike.md)
+• **image**: `ArrayBufferLike` \| [`ImageDataLike`](../type-aliases/ImageDataLike.md)
 
 • **config**: [`PartialChafaConfig`](../type-aliases/PartialChafaConfig.md)
 
@@ -61,7 +61,7 @@ Converts an image into a Chafa canvas pointer.
 
 #### Parameters
 
-• **image**: `ArrayBuffer` \| [`ImageDataLike`](../type-aliases/ImageDataLike.md)
+• **image**: `ArrayBufferLike` \| [`ImageDataLike`](../type-aliases/ImageDataLike.md)
 
 • **config**: [`PartialChafaConfig`](../type-aliases/PartialChafaConfig.md)
 
@@ -81,7 +81,7 @@ Converts an image into an array of `console.log` arguments.
 
 #### Parameters
 
-• **image**: `ArrayBuffer` \| [`ImageDataLike`](../type-aliases/ImageDataLike.md)
+• **image**: `ArrayBufferLike` \| [`ImageDataLike`](../type-aliases/ImageDataLike.md)
 
 • **config**: [`PartialChafaConfig`](../type-aliases/PartialChafaConfig.md)
 
@@ -101,7 +101,7 @@ Converts an image into an HTML string.
 
 #### Parameters
 
-• **image**: `ArrayBuffer` \| [`ImageDataLike`](../type-aliases/ImageDataLike.md)
+• **image**: `ArrayBufferLike` \| [`ImageDataLike`](../type-aliases/ImageDataLike.md)
 
 • **config**: [`PartialChafaConfig`](../type-aliases/PartialChafaConfig.md)
 
@@ -121,7 +121,7 @@ Converts an image into a matrix of characters.
 
 #### Parameters
 
-• **image**: `ArrayBuffer` \| [`ImageDataLike`](../type-aliases/ImageDataLike.md)
+• **image**: `ArrayBufferLike` \| [`ImageDataLike`](../type-aliases/ImageDataLike.md)
 
 • **config**: [`PartialChafaConfig`](../type-aliases/PartialChafaConfig.md)
 
