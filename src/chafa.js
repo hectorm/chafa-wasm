@@ -13,7 +13,7 @@ const signatures = [
   { sig: [0x52, 0x49, 0x46, 0x46], dec: "_decode_webp" },
 ];
 
-const emptyImageData = { width: 0, height: 0, data: new Uint8ClampedArray() };
+const emptyImageData = { width: 0, height: 0, data: new Uint8ClampedArray(0) };
 
 Module["decodeImage"] = (image, callback) => {
   if (globalThis.ArrayBuffer && image instanceof ArrayBuffer) {

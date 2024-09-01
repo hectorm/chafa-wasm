@@ -61,7 +61,7 @@ ImageDataLike decode_png(std::string bytes) {
         Uint8ClampedArray.new_(emscripten::typed_memory_view(buffer.size(), buffer.data()))};
   } catch (std::exception &e) {
     std::cerr << e.what() << std::endl;
-    return ImageDataLike{0, 0, Uint8ClampedArray.new_()};
+    return ImageDataLike{0, 0, Uint8ClampedArray.new_(0)};
   }
 }
 
@@ -116,7 +116,7 @@ ImageDataLike decode_jpeg(std::string bytes) {
         Uint8ClampedArray.new_(emscripten::typed_memory_view(buffer.size(), buffer.data()))};
   } catch (std::exception &e) {
     std::cerr << e.what() << std::endl;
-    return ImageDataLike{0, 0, Uint8ClampedArray.new_()};
+    return ImageDataLike{0, 0, Uint8ClampedArray.new_(0)};
   }
 }
 
@@ -168,7 +168,7 @@ ImageDataLike decode_jpegxl(std::string bytes) {
         Uint8ClampedArray.new_(emscripten::typed_memory_view(buffer.size(), buffer.data()))};
   } catch (std::exception &e) {
     std::cerr << e.what() << std::endl;
-    return ImageDataLike{0, 0, Uint8ClampedArray.new_()};
+    return ImageDataLike{0, 0, Uint8ClampedArray.new_(0)};
   }
 }
 
@@ -203,7 +203,7 @@ ImageDataLike decode_webp(std::string bytes) {
         Uint8ClampedArray.new_(emscripten::typed_memory_view(buffer.size(), buffer.data()))};
   } catch (std::exception &e) {
     std::cerr << e.what() << std::endl;
-    return ImageDataLike{0, 0, Uint8ClampedArray.new_()};
+    return ImageDataLike{0, 0, Uint8ClampedArray.new_(0)};
   }
 }
 
