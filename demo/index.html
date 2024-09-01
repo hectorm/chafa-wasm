@@ -6,13 +6,16 @@
     <meta
       http-equiv="Content-Security-Policy"
       content="
-      default-src 'none';
-      connect-src 'self';
-      font-src 'self';
-      img-src 'self' data:;
-      manifest-src 'self';
-      script-src 'self' 'sha384-XiiRgIf5zQ4bHRD8h77lp8w+PAEkizITuBcqxsfIJIHIN8EPq6rX/IXz7CzbJ8/v' https://cdnjs.cloudflare.com/ajax/libs/bootstrap/;
-      style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com/ajax/libs/bootstrap/;"
+        default-src 'none';
+        font-src 'self';
+        img-src 'self' data:;
+        connect-src 'self';
+        worker-src 'self';
+        manifest-src 'self';
+        script-src-elem 'self' 'sha384-XiiRgIf5zQ4bHRD8h77lp8w+PAEkizITuBcqxsfIJIHIN8EPq6rX/IXz7CzbJ8/v' https://cdnjs.cloudflare.com/ajax/libs/bootstrap/;
+        style-src-elem 'self' 'sha384-fBcH0D+Mqn9267xWkqPrzMtuvPgtFK1cASMy5Vv+yDN3NHJTl/obqWjRw0Hk4PqU' https://cdnjs.cloudflare.com/ajax/libs/bootstrap/;
+        style-src-attr 'unsafe-inline';
+      "
     />
 
     <title>ANSI-o-Matic</title>
