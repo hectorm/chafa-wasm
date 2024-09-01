@@ -38,7 +38,7 @@
     "dist/"
   ],
   "scripts": {
-    "all": "run-s types build docs lint test",
+    "all": "run-s build docs lint test",
     "build": "run-s build:wasm build:types",
     "build:wasm": "run-s build:wasm:clean build:wasm:docker",
     "build:wasm:clean": "node --import=fs -e \"['./dist/chafa.js', './dist/chafa.wasm'].map(f => fs.rmSync(f, { force: true }))\"",
