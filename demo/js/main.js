@@ -272,11 +272,12 @@ $ansi.srcdoc = `
   <head>
     <style>
       @font-face {
-        font-family: "Iosevka Fixed SS15";
-        font-weight: 400;
-        font-style: normal;
+        font-family: "Iosevka Fixed SS15 Web";
         font-display: block;
-        src: local("Iosevka Fixed SS15"), url("./fonts/iosevka-fixed-ss15-regular-unhinted-v31.4.0.woff2") format("woff2");
+        font-weight: 400;
+        font-stretch: normal;
+        font-style: normal;
+        src: local("Iosevka Fixed SS15 Web"), url("./fonts/IosevkaFixedSS15-Regular.woff2") format("woff2");
       }
       :root, body {
         display: block;
@@ -287,7 +288,7 @@ $ansi.srcdoc = `
         box-sizing: border-box;
       }
       body {
-        font-family: "Iosevka Fixed SS15", "Iosevka Fixed", monospace;
+        font-family: "Iosevka Fixed SS15 Web", monospace;
         font-size: 14px;
         font-variant: none;
         line-height: 1;
@@ -301,7 +302,7 @@ $ansi.srcdoc = `
     </style>
   </head>
   <body>&nbsp;</body>
-`.replace(/^\s+|\s+$|\n/gm, "");
+`.replace(/^\s+|(?<=[:;,}])\s+|\s+(?=[:;,{])|\s+$|\n/gm, "");
 
 $settings.addEventListener(
   "change",
