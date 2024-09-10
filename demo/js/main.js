@@ -267,42 +267,47 @@ const copyToClipboard = async (getText) => {
   return copied;
 };
 
-$ansi.srcdoc = `
-  <!DOCTYPE html>
-  <head>
-    <style>
-      @font-face {
-        font-family: "Iosevka Fixed SS15 Web";
-        font-display: block;
-        font-weight: 400;
-        font-stretch: normal;
-        font-style: normal;
-        src: local("Iosevka Fixed SS15 Web"), url("./fonts/IosevkaFixedSS15-Regular.woff2") format("woff2");
-      }
-      :root, body {
-        display: block;
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 0.5em;
-        box-sizing: border-box;
-      }
-      body {
-        font-family: "Iosevka Fixed SS15 Web", monospace;
-        font-size: 14px;
-        font-variant: none;
-        line-height: 1;
-        white-space: pre;
-        letter-spacing: 0;
-        word-spacing: 0;
-        overflow-x: auto;
-        overflow-y: hidden;
-        contain: strict;
-      }
-    </style>
-  </head>
-  <body>&nbsp;</body>
-`.replace(/^\s+|(?<=[:;,}])\s+|\s+(?=[:;,{])|\s+$|\n/gm, "");
+// The font is loaded outside the iframe to be cached by the Service Worker
+// See: https://issues.chromium.org/issues/41411856
+fetch("./fonts/IosevkaFixedSS15-Regular.woff2").then(async (fontRes) => {
+  const fontUrl = URL.createObjectURL(await fontRes.blob());
+  $ansi.srcdoc = `
+    <!DOCTYPE html>
+    <head>
+      <style>
+        @font-face {
+          font-family: "Iosevka Fixed SS15 Web";
+          font-display: block;
+          font-weight: 400;
+          font-stretch: normal;
+          font-style: normal;
+          src: local("Iosevka Fixed SS15 Web"), url("${fontUrl}") format("woff2");
+        }
+        :root, body {
+          display: block;
+          width: 100%;
+          height: 100%;
+          margin: 0;
+          padding: 0.5em;
+          box-sizing: border-box;
+        }
+        body {
+          font-family: "Iosevka Fixed SS15 Web", monospace;
+          font-size: 14px;
+          font-variant: none;
+          line-height: 1;
+          white-space: pre;
+          letter-spacing: 0;
+          word-spacing: 0;
+          overflow-x: auto;
+          overflow-y: hidden;
+          contain: strict;
+        }
+      </style>
+    </head>
+    <body>&nbsp;</body>
+  `.replace(/^\s+|(?<=[:;,}])\s+|\s+(?=[:;,{])|\s+$|\n/gm, "");
+});
 
 $settings.addEventListener(
   "change",
