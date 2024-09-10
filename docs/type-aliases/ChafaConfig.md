@@ -21,13 +21,13 @@ Supports most of the options of the Chafa command-line utility, see its document
 
 > **colorExtractor**: `number` \| `string`
 
-### colorSpace
-
-> **colorSpace**: `number` \| `string`
-
 ### colors
 
 > **colors**: `number` \| `string`
+
+### colorSpace
+
+> **colorSpace**: `number` \| `string`
 
 ### dither
 
