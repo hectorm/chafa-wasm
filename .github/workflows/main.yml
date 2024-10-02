@@ -21,7 +21,7 @@ jobs:
       contents: "read"
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332"
+        uses: "actions/checkout@d632683dd7b4114ad314bca15554477dd762a938"
       - name: "Expose GitHub Actions variables"
         uses: "actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea"
         with:
@@ -32,7 +32,7 @@ jobs:
       - name: "Set up Docker Buildx"
         uses: "docker/setup-buildx-action@988b5a0280414f521da01fcc63a27aeeb4b104db"
       - name: "Use Node.js lts/*"
-        uses: "actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b"
+        uses: "actions/setup-node@0a44ba7841725637a19e28fa30b79a866c81b0a6"
         with:
           node-version: "lts/*"
           cache: "npm"
@@ -78,14 +78,14 @@ jobs:
         os: ["ubuntu-latest", "windows-latest", "macos-latest"]
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332"
+        uses: "actions/checkout@d632683dd7b4114ad314bca15554477dd762a938"
       - name: "Download module artifact"
         uses: "actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16"
         with:
           name: "dist"
           path: "./dist/"
       - name: "Use Node.js ${{ matrix.node_version }}"
-        uses: "actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b"
+        uses: "actions/setup-node@0a44ba7841725637a19e28fa30b79a866c81b0a6"
         with:
           node-version: "${{ matrix.node_version }}"
           cache: "npm"
@@ -107,18 +107,18 @@ jobs:
         os: ["ubuntu-latest", "windows-latest", "macos-latest"]
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332"
+        uses: "actions/checkout@d632683dd7b4114ad314bca15554477dd762a938"
       - name: "Download module artifact"
         uses: "actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16"
         with:
           name: "dist"
           path: "./dist/"
       - name: "Use Deno ${{ matrix.deno_version }}"
-        uses: "denoland/setup-deno@916edb9a40fd86d1ff57b758807ebe57242f7407"
+        uses: "denoland/setup-deno@5e01c016a857a4dbb5afe9d0f9733cd472cba985"
         with:
           deno-version: "${{ matrix.deno_version }}"
       - name: "Use Node.js lts/*"
-        uses: "actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b"
+        uses: "actions/setup-node@0a44ba7841725637a19e28fa30b79a866c81b0a6"
         with:
           node-version: "lts/*"
           cache: "npm"
@@ -140,7 +140,7 @@ jobs:
         os: ["ubuntu-latest", "windows-latest", "macos-latest"]
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332"
+        uses: "actions/checkout@d632683dd7b4114ad314bca15554477dd762a938"
       - name: "Download module artifact"
         uses: "actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16"
         with:
@@ -168,14 +168,14 @@ jobs:
         os: ["ubuntu-latest"]
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332"
+        uses: "actions/checkout@d632683dd7b4114ad314bca15554477dd762a938"
       - name: "Download module artifact"
         uses: "actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16"
         with:
           name: "dist"
           path: "./dist/"
       - name: "Use Node.js lts/*"
-        uses: "actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b"
+        uses: "actions/setup-node@0a44ba7841725637a19e28fa30b79a866c81b0a6"
         with:
           node-version: "lts/*"
           cache: "npm"
@@ -194,14 +194,14 @@ jobs:
       id-token: "write"
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332"
+        uses: "actions/checkout@d632683dd7b4114ad314bca15554477dd762a938"
       - name: "Download module artifact"
         uses: "actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16"
         with:
           name: "dist"
           path: "./dist/"
       - name: "Use Node.js lts/*"
-        uses: "actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b"
+        uses: "actions/setup-node@0a44ba7841725637a19e28fa30b79a866c81b0a6"
         with:
           node-version: "lts/*"
           registry-url: "https://registry.npmjs.org"
