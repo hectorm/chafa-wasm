@@ -82,7 +82,7 @@
     "eslint-config-prettier": "~9.1.0",
     "globals": "~15.11.0",
     "mocha": "~10.7.3",
-    "npm-run-all2": "~6.2.4",
+    "npm-run-all2": "~7.0.1",
     "playwright": "~1.48.1",
     "prettier": "~3.3.3",
     "typedoc": "~0.26.10",
