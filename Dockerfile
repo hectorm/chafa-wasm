@@ -2,7 +2,7 @@
 ## "build" stage
 ##################################################
 
-FROM docker.io/hectorm/wasm:v62@sha256:4d5b597466a797079637ecdd1042b6c800f02fdaa65b675f13f8d2f48bb698b6 AS build
+FROM docker.io/hectorm/wasm:v64@sha256:b42dd92671f1a6614771d12c609e0576a5907938c64dd53697201e985ccfa04b AS build
 
 # Environment
 ENV BUILDDIR=/tmp/build
@@ -18,7 +18,7 @@ ENV CXXFLAGS=${CFLAGS}
 ENV LDFLAGS='-fwasm-exceptions'
 
 # Build zlib-ng
-ARG ZLIB_NG_TREEISH=2.2.1
+ARG ZLIB_NG_TREEISH=2.2.2
 ARG ZLIB_NG_REMOTE=https://github.com/zlib-ng/zlib-ng.git
 WORKDIR ${BUILDDIR}/dep/zlib-ng/
 RUN git clone "${ZLIB_NG_REMOTE:?}" ./ \
@@ -78,7 +78,7 @@ RUN emmake make -j"$(nproc)" install
 RUN pkg-config --static --exists --print-errors libffi
 
 # Build glib
-ARG GLIB_TREEISH=2.82.0
+ARG GLIB_TREEISH=2.83.0
 ARG GLIB_REMOTE=https://github.com/GNOME/glib.git
 WORKDIR ${BUILDDIR}/dep/glib/
 RUN git clone "${GLIB_REMOTE:?}" ./ \
@@ -144,7 +144,7 @@ RUN emmake ninja -C ./build/ install
 RUN pkg-config --static --exists --print-errors libspng_static
 
 # Build libjpeg-turbo
-ARG LIBJPEG_TURBO_TREEISH=3.0.3
+ARG LIBJPEG_TURBO_TREEISH=3.0.4
 ARG LIBJPEG_TURBO_REMOTE=https://github.com/libjpeg-turbo/libjpeg-turbo.git
 WORKDIR ${BUILDDIR}/dep/libjpeg-turbo/
 RUN git clone "${LIBJPEG_TURBO_REMOTE:?}" ./ \
@@ -165,7 +165,7 @@ RUN emmake ninja -C ./build/ install
 RUN pkg-config --static --exists --print-errors libjpeg
 
 # Build libjxl
-ARG LIBJXL_TREEISH=v0.10.3
+ARG LIBJXL_TREEISH=v0.11.1
 ARG LIBJXL_REMOTE=https://github.com/libjxl/libjxl.git
 WORKDIR ${BUILDDIR}/dep/libjxl/
 RUN git clone "${LIBJXL_REMOTE:?}" ./ \
@@ -225,7 +225,7 @@ RUN emmake ninja -C ./build/ install
 RUN pkg-config --static --exists --print-errors libwebp
 
 # Build Chafa
-ARG CHAFA_TREEISH=1.14.4
+ARG CHAFA_TREEISH=1.14.5
 ARG CHAFA_REMOTE=https://github.com/hpjansson/chafa.git
 WORKDIR ${BUILDDIR}/dep/chafa/
 RUN git clone "${CHAFA_REMOTE:?}" ./ \
