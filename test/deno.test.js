@@ -1,7 +1,7 @@
 /* global Deno */
 // @ts-nocheck
-import { describe, it } from "https://deno.land/std/testing/bdd.ts";
-import { assert, assertEquals, assertMatch, assertThrows, assertRejects } from "https://deno.land/std/assert/mod.ts";
+import { describe, it } from "jsr:@std/testing@1/bdd";
+import { assert, assertEquals, assertMatch, assertThrows, assertRejects } from "jsr:@std/assert@1";
 
 globalThis.test = Deno.test;
 globalThis.describe = describe;
