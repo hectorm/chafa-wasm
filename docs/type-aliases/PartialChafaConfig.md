@@ -1,4 +1,4 @@
-[**chafa-wasm**](../README.md) • **Docs**
+[**chafa-wasm**](../README.md)
 
 ***
 

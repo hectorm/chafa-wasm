@@ -1,4 +1,4 @@
-[**chafa-wasm**](../README.md) • **Docs**
+[**chafa-wasm**](../README.md)
 
 ***
 
@@ -14,7 +14,7 @@ A factory function that returns a promise that resolves to a ChafaModule object.
 
 ## Parameters
 
-• **moduleArg?**
+### moduleArg?
 
 ## Returns
 

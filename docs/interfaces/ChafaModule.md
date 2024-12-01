@@ -1,4 +1,4 @@
-[**chafa-wasm**](../README.md) • **Docs**
+[**chafa-wasm**](../README.md)
 
 ***
 
@@ -23,9 +23,13 @@ If an already decoded image is specified, it will be left as is.
 
 #### Parameters
 
-• **image**: `ArrayBufferLike` \| [`ImageDataLike`](../type-aliases/ImageDataLike.md)
+##### image
 
-• **callback**: [`Callback`](../type-aliases/Callback.md)\<[`ImageDataLike`](../type-aliases/ImageDataLike.md)\>
+`ArrayBufferLike` | [`ImageDataLike`](../type-aliases/ImageDataLike.md)
+
+##### callback
+
+[`Callback`](../type-aliases/Callback.md)\<[`ImageDataLike`](../type-aliases/ImageDataLike.md)\>
 
 #### Returns
 
@@ -41,11 +45,17 @@ Converts an image into an ANSI string.
 
 #### Parameters
 
-• **image**: `ArrayBufferLike` \| [`ImageDataLike`](../type-aliases/ImageDataLike.md)
+##### image
 
-• **config**: [`PartialChafaConfig`](../type-aliases/PartialChafaConfig.md)
+`ArrayBufferLike` | [`ImageDataLike`](../type-aliases/ImageDataLike.md)
 
-• **callback**: [`Callback`](../type-aliases/Callback.md)\<`object`\>
+##### config
+
+[`PartialChafaConfig`](../type-aliases/PartialChafaConfig.md)
+
+##### callback
+
+[`Callback`](../type-aliases/Callback.md)\<`object`\>
 
 #### Returns
 
@@ -61,11 +71,17 @@ Converts an image into a Chafa canvas pointer.
 
 #### Parameters
 
-• **image**: `ArrayBufferLike` \| [`ImageDataLike`](../type-aliases/ImageDataLike.md)
+##### image
 
-• **config**: [`PartialChafaConfig`](../type-aliases/PartialChafaConfig.md)
+`ArrayBufferLike` | [`ImageDataLike`](../type-aliases/ImageDataLike.md)
 
-• **callback**: [`Callback`](../type-aliases/Callback.md)\<`object`\>
+##### config
+
+[`PartialChafaConfig`](../type-aliases/PartialChafaConfig.md)
+
+##### callback
+
+[`Callback`](../type-aliases/Callback.md)\<`object`\>
 
 #### Returns
 
@@ -81,11 +97,17 @@ Converts an image into an array of `console.log` arguments.
 
 #### Parameters
 
-• **image**: `ArrayBufferLike` \| [`ImageDataLike`](../type-aliases/ImageDataLike.md)
+##### image
 
-• **config**: [`PartialChafaConfig`](../type-aliases/PartialChafaConfig.md)
+`ArrayBufferLike` | [`ImageDataLike`](../type-aliases/ImageDataLike.md)
 
-• **callback**: [`Callback`](../type-aliases/Callback.md)\<`object`\>
+##### config
+
+[`PartialChafaConfig`](../type-aliases/PartialChafaConfig.md)
+
+##### callback
+
+[`Callback`](../type-aliases/Callback.md)\<`object`\>
 
 #### Returns
 
@@ -101,11 +123,17 @@ Converts an image into an HTML string.
 
 #### Parameters
 
-• **image**: `ArrayBufferLike` \| [`ImageDataLike`](../type-aliases/ImageDataLike.md)
+##### image
 
-• **config**: [`PartialChafaConfig`](../type-aliases/PartialChafaConfig.md)
+`ArrayBufferLike` | [`ImageDataLike`](../type-aliases/ImageDataLike.md)
 
-• **callback**: [`Callback`](../type-aliases/Callback.md)\<`object`\>
+##### config
+
+[`PartialChafaConfig`](../type-aliases/PartialChafaConfig.md)
+
+##### callback
+
+[`Callback`](../type-aliases/Callback.md)\<`object`\>
 
 #### Returns
 
@@ -121,11 +149,17 @@ Converts an image into a matrix of characters.
 
 #### Parameters
 
-• **image**: `ArrayBufferLike` \| [`ImageDataLike`](../type-aliases/ImageDataLike.md)
+##### image
 
-• **config**: [`PartialChafaConfig`](../type-aliases/PartialChafaConfig.md)
+`ArrayBufferLike` | [`ImageDataLike`](../type-aliases/ImageDataLike.md)
 
-• **callback**: [`Callback`](../type-aliases/Callback.md)\<`object`\>
+##### config
+
+[`PartialChafaConfig`](../type-aliases/PartialChafaConfig.md)
+
+##### callback
+
+[`Callback`](../type-aliases/Callback.md)\<`object`\>
 
 #### Returns
 

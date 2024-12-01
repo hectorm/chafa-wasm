@@ -1,4 +1,4 @@
-[**chafa-wasm**](../README.md) • **Docs**
+[**chafa-wasm**](../README.md)
 
 ***
 
@@ -14,9 +14,13 @@
 
 ## Parameters
 
-• **error**: `unknown`
+### error
 
-• **data**: `T`
+`unknown`
+
+### data
+
+`T`
 
 ## Returns
 

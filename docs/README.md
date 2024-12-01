@@ -1,12 +1,12 @@
-**chafa-wasm** • **Docs**
+**chafa-wasm**
 
 ***
 
 # chafa-wasm
 
-## Namespaces
+## Modules
 
-- ["chafa-wasm"](namespaces/chafa-wasm/README.md)
+- [chafa-wasm](chafa-wasm/README.md)
 
 ## Interfaces
 

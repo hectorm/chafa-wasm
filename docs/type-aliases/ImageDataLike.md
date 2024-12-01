@@ -1,4 +1,4 @@
-[**chafa-wasm**](../README.md) • **Docs**
+[**chafa-wasm**](../README.md)
 
 ***
 
@@ -8,11 +8,11 @@
 
 > **ImageDataLike**: `object`
 
+## Type declaration
+
 ## Index Signature
 
  \[`x`: `string` \| `number` \| `symbol`\]: `any`
-
-## Type declaration
 
 ### data
 
