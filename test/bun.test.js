@@ -14,7 +14,7 @@ globalThis.assertThrows = (a) => expect(a).toThrow();
 /** @type {(a: () => Promise<unknown>) => void} */
 globalThis.assertRejects = (a) => expect(a).toThrow();
 
-// @ts-ignore
+// @ts-expect-error
 import Chafa from "../dist/chafa.js";
 
 globalThis.Chafa = Chafa;

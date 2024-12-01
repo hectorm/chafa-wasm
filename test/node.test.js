@@ -10,7 +10,7 @@ globalThis.assertMatch = assert.match;
 globalThis.assertThrows = assert.throws;
 globalThis.assertRejects = assert.rejects;
 
-// @ts-ignore
+// @ts-expect-error
 import Chafa from "../dist/chafa.js";
 
 globalThis.Chafa = Chafa;
