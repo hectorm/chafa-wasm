@@ -283,6 +283,9 @@ RUN em++ ${CPPFLAGS-} ${CXXFLAGS-} ${LDFLAGS-} \
 		--extern-pre-js "${BUILDDIR:?}"/src/pre.txt \
 		-o "${BUILDDIR:?}"/dist/chafa.js
 
+# Add "node:" prefix to "module" import call to fix an error with Deno
+RUN sed -i 's|import("module")|import("node:module")|g' "${BUILDDIR:?}"/dist/chafa.js
+
 ##################################################
 ## "dist" stage
 ##################################################
