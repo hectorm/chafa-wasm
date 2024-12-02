@@ -21,8 +21,8 @@ import moduleFactory from "../../dist/chafa.js";
       port.postMessage(
         Object.entries(obj).reduce(
           /** @type {(dict: Record<string, any>, entry: [string, any]) => Record<string, any>} */
-          (dict, [key, { value }]) => {
-            if (value != null) dict[key] = value;
+          (dict, [key, value]) => {
+            if (value?.value != null) dict[key] = value.value;
             return dict;
           },
           {},
