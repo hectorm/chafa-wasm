@@ -80,13 +80,13 @@
     "chai": "~5.1.2",
     "eslint": "~9.17.0",
     "eslint-config-prettier": "~9.1.0",
-    "globals": "~15.13.0",
+    "globals": "~15.14.0",
     "mocha": "~11.0.1",
     "npm-run-all2": "~7.0.2",
     "playwright": "~1.49.1",
     "prettier": "~3.4.2",
-    "typedoc": "~0.27.5",
-    "typedoc-plugin-markdown": "~4.3.2",
+    "typedoc": "~0.27.6",
+    "typedoc-plugin-markdown": "~4.3.3",
     "typescript": "~5.7.2"
   }
 }
