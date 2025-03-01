@@ -30,7 +30,7 @@ jobs:
               if (k.startsWith("ACTIONS_")) core.exportVariable(k, v);
             }
       - name: "Set up Docker Buildx"
-        uses: "docker/setup-buildx-action@6524bf65af31da8d45b59e8c27de4bd072b392f5"
+        uses: "docker/setup-buildx-action@b5ca514318bd6ebac0fb2aedd5d36ec1b5c232a2"
       - name: "Use Node.js lts/*"
         uses: "actions/setup-node@1d0ff469b7ec7b3cb9d8673fde0c81c44821de2a"
         with:
@@ -53,7 +53,7 @@ jobs:
       - name: "Lint"
         run: "npm run lint"
       - name: "Upload module artifact"
-        uses: "actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08"
+        uses: "actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1"
         with:
           name: "dist"
           path: "./dist/"
@@ -80,7 +80,7 @@ jobs:
       - name: "Checkout"
         uses: "actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683"
       - name: "Download module artifact"
-        uses: "actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16"
+        uses: "actions/download-artifact@cc203385981b70ca67e1cc392babf9cc229d5806"
         with:
           name: "dist"
           path: "./dist/"
@@ -109,7 +109,7 @@ jobs:
       - name: "Checkout"
         uses: "actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683"
       - name: "Download module artifact"
-        uses: "actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16"
+        uses: "actions/download-artifact@cc203385981b70ca67e1cc392babf9cc229d5806"
         with:
           name: "dist"
           path: "./dist/"
@@ -142,7 +142,7 @@ jobs:
       - name: "Checkout"
         uses: "actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683"
       - name: "Download module artifact"
-        uses: "actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16"
+        uses: "actions/download-artifact@cc203385981b70ca67e1cc392babf9cc229d5806"
         with:
           name: "dist"
           path: "./dist/"
@@ -170,7 +170,7 @@ jobs:
       - name: "Checkout"
         uses: "actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683"
       - name: "Download module artifact"
-        uses: "actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16"
+        uses: "actions/download-artifact@cc203385981b70ca67e1cc392babf9cc229d5806"
         with:
           name: "dist"
           path: "./dist/"
@@ -196,7 +196,7 @@ jobs:
       - name: "Checkout"
         uses: "actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683"
       - name: "Download module artifact"
-        uses: "actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16"
+        uses: "actions/download-artifact@cc203385981b70ca67e1cc392babf9cc229d5806"
         with:
           name: "dist"
           path: "./dist/"
