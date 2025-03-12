@@ -18,7 +18,7 @@ ENV CXXFLAGS=${CFLAGS}
 ENV LDFLAGS='-fwasm-exceptions'
 
 # Build zlib-ng
-ARG ZLIB_NG_TREEISH=2.2.2
+ARG ZLIB_NG_TREEISH=2.2.4
 ARG ZLIB_NG_REMOTE=https://github.com/zlib-ng/zlib-ng.git
 WORKDIR ${BUILDDIR}/dep/zlib-ng/
 RUN git clone "${ZLIB_NG_REMOTE:?}" ./ \
@@ -60,7 +60,7 @@ RUN emmake ninja -C ./build/ install
 RUN pkg-config --static --exists --print-errors libbrotlidec
 
 # Build libffi
-ARG LIBFFI_TREEISH=v3.4.6
+ARG LIBFFI_TREEISH=v3.4.7
 ARG LIBFFI_REMOTE=https://github.com/libffi/libffi.git
 WORKDIR ${BUILDDIR}/dep/libffi/
 RUN git clone "${LIBFFI_REMOTE:?}" ./ \
@@ -78,7 +78,7 @@ RUN emmake make -j"$(nproc)" install
 RUN pkg-config --static --exists --print-errors libffi
 
 # Build glib
-ARG GLIB_TREEISH=2.83.0
+ARG GLIB_TREEISH=2.84.0
 ARG GLIB_REMOTE=https://github.com/GNOME/glib.git
 WORKDIR ${BUILDDIR}/dep/glib/
 RUN git clone "${GLIB_REMOTE:?}" ./ \
@@ -144,7 +144,7 @@ RUN emmake ninja -C ./build/ install
 RUN pkg-config --static --exists --print-errors libspng_static
 
 # Build libjpeg-turbo
-ARG LIBJPEG_TURBO_TREEISH=3.0.4
+ARG LIBJPEG_TURBO_TREEISH=3.1.0
 ARG LIBJPEG_TURBO_REMOTE=https://github.com/libjpeg-turbo/libjpeg-turbo.git
 WORKDIR ${BUILDDIR}/dep/libjpeg-turbo/
 RUN git clone "${LIBJPEG_TURBO_REMOTE:?}" ./ \
@@ -196,7 +196,7 @@ RUN emmake ninja -C ./build/ install
 RUN pkg-config --static --exists --print-errors libjxl
 
 # Build libwebp
-ARG LIBWEBP_TREEISH=v1.4.0
+ARG LIBWEBP_TREEISH=v1.5.0
 ARG LIBWEBP_REMOTE=https://github.com/webmproject/libwebp.git
 WORKDIR ${BUILDDIR}/dep/libwebp/
 RUN git clone "${LIBWEBP_REMOTE:?}" ./ \
