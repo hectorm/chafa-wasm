@@ -60,7 +60,7 @@ RUN emmake ninja -C ./build/ install
 RUN pkg-config --static --exists --print-errors libbrotlidec
 
 # Build libffi
-ARG LIBFFI_TREEISH=v3.4.7
+ARG LIBFFI_TREEISH=v3.4.8
 ARG LIBFFI_REMOTE=https://github.com/libffi/libffi.git
 WORKDIR ${BUILDDIR}/dep/libffi/
 RUN git clone "${LIBFFI_REMOTE:?}" ./ \
