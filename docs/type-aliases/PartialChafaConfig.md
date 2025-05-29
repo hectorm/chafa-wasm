@@ -6,4 +6,4 @@
 
 # Type Alias: PartialChafaConfig
 
-> **PartialChafaConfig**: \{ \[P in keyof ChafaConfig\]?: ChafaConfig\[P\] \| string \}
+> **PartialChafaConfig** = \{ \[P in keyof ChafaConfig\]?: ChafaConfig\[P\] \| string \}

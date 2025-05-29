@@ -6,4 +6,4 @@
 
 # Type Alias: ReadonlyChafaConfig
 
-> **ReadonlyChafaConfig**: `{ readonly [P in keyof ChafaConfig]: ChafaConfig[P] }`
+> **ReadonlyChafaConfig** = `{ readonly [P in keyof ChafaConfig]: ChafaConfig[P] }`

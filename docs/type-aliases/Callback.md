@@ -6,11 +6,13 @@
 
 # Type Alias: Callback()\<T\>
 
-> **Callback**\<`T`\>: (`error`, `data`) => `void`
+> **Callback**\<`T`\> = (`error`, `data`) => `void`
 
 ## Type Parameters
 
-• **T**
+### T
+
+`T`
 
 ## Parameters
 

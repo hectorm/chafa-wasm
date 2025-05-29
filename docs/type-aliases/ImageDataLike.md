@@ -6,21 +6,25 @@
 
 # Type Alias: ImageDataLike
 
-> **ImageDataLike**: `object`
+> **ImageDataLike** = `object`
 
-## Type declaration
+## Indexable
 
-## Index Signature
+\[`x`: `string` \| `number` \| `symbol`\]: `any`
 
- \[`x`: `string` \| `number` \| `symbol`\]: `any`
+## Properties
 
 ### data
 
 > **data**: `Uint8ClampedArray`
 
+***
+
 ### height
 
 > **height**: `number`
+
+***
 
 ### width
 

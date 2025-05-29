@@ -6,8 +6,6 @@
 
 # chafa-wasm
 
-## Index
+## Variables
 
-### Functions
-
-- [default](functions/default.md)
+- [default](variables/default.md)
