@@ -71,20 +71,20 @@
     "version:git": "git add -A ./docs/"
   },
   "devDependencies": {
-    "@eslint/js": "~9.26.0",
-    "@types/bun": "~1.2.13",
+    "@eslint/js": "~9.27.0",
+    "@types/bun": "~1.2.15",
     "@types/eslint": "~9.6.1",
     "@types/eslint-config-prettier": "~6.11.3",
-    "@types/node": "~22.15.17",
+    "@types/node": "~22.15.24",
     "chai": "~5.2.0",
-    "eslint": "~9.26.0",
+    "eslint": "~9.27.0",
     "eslint-config-prettier": "~10.1.5",
-    "globals": "~16.1.0",
-    "mocha": "~11.2.2",
+    "globals": "~16.2.0",
+    "mocha": "~11.5.0",
     "npm-run-all2": "~8.0.4",
     "playwright": "~1.52.0",
     "prettier": "~3.5.3",
-    "typedoc": "~0.28.4",
+    "typedoc": "~0.28.5",
     "typedoc-plugin-markdown": "~4.6.3",
     "typescript": "~5.8.3"
   }
