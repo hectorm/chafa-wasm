@@ -159,8 +159,7 @@ RUN emcmake cmake -G 'Ninja' -S ./ -B ./build/ \
 		-D ENABLE_STATIC=ON \
 		-D ENABLE_SHARED=OFF \
 		-D WITH_JPEG8=ON \
-		-D WITH_TURBOJPEG=OFF \
-		-D WITH_SIMD=0
+		-D WITH_TURBOJPEG=OFF
 RUN emmake ninja -C ./build/ install
 RUN pkg-config --static --exists --print-errors libjpeg
 
@@ -209,7 +208,6 @@ RUN emcmake cmake -G 'Ninja' -S ./ -B ./build/ \
 		-D CMAKE_FIND_ROOT_PATH_MODE_PACKAGE=BOTH \
 		-D CMAKE_BUILD_TYPE=Release \
 		-D BUILD_SHARED_LIBS=OFF \
-		-D WEBP_ENABLE_SIMD=OFF \
 		-D WEBP_USE_THREAD=OFF \
 		-D WEBP_BUILD_CWEBP=OFF \
 		-D WEBP_BUILD_DWEBP=OFF \
