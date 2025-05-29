@@ -82,6 +82,7 @@ const chafaSymbolClasses = [
   "legacy",
   "narrow",
   "none",
+  "octant",
   "quad",
   "sextant",
   "solid",
