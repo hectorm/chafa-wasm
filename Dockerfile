@@ -13,9 +13,9 @@ ENV PKG_CONFIG_PATH=${PKG_CONFIG_LIBDIR}
 ENV EM_PKG_CONFIG_PATH=${PKG_CONFIG_LIBDIR}
 ENV CHOST=wasm32-unknown-emscripten
 ENV CPPFLAGS='-Wdate-time'
-ENV CFLAGS='-O3 -msimd128 -fwasm-exceptions -frandom-seed=42 -Wall -Wextra -Wformat -Werror=format-security'
+ENV CFLAGS='-O3 -msimd128 -fwasm-exceptions -sSUPPORT_LONGJMP=wasm -frandom-seed=42 -Wall -Wextra -Wformat -Werror=format-security'
 ENV CXXFLAGS=${CFLAGS}
-ENV LDFLAGS='-fwasm-exceptions'
+ENV LDFLAGS='-fwasm-exceptions -sSUPPORT_LONGJMP=wasm'
 
 # Build zlib-ng
 ARG ZLIB_NG_TREEISH=2.2.4
