@@ -53,7 +53,7 @@ try {
   const chaiJsUri = `data:application/javascript;base64,${chaiJsData.toString("base64")}`;
 
   const chafaWasmData = fs.readFileSync(require.resolve("../dist/chafa.wasm"));
-  const chafaWasmUri = `data:application/octet-stream;base64,${chafaWasmData.toString("base64")}`;
+  const chafaWasmUri = `data:application/wasm;base64,${chafaWasmData.toString("base64")}`;
 
   const chafaJsData = fs.readFileSync(require.resolve("../dist/chafa.js"));
   const chafaJsPatchedData = Buffer.from(chafaJsData.toString("utf-8").replaceAll("chafa.wasm", chafaWasmUri));
