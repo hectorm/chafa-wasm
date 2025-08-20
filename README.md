@@ -12,7 +12,7 @@ With this [Chafa](https://hpjansson.org/chafa/) port to WebAssembly you can conv
 
 This module uses [Emscripten/Embind](https://emscripten.org) to expose low-level bindings of [libchafa](https://hpjansson.org/chafa/ref/) and also includes a higher-level API for the most common scenarios, see the [`docs/`](docs/README.md) directory for details.
 
-If you just want to play with the parameters interactively, a demo application is also available [here](https://hectorm.github.io/chafa-wasm/).
+If you just want to play with the parameters interactively, a demo application is also available [here](https://ansi-o-matic.molinero.dev).
 
 ## Usage
 
