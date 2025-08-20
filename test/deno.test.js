@@ -1,10 +1,10 @@
 /* global Deno */
-// @ts-expect-error
+// @ts-ignore
 import { describe, it } from "jsr:@std/testing@1/bdd";
-// @ts-expect-error
+// @ts-ignore
 import { assert, assertEquals, assertMatch, assertThrows, assertRejects } from "jsr:@std/assert@1";
 
-// @ts-expect-error
+// @ts-ignore
 globalThis.test = Deno.test;
 globalThis.describe = describe;
 globalThis.it = it;
