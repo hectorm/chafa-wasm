@@ -23,7 +23,7 @@ jobs:
       - name: "Checkout"
         uses: "actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8"
       - name: "Expose GitHub Actions variables"
-        uses: "actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea"
+        uses: "actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd"
         with:
           script: |
             for (const [k, v] of Object.entries(process.env)) {
@@ -32,7 +32,7 @@ jobs:
       - name: "Set up Docker Buildx"
         uses: "docker/setup-buildx-action@e468171a9de216ec08956ac3ada2f0791b6bd435"
       - name: "Use Node.js lts/*"
-        uses: "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020"
+        uses: "actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444"
         with:
           node-version: "lts/*"
           cache: "npm"
@@ -85,7 +85,7 @@ jobs:
           name: "dist"
           path: "./dist/"
       - name: "Use Node.js ${{ matrix.node_version }}"
-        uses: "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020"
+        uses: "actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444"
         with:
           node-version: "${{ matrix.node_version }}"
           cache: "npm"
@@ -118,7 +118,7 @@ jobs:
         with:
           deno-version: "${{ matrix.deno_version }}"
       - name: "Use Node.js lts/*"
-        uses: "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020"
+        uses: "actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444"
         with:
           node-version: "lts/*"
           cache: "npm"
@@ -175,7 +175,7 @@ jobs:
           name: "dist"
           path: "./dist/"
       - name: "Use Node.js lts/*"
-        uses: "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020"
+        uses: "actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444"
         with:
           node-version: "lts/*"
           cache: "npm"
@@ -201,7 +201,7 @@ jobs:
           name: "dist"
           path: "./dist/"
       - name: "Use Node.js lts/*"
-        uses: "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020"
+        uses: "actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444"
         with:
           node-version: "lts/*"
           registry-url: "https://registry.npmjs.org"
