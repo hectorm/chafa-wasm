@@ -42,7 +42,7 @@ RUN emmake ninja -C ./build/ install
 RUN pkg-config --static --exists --print-errors zlib
 
 # Build brotli
-ARG BROTLI_TREEISH=v1.1.0
+ARG BROTLI_TREEISH=v1.2.0
 ARG BROTLI_REMOTE=https://github.com/google/brotli.git
 WORKDIR ${BUILDDIR}/dep/brotli/
 RUN git clone "${BROTLI_REMOTE:?}" ./ \
