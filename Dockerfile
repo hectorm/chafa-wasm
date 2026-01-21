@@ -232,7 +232,7 @@ RUN git clone "${CHAFA_REMOTE:?}" ./ \
 	&& git submodule update --init --recursive
 RUN NOCONFIGURE=1 ./autogen.sh
 RUN emconfigure ./configure \
-		CFLAGS="${CFLAGS-} -USMOL_WITH_AVX2" \
+		CFLAGS="${CFLAGS-} -USMOL_WITH_AVX2 -Wno-error=incompatible-pointer-types" \
 		--prefix="${SYSROOT:?}" \
 		--libdir="${SYSROOT:?}"/lib \
 		--host="${CHOST:?}" \
