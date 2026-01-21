@@ -144,7 +144,7 @@ RUN emmake ninja -C ./build/ install
 RUN pkg-config --static --exists --print-errors libspng_static
 
 # Build libjpeg-turbo
-ARG LIBJPEG_TURBO_TREEISH=3.1.1
+ARG LIBJPEG_TURBO_TREEISH=3.1.3
 ARG LIBJPEG_TURBO_REMOTE=https://github.com/libjpeg-turbo/libjpeg-turbo.git
 WORKDIR ${BUILDDIR}/dep/libjpeg-turbo/
 RUN git clone "${LIBJPEG_TURBO_REMOTE:?}" ./ \
