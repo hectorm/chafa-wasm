@@ -55,7 +55,7 @@ Converts an image into an ANSI string.
 
 ##### callback
 
-[`Callback`](../type-aliases/Callback.md)\<\{ `ansi`: `string`; `config`: `null` \| [`ReadonlyChafaConfig`](../type-aliases/ReadonlyChafaConfig.md); \}\>
+[`Callback`](../type-aliases/Callback.md)\<\{ `ansi`: `string`; `config`: [`ReadonlyChafaConfig`](../type-aliases/ReadonlyChafaConfig.md) \| `null`; \}\>
 
 #### Returns
 
@@ -81,7 +81,7 @@ Converts an image into a Chafa canvas pointer.
 
 ##### callback
 
-[`Callback`](../type-aliases/Callback.md)\<\{ `canvas`: `number`; `config`: `null` \| [`ReadonlyChafaConfig`](../type-aliases/ReadonlyChafaConfig.md); \}\>
+[`Callback`](../type-aliases/Callback.md)\<\{ `canvas`: `number`; `config`: [`ReadonlyChafaConfig`](../type-aliases/ReadonlyChafaConfig.md) \| `null`; \}\>
 
 #### Returns
 
@@ -107,7 +107,7 @@ Converts an image into an array of `console.log` arguments.
 
 ##### callback
 
-[`Callback`](../type-aliases/Callback.md)\<\{ `args`: `string`[]; `config`: `null` \| [`ReadonlyChafaConfig`](../type-aliases/ReadonlyChafaConfig.md); \}\>
+[`Callback`](../type-aliases/Callback.md)\<\{ `args`: `string`[]; `config`: [`ReadonlyChafaConfig`](../type-aliases/ReadonlyChafaConfig.md) \| `null`; \}\>
 
 #### Returns
 
@@ -133,7 +133,7 @@ Converts an image into an HTML string.
 
 ##### callback
 
-[`Callback`](../type-aliases/Callback.md)\<\{ `config`: `null` \| [`ReadonlyChafaConfig`](../type-aliases/ReadonlyChafaConfig.md); `html`: `string`; \}\>
+[`Callback`](../type-aliases/Callback.md)\<\{ `config`: [`ReadonlyChafaConfig`](../type-aliases/ReadonlyChafaConfig.md) \| `null`; `html`: `string`; \}\>
 
 #### Returns
 
@@ -159,7 +159,7 @@ Converts an image into a matrix of characters.
 
 ##### callback
 
-[`Callback`](../type-aliases/Callback.md)\<\{ `config`: `null` \| [`ReadonlyChafaConfig`](../type-aliases/ReadonlyChafaConfig.md); `matrix`: `number`[][][]; \}\>
+[`Callback`](../type-aliases/Callback.md)\<\{ `config`: [`ReadonlyChafaConfig`](../type-aliases/ReadonlyChafaConfig.md) \| `null`; `matrix`: `number`[][][]; \}\>
 
 #### Returns
 
