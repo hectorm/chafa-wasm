@@ -18,7 +18,7 @@ ENV CXXFLAGS=${CFLAGS}
 ENV LDFLAGS='-fwasm-exceptions -sSUPPORT_LONGJMP=wasm'
 
 # Build zlib-ng
-ARG ZLIB_NG_TREEISH=2.2.5
+ARG ZLIB_NG_TREEISH=2.3.2
 ARG ZLIB_NG_REMOTE=https://github.com/zlib-ng/zlib-ng.git
 WORKDIR ${BUILDDIR}/dep/zlib-ng/
 RUN git clone "${ZLIB_NG_REMOTE:?}" ./ \
