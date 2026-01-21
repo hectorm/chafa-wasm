@@ -49,7 +49,7 @@ try {
     path: require.resolve("mocha/mocha.js"),
   });
 
-  const chaiJsData = fs.readFileSync(require.resolve("chai/chai.js"));
+  const chaiJsData = fs.readFileSync(require.resolve("chai/index.js"));
   const chaiJsUri = `data:application/javascript;base64,${chaiJsData.toString("base64")}`;
 
   const chafaWasmData = fs.readFileSync(require.resolve("../dist/chafa.wasm"));
