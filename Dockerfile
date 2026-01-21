@@ -171,6 +171,7 @@ RUN git clone "${LIBJXL_REMOTE:?}" ./ \
 	&& git checkout "${LIBJXL_TREEISH:?}" \
 	&& git submodule update --init --recursive
 RUN emcmake cmake -G 'Ninja' -S ./ -B ./build/ \
+		-D CMAKE_POLICY_VERSION_MINIMUM=3.5 \
 		-D CMAKE_INSTALL_PREFIX="${SYSROOT:?}" \
 		-D CMAKE_INSTALL_LIBDIR="${SYSROOT:?}"/lib \
 		-D CMAKE_FIND_ROOT_PATH="${SYSROOT:?}" \
