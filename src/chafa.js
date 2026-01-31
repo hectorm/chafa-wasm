@@ -343,7 +343,7 @@ Module["imageToCanvas"] = (image, partialConfig, callback) => {
       Module["_chafa_symbol_map_apply_selectors"](symbolMapPtr, symbolMapSelPtr);
 
       // Allocate memory for the fill symbol map selectors
-      const fillSymbolMapSelLen = Module["lengthBytesUTF8"](config["symbols"]);
+      const fillSymbolMapSelLen = Module["lengthBytesUTF8"](config["fill"]);
       fillSymbolMapSelPtr = Module["_malloc"](fillSymbolMapSelLen + 1);
       Module["stringToUTF8"](config["fill"], fillSymbolMapSelPtr, fillSymbolMapSelLen + 1);
 
